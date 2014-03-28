@@ -1,7 +1,8 @@
 # Build and Release Folders
 _notes/
 _old/
-*.ignore.html
 *.ignore.css
+*.ignore.html
 *.ignore.js
+*.ignore.php
 
