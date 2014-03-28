@@ -1,0 +1,1 @@
+var Package1Class1 = function () {};
