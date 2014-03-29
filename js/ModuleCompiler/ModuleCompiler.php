@@ -128,10 +128,7 @@ case 'closure':
 		"// ==/ClosureCompiler=="
 	
 	);
-	
-	//$result = "// ==ClosureCompiler==\n// @output_file_name default.js\n" . $result . "// ==/ClosureCompiler==";
 
-	
 	$sep = "\n";
 	
 

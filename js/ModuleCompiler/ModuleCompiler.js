@@ -46,36 +46,30 @@ var ModuleCompiler = function (options) {
 			
 		eventChangeHandler = function (event) {
 				
-			var a, params = [], i, n, 
-				path	= core.find('*[name=path]').val(),
-				//prefix	= core.find('*[name=prefix]'),
-				type	= core.find('*[name=type]:checked').val(),
-				p;
+			var data, i, n, params = [],
 				
-			for (i = 0; i < CONFIG.PATH.length; i += 1) {
+				collection	= core.find('*[name=collection]').val(),
+				
+				type		= core.find('*[name=type]:checked').val();
+				
+			for (i = 0; i < opts.data.length; i += 1) {
 
-				if (path === CONFIG.PATH[i].value) {
+				if (collection === opts.data[i].value) {
 						
-					a = CONFIG.PATH[i].data instanceof Array ? CONFIG.PATH[i].data : [CONFIG.PATH[i].data];
+					data = opts.data[i].data instanceof Array ? opts.data[i].data : [opts.data[i].data];
 						
-					for (n = 0; n < a.length; n += 1) {
+					for (n = 0; n < data.length; n += 1) {
 							
 						params.push({
-							path:	a[n].path || CONFIG.PATH[i].value,
-							dir:	a[n].dir || null,
-							prefix: a[n][type],
-							first:	a[n].first || CONFIG.PATH[i].first || null
+							path:	(opts.prefix || '') + (data[n].path || opts.data[i].value),
+							dir:	data[n].dir || null,
+							prefix: data[n][type],
+							first:	data[n].first || opts.data[i].first || null
 						});
-						
-						//
 							
 					}
-					
-					console.log(CONFIG.PATH[i]);
-					
+
 					form.params = {data: params};
-					
-					console.log(form.query);
 						
 					break;
 						
@@ -87,19 +81,19 @@ var ModuleCompiler = function (options) {
 			
 			
 			
-		data = function () {
+		get_form = function () {
 				
 			var obj = {
 					
 					fields:	[
 						[
-							{name: 'type', label: 'Closure', type: 'radio', value: 'closure', checked: 1},
-							{name: 'type', label: 'Script',  type: 'radio', value: 'script'},
+							{name: 'type', label: 'Closure', type: 'radio', value: 'closure'},
+							{name: 'type', label: 'Script',  type: 'radio', value: 'script', checked: 1},
 							{name: 'type', label: 'Join',    type: 'radio', value: 'join'}
 						],
-						{name: 'path',   label: 'Lib',    type: 'select', values: CONFIG.PATH}						
+						{name: 'collection',   label: 'Lib',    type: 'select', values: opts.data}						
 					],
-					check:	[{id: 'path'}],
+					check:	[{id: 'collection'}],
 					params:	{json: 1},				
 					path:	opts.process,
 					target:	core
@@ -119,11 +113,11 @@ var ModuleCompiler = function (options) {
 			
 			result	= $('<textarea/>').appendTo(core).addClass('result');
 			
-			form	= new plura.form.Form(data());
+			form	= new plura.form.Form(get_form());
 			
 			form.core.on('FORM_PROCESS_ERROR FORM_PROCESS_SUCCESS FORM_VALIDATION_ERROR', eventFormHandler)
 				
-				.find('*[name=path], *[name=type]').on('change', eventChangeHandler);
+				.find('*[name=collection], *[name=type]').on('change', eventChangeHandler);
 			
 		};
 		
@@ -132,5 +126,3 @@ var ModuleCompiler = function (options) {
 	
 
 };
-
-$(function () { new ModuleCompiler(); });
