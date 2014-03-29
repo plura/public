@@ -1,8 +1,15 @@
-var ModuleCompiler = function () {
+var ModuleCompiler = function (options) {
+	
 		
 	"use strict";
 	
-	var core, form, result,
+	
+	var defaults = {
+			process: 'ModuleCompiler.php'
+		},
+	
+	
+		core, form, result, opts,
 	
 		
 		eventFormHandler = function (event, data) {
@@ -39,9 +46,9 @@ var ModuleCompiler = function () {
 			
 		eventChangeHandler = function (event) {
 				
-			var a, b = [], i, n, 
+			var a, params = [], i, n, 
 				path	= core.find('*[name=path]').val(),
-				prefix	= core.find('*[name=prefix]'),
+				//prefix	= core.find('*[name=prefix]'),
 				type	= core.find('*[name=type]:checked').val(),
 				p;
 				
@@ -53,15 +60,22 @@ var ModuleCompiler = function () {
 						
 					for (n = 0; n < a.length; n += 1) {
 							
-						b.push({
+						params.push({
 							path:	a[n].path || CONFIG.PATH[i].value,
 							dir:	a[n].dir || null,
-							prefix: a[n][type]
+							prefix: a[n][type],
+							first:	a[n].first || CONFIG.PATH[i].first || null
 						});
+						
+						//
 							
 					}
 					
-					form.params = {data: b};
+					console.log(CONFIG.PATH[i]);
+					
+					form.params = {data: params};
+					
+					console.log(form.query);
 						
 					break;
 						
@@ -87,7 +101,7 @@ var ModuleCompiler = function () {
 					],
 					check:	[{id: 'path'}],
 					params:	{json: 1},				
-					path:	'tree.php',
+					path:	opts.process,
 					target:	core
 				};
 
@@ -98,6 +112,8 @@ var ModuleCompiler = function () {
 	
 	
 		init = function () {
+			
+			opts	= $.extend(true, {}, defaults, options);
 
 			core	= $('<div/>').appendTo('body').addClass('core');
 			
