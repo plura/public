@@ -24,7 +24,30 @@ foreach($_GET['data'] as $data) {
 	
 	//cache preventor
 	$date		= new DateTime();
-	
+
+
+	//firsts
+	if (isset($data['first'])) {
+
+		$firsts = array();
+
+		if (is_string($data['first'])) {
+
+			$data['first'] = array($data['first']);
+
+		}
+
+		foreach ($data['first'] as $first) {
+			
+			array_push($firsts, preg_quote($first));
+		
+		}
+
+		$firsts_regexp = '#(' . implode("|", $firsts) . ')#';
+
+	}
+
+
 
 	//iterate!
 	foreach($objects as $name => $object){
@@ -88,10 +111,15 @@ foreach($_GET['data'] as $data) {
 			
 			//check if a particular path should be included in the special 'top' array
 			
-			if (!empty($data['first']) && preg_match( '#' . preg_quote( implode( $data['first'] ) ) . '#', $f )) {
-				
-				//print "yes";	
+			//print_r($data['first']); 
+
+
+
+			if (isset($data['first']) && preg_match( $firsts_regexp, $f )) {
+			
+
 				array_push($result_top, $item);
+
 				
 				
 			} else {
@@ -158,8 +186,6 @@ default:
 
 
 }
-
-	
 
 
 
