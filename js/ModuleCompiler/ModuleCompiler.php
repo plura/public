@@ -1,13 +1,18 @@
 <?php
 
-//type=script&path=package1%2Bfirst&json=1&data%5B0%5D%5Bpath%5D=test%2Fframework1%2Fpackage1%2F&data%5B0%5D%5Bdir%5D=&data%5B0%5D%5Bprefix%5D=test%2Fframework1%2Fpackage1%2F&data%5B0%5D%5Bfirst%5D%5B%5D=Package1Class3.js 
+/**
+ * Module Compiler 1.0
+ *
+ * Copyright (c) 2014 Plura
+ *
+ * Date: 2014-09-05 12:00:00 (Fri, 05 Sep 2014)
+ * Revision: 6246
+ *
+ */
 
 $result				= array();
 
 $result_top			= array();
-	
-$result_top_sort	= array();
-
 
 foreach($_GET['data'] as $data) {
 	
@@ -108,16 +113,13 @@ foreach($_GET['data'] as $data) {
 
 			//check if a particular path should be included in the special 'top' array
 			if (isset($data['first']) && preg_match( $firsts_regexp, $f )) {
-			
-
-				array_push($result_top, $item);
 
 				//get corresponding key in data['first'] to correctly sort order afterwards
 				foreach ($data['first'] as $key => $value) {
 
 					if (preg_match("#" . preg_quote($value) . "#", $f)) {
 
-						array_push($result_top_sort, $key);
+						$result_top[$key] = $item;
 
 						break;
 
@@ -141,6 +143,11 @@ foreach($_GET['data'] as $data) {
 		
 
 }
+
+
+
+//sort array by keys - they might be unordered. ie. [2, 0, 1]
+ksort($result_top);
 
 
 
@@ -192,23 +199,8 @@ default:
 
 
 
-if(!empty($result_top)) {
-
-
-	$result_top = array_map(function($i) use ($result_top) {
-	   
-	   return $result_top[$i];
-	
-	}, $result_top_sort);	
-
-}
-
-
-
-
 $r = array_merge( $result_top, $result );
-	
-	
+
 
 echo json_encode(array(
 
