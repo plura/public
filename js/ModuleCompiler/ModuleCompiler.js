@@ -51,7 +51,9 @@ var ModuleCompiler = function (options) {
 				collection	= core.find('*[name=collection]').val(),
 				
 				type		= core.find('*[name=type]:checked').val();
-				
+			
+			form.params = {data: null}; //clean other params
+
 			for (i = 0; i < opts.data.length; i += 1) {
 
 				if (collection === opts.data[i].value) {

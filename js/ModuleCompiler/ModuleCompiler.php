@@ -2,10 +2,12 @@
 
 //type=script&path=package1%2Bfirst&json=1&data%5B0%5D%5Bpath%5D=test%2Fframework1%2Fpackage1%2F&data%5B0%5D%5Bdir%5D=&data%5B0%5D%5Bprefix%5D=test%2Fframework1%2Fpackage1%2F&data%5B0%5D%5Bfirst%5D%5B%5D=Package1Class3.js 
 
-$result		= array();
+$result				= array();
 
-$result_top	= array();
+$result_top			= array();
 	
+$result_top_sort	= array();
+
 
 foreach($_GET['data'] as $data) {
 	
@@ -28,6 +30,7 @@ foreach($_GET['data'] as $data) {
 
 	//firsts
 	if (isset($data['first'])) {
+
 
 		$firsts = array();
 
@@ -96,31 +99,31 @@ foreach($_GET['data'] as $data) {
 
 					
 				fclose($handle);
-
-					
-				/*print $contents; exit; */
-				
 				
 				break;
 
 					
 			}
 			
-			
-			//print $data['first'] . ":" + $f . "<br/>";
-			
+
 			//check if a particular path should be included in the special 'top' array
-			
-			//print_r($data['first']); 
-
-
-
 			if (isset($data['first']) && preg_match( $firsts_regexp, $f )) {
 			
 
 				array_push($result_top, $item);
 
-				
+				//get corresponding key in data['first'] to correctly sort order afterwards
+				foreach ($data['first'] as $key => $value) {
+
+					if (preg_match("#" . preg_quote($value) . "#", $f)) {
+
+						array_push($result_top_sort, $key);
+
+						break;
+
+					}
+
+				}
 				
 			} else {
 				
@@ -184,6 +187,19 @@ case 'script':
 default:
 
 
+
+}
+
+
+
+if(!empty($result_top)) {
+
+
+	$result_top = array_map(function($i) use ($result_top) {
+	   
+	   return $result_top[$i];
+	
+	}, $result_top_sort);	
 
 }
 
