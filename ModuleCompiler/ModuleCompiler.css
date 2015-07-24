@@ -1,0 +1,73 @@
+
+/* FONTS */
+
+label, select									{ font: normal 14px Arial, Helvetica, sans-serif; }
+
+
+.files .tree .node>.trigger:before				{ font-family:'FontAwesome'; }
+.files .tree .node>.trigger:before				{ content: '\f096'; }
+.files .tree .node.on>.trigger:before			{ content: '\f046'; }
+
+
+/* STRUCTURE */
+body, html										{ padding: 0; width: 100%; margin: 0; height: 100%;}
+
+body { margin: 0px; padding: 0px;}
+
+html { margin: 0px; padding: 0px;}
+
+body {overflow: hidden;}
+
+
+/*body											{ margin: 0; padding: 0; }*/
+
+*												{ box-sizing: border-box;}
+
+
+/*CORE*/
+/*.core:after									{ content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+*/
+.core>*											{ float: left;}
+
+/* common */
+label, input[type=radio], select, fieldset		{ float:left; }
+
+fieldset										{ border:none; }
+
+label											{ margin: 0 10px 0 0; }
+
+
+/* Collections */
+.collections									{  }
+
+/*dims*/
+.collections									{ width: 33.3333%; height: 50px; padding: 10px; }
+.collections select								{ width: 200px; }
+.collections select								{ margin: 0 50px 0 0; }
+
+
+.types											{ width: 66.6666%; height: 50px; padding: 10px; }
+.types input[type=radio]						{ margin-right: 10px;}
+.types label									{ margin-right: 40px; }
+
+
+/* Files */
+
+.files .node									{ list-style: none; }			
+.files .tree .node>.trigger:before				{ display: inline-block; }
+
+/*dims*/
+.files											{ width: 33.3333%; }
+.files .tree .branch							{ padding-left: 20px; }
+.files .tree .node>.trigger:before				{ width: 20px; }
+
+
+
+
+/* Result */
+.result 										{ }
+
+/*dims*/
+.result 										{ width: 66.6666%;  }
+
+.result textarea								{ width: 100%; height: 100%; }
