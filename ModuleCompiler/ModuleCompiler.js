@@ -30,7 +30,7 @@ var ModuleCompiler = function (options) {
 	
 
 
-		refresh = function ( handler ) {
+		refresh = function ( handler, exclude ) {
 
 			var data, i, params = [], 
 
@@ -41,15 +41,18 @@ var ModuleCompiler = function (options) {
 			data = collection instanceof Array ? collection : [ collection ];
 
 			for (i = 0; i < data.length; i += 1) {
-					
+				
 				params.push({
-					path:	(options.prefix || '') + data[i].path,
-					dir:	data[i].dir || null,
-					prefix: data[i][type],
-					first:	data[i].first || null
+					path:		(options.prefix || '') + data[i].path,
+					dir:		data[i].dir || null,
+					prefix:		data[i][type],
+					first:		data[i].first || null,
+					exclude:	exclude && exclude[i] || null 
 				});
-							
+
 			}
+
+			console.log(options.process + '?' + $.param({data: params, type: type}));
 
 			$.get( options.process,  {data: params, type: type}, handler, 'json');
 
@@ -66,7 +69,9 @@ var ModuleCompiler = function (options) {
 		},
 
 
-		eventDataTypeHandler = function (data) {
+		eventDataFilesHandler = function ( data ) {
+
+			//ui_filter_files.get();
 
 			ui_result.refresh( data.result );
 
@@ -81,17 +86,16 @@ var ModuleCompiler = function (options) {
 
 			case 'COLLECTIONS':
 
+				ui_filter_types.refresh( ui_filter_collections.get() );
+
 				refresh( eventDataCollectionsHandler );
 
 				break;
 
 			case 'FILES':
-
-				break;
-
 			case 'TYPES':
 
-				refresh( eventDataTypeHandler );			
+				refresh( eventDataFilesHandler, ui_filter_files.get() );		
 
 				break;								
 
@@ -237,6 +241,43 @@ var ModuleCompilerFilterType = function (options) {
 
 	var holder, form, _this = this,
 
+
+		refresh = function ( filter ) {
+
+			var label, labels = form.find('label'), types = form.find('input'), clss = 'disabled';
+
+			if ( filter ) {
+
+				types.each( function () {
+
+					label = form.find('label[for=' + $(this).prop('id') + ']');
+
+					if ( $(this).val() === 'join' || filter[ $(this).val() ] ) {
+
+						$(this).prop({disabled: false});
+
+						label.removeClass( clss );
+
+					} else {
+
+						$(this).prop({disabled: true});
+
+						label.addClass( clss );
+
+					}
+
+				});
+
+			} else {
+
+				labels.addClass( clss );
+
+				types.prop({disabled: true});
+
+			}
+
+		},
+
 		
 		get = function () {
 
@@ -249,7 +290,7 @@ var ModuleCompilerFilterType = function (options) {
 
 			event.stopImmediatePropagation();
 
-			form.trigger('TYPES');	
+			holder.trigger('TYPES');
 
 		},
 
@@ -280,12 +321,15 @@ var ModuleCompilerFilterType = function (options) {
 			
 			}
 
-			_this.core = form;
+			refresh();
+
+			_this.core = holder;
 
 		};
 
 
-	_this.get = get;
+	_this.refresh	= refresh;
+	_this.get		= get;
 
 
 	init();
@@ -302,14 +346,49 @@ var ModuleCompilerFileManager = function ( options ) {
 
 	"use strict";
 
-	var holder, tree, _this = this,
+	var core, inner, tree, _this = this,
+
+
+		get = function () {
+
+			var e, exclude = [], i, inactive;
+
+			for (i = 0; i < tree.length; i += 1) {
+
+				inactive	= tree[i].inactive();
+
+				if (inactive) {
+
+					exclude[i]	= [];
+
+					for ( e in inactive ) {
+
+						if (inactive.hasOwnProperty(e)) {
+
+							exclude[i].push( inactive[e].data.path || inactive[e].data );
+
+						}
+
+					}
+
+				} else {
+
+					exclude[i] = false;
+
+				}
+
+			}
+
+			return exclude;
+			
+		},
 
 
 		clean = function () {
 
 			tree = [];
 
-			holder.empty();
+			inner.empty();
 
 		},
 
@@ -325,10 +404,10 @@ var ModuleCompilerFileManager = function ( options ) {
 
 				tree[i] = new ModuleCompilerFileManagerNav({
 					data:	data[i],
-					target:	holder
+					target:	inner
 				});
 
-				tree[i].core.on('FILES', eventTreeHandler);
+				tree[i].core.on('CHANGE', eventTreeHandler);
 
 			}
 
@@ -337,7 +416,7 @@ var ModuleCompilerFileManager = function ( options ) {
 
 		resize = function (height) {
 
-			holder.height(height);
+			core.outerHeight(height);
 
 		},
 
@@ -346,42 +425,22 @@ var ModuleCompilerFileManager = function ( options ) {
 
 			event.stopImmediatePropagation();
 
-			var data = [], i, s, selected, t;
-
-			for (i = 0; i < tree.length; i += 1) {
-
-				selected = tree[i].selected();
-
-				t = [];
-
-				for (s in selected) {
-
-					if (selected.hasOwnProperty(s)) {
-
-						t.push( selected[i] );
-
-					}
-
-				}
-				
-				a[i] = t;
-
-			}
-
-			holder.trigger('CHANGE', data);
+			core.trigger('FILES');
 
 		},
 
 
 		init = function () {
 
-			holder		= $('<div/>').appendTo(options.target).addClass('files');
+			core		= $('<div/>').appendTo(options.target).addClass('files');
 
-			_this.core	= holder;
+			inner		= $('<div/>').appendTo( core ).addClass('inner');
+
+			_this.core	= core;
 
 		};
 
-
+	_this.get		= get;
 	_this.refresh	= refresh;
 	_this.resize	= resize;
 
@@ -395,39 +454,10 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 	"use strict";
 
-	var active, core, tree, _this = this,
-
-		//toggle branch [and children]
-		toggle = function (id) {
-
-			activate( id, !active[id] );
-
-			core.trigger('CHANGE', {selected: active});
-
-		},
+	var active, core, inactive, tree, tree_leaf_count, tree_leaf_active_count, _this = this,
 
 
-		//toggle branch [and activates children accordingly]
-		open = function (id) {
 
-			var on 			= tree[id].hasClass('on'),
-				children	= tree[id].find('.node');
-
-			activate( id, !on);
-
-			if (children.length) {
-
-				children.each( function () {
-
-					activate( $(this).data('id'), !on);
-
-				});
-
-			}
-
-			core.trigger('CHANGE', {selected: active});
-
-		},
 
 
 		//sets active status. adds or deletes leaf nodes from the 'active' aggregator object
@@ -439,19 +469,27 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 				if (is_leaf(id)){
 				
-					active[id] = tree[id];
+					active[id] = tree[id].data();
+
+					tree_leaf_active_count += 1;
+
+					delete inactive[id];
 
 					tree[id].parentsUntil('.tree', '.node:not(.leaf)').each( function() {
 
 						activate( $(this).data('id') );
 
-					});
+					});					
 
 				}
 
 			} else {
 
 				if (is_leaf(id)) {
+
+					inactive[id] = tree[id].data();
+
+					tree_leaf_active_count -= 1;					
 				
 					delete active[id];
 
@@ -481,19 +519,83 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 
 
+		//toggle branch [and activates children accordingly]
+		open = function (id) {
+
+			var on 			= tree[id].hasClass('on'),
+				children	= tree[id].find('.node');
+
+			activate( id, !on);
+
+			if (children.length) {
+
+				children.each( function () {
+
+					activate( $(this).data('id'), !on);
+
+				});
+
+			}
+
+			core.trigger('CHANGE', get_info() );
+
+		},
+
+
+		get_active = function (active) {
+
+			var a = active === undefined ? true : active;
+
+			if ( (a && tree_leaf_active_count) || (!a && tree_leaf_active_count < tree_leaf_count) ) {
+
+				return a ? active : inactive;
+
+			}
+
+			return false;
+
+		},
+
+
+		get_info = function () {
+
+			return {
+				active:		get_active(), 
+				inactive:	get_active( false ),
+				leaf:		tree_leaf_count,
+				selected:	tree_leaf_active_count
+			};
+
+		},			
+
+
+		//toggle branch [and children]
+		toggle = function (id) {
+
+			activate( id, !active[id] );
+
+			//console.log( tree_leaf_count +' : ' +  tree_leaf_active_count);
+
+			core.trigger('CHANGE', get_info() );
+
+		},
+
+
 		render = function (data, id) {
 
-			var i, nodeID, parentID = id ? id + '_' : 'i',
+			var i, nodeID, nodeData, parentID = id ? id + '_' : 'i',
 
 				ui_holder = $('<ul/>'), ui_branch, ui_leaf, ui_trigger;
 
 			for(i = 0; i < data.length; i += 1 ) {
 
-				nodeID = parentID + i;
+				nodeID		= parentID + i;
 
-				ui_leaf = $('<li/>').appendTo( ui_holder ).addClass( 'node ' + nodeID ).data('id', nodeID);
+				nodeData	= {id: nodeID, data: data[i]};
 
-				ui_trigger = trigger( data[i] ).appendTo( ui_leaf ).addClass('trigger');
+				ui_leaf		= $('<li/>').appendTo( ui_holder ).addClass( 'node ' + nodeID ).data( nodeData );
+
+				ui_trigger	= trigger( data[i] ).appendTo( ui_leaf ).addClass('trigger');
 
 				if (data[i].children) {
 
@@ -504,6 +606,8 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 				} else {
 
 					ui_leaf.addClass('leaf').on('click', eventLeafClickHandler);
+
+					tree_leaf_count += 1;
 
 				}
 
@@ -521,9 +625,17 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 		trigger = function( data ) {
 
-			var label = typeof data === 'string' ? data : data.vanity;
+			var label = typeof data === 'string' ? data : data.name || data.vanity,
 
-			return $('<span/>').html( label );
+				dom	= $('<span/>').html( label );
+
+			if (data.path) {
+
+				dom.attr('data-path', data.path);
+
+			}
+
+			return dom;
 
 		},
 
@@ -559,16 +671,25 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 		init = function () {
 
-			tree		= {};
+			tree					= {};
 
-			active		= {};
+			tree_leaf_count			= 0;
 
-			core		= render(options.data).appendTo( options.target ).addClass('tree');
+			tree_leaf_active_count	= 0;
 
-			_this.core	= core;
+			active					= {};
+
+			inactive				= {};
+
+			core					= render(options.data).appendTo( options.target ).addClass('tree');
+
+			_this.core				= core;
 
 		};
 
+
+	_this.active	= function () { return get_active(); };
+	_this.inactive	= function () { return get_active( false ); };
 
 	init();
 
@@ -582,7 +703,7 @@ var ModuleCompilerResultManager = function (options) {
 
 	"use strict";
 
-	var core, textarea, _this = this,
+	var core, inner, textarea, _this = this,
 
 		refresh = function(data) {
 
@@ -592,15 +713,17 @@ var ModuleCompilerResultManager = function (options) {
 
 		resize = function (height) {
 
-			core.height( height );
+			core.outerHeight( height );
 
 		},
 
 		init = function () {
 
-			core	 = $('<div/>').appendTo( options.target ).addClass('result');
+			core	 	= $('<div/>').appendTo( options.target ).addClass('result');
 
-			textarea = $('<textarea/>').appendTo( core );
+			inner		= $('<div/>').appendTo( core ).addClass('inner');			
+
+			textarea	= $('<textarea/>').appendTo( inner );
 
 		};
 

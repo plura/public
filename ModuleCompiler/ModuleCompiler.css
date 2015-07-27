@@ -4,9 +4,13 @@
 label, select									{ font: normal 14px Arial, Helvetica, sans-serif; }
 
 
-.files .tree .node>.trigger:before				{ font-family:'FontAwesome'; }
+.files .tree .node:not(.leaf)>.trigger			{ font-weight: bold; }
+
+.files .tree .node>.trigger:before				{ font-family:'FontAwesome'; font-weight: normal; }
 .files .tree .node>.trigger:before				{ content: '\f096'; }
 .files .tree .node.on>.trigger:before			{ content: '\f046'; }
+
+
 
 
 /* STRUCTURE */
@@ -37,6 +41,11 @@ fieldset										{ border:none; }
 label											{ margin: 0 10px 0 0; }
 
 
+/* COMMON */
+.files, .result									{ padding: 20px; }
+.files .inner, .result .inner					{ height: 100%; }	
+
+
 /* Collections */
 .collections									{  }
 
@@ -52,13 +61,16 @@ label											{ margin: 0 10px 0 0; }
 
 
 /* Files */
-
-.files .node									{ list-style: none; }			
+.files .inner									{ overflow-y: auto;}
+.files .tree									{ padding: 0; margin: 0; }
+.files .tree .node								{ list-style: none; cursor: default; }			
+.files .tree .node>.trigger						{ display: inline-block; }
 .files .tree .node>.trigger:before				{ display: inline-block; }
 
 /*dims*/
 .files											{ width: 33.3333%; }
-.files .tree .branch							{ padding-left: 20px; }
+.files .tree .branch							{ padding-left: 40px; }
+.files .tree .node>.trigger						{ padding-top: 2px; padding-bottom: 2px; }
 .files .tree .node>.trigger:before				{ width: 20px; }
 
 

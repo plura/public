@@ -12,6 +12,11 @@
 
 //http://localhost/dev/code/public/ModuleCompiler/ModuleCompiler.php?type=script&collection=p.admin.js&json=1&data%5B0%5D%5Bpath%5D=..%2F..%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bdir%5D=&data%5B0%5D%5Bprefix%5D=http%3A%2F%2Flocalhost%2Fdev%2Fcode%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bfirst%5D%5B%5D=Admin.js
 
+//http://localhost/dev/code/public/ModuleCompiler/ModuleCompiler.php?data%5B0%5D%5Bpath%5D=..%2F..%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bdir%5D=&data%5B0%5D%5Bprefix%5D=http%3A%2F%2Flocalhost%2Fdev%2Fcode%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bfirst%5D%5B%5D=Admin.js&data%5B0%5D%5Bexclude%5D%5B%5D=Admin.js&data%5B0%5D%5Bexclude%5D%5B%5D=admin%2Fconstants%2FRegExp.js&type=script
+
+
+//http://localhost/dev/code/public/ModuleCompiler/ModuleCompiler.php?data%5B0%5D%5Bpath%5D=..%2F..%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bdir%5D=&data%5B0%5D%5Bprefix%5D=&data%5B0%5D%5Bfirst%5D%5B%5D=Admin.js&data%5B0%5D%5Bexclude%5D=&type=join
+
 $result				= array();
 
 $result_top			= array();
@@ -66,7 +71,7 @@ function get_tree_structure ( $source ) {
 
 			}
 
-			$flat[$key]['children'][] = $value;
+			$flat[$key]['children'][] = array( 'path' => $value, 'name' => $file );
 
 		} else {
 
@@ -82,22 +87,46 @@ function get_tree_structure ( $source ) {
 
 
 
+function multi_regexp ( $source ) {
+
+	$a = array();
+		
+	if (is_string( $source ) ) {
+
+		$source = array( $source );
+
+	}
+
+	foreach ($source as $s) {
+
+		$a[] = preg_quote( $s );
+	
+	}
+
+	return '#(' . implode("|", $a) . ')#';
+
+}
+
+
+
 //INIT DATA PARSING
 
 foreach($_GET['data'] as $data) {
 
-	//store files for tree structure parsing
+	//store files path for tree structure parsing
 	$files		= array();
+
+	$files_top	= array();
 	
 	
 	//check if dir exists
-	$dir		= isset( $data['dir'] ) ? '/' . $data['dir'] : '';
+	//$dir		= isset( $data['dir'] ) ? '/' . $data['dir'] : '';
 	
 	
 	//init recursive directory iterator
-	$path		= new RecursiveDirectoryIterator( $data['path'] . $dir );
+	$path		= new RecursiveDirectoryIterator( $data['path'] );// . $dir );
 	
-	
+
 	//init recursive item iterator
 	$objects	= new RecursiveIteratorIterator( $path, RecursiveIteratorIterator::SELF_FIRST );
 	
@@ -105,24 +134,33 @@ foreach($_GET['data'] as $data) {
 	//cache preventor
 	$date		= new DateTime();
 
+
+	//exclude
+	if (isset($data['exclude'])) {
+
+		$exclude = array();
+
+		foreach ($exclude as $e) {
+
+			$exclude[] = preg_quote( $e );
+
+		}
+
+	}
+
+
+	//exclude files
+	if (isset($data['exclude']) && !empty($data['exclude'])) {
+
+		$exclude_regexp = multi_regexp( $data['exclude'] );
+
+	}
+
+	
 	//firsts
 	if (isset($data['first']) && !empty($data['first'])) {
 
-		$firsts = array();
-
-		if (is_string( $data['first'] ) ) {
-
-			$data['first'] = array($data['first']);
-
-		}
-
-		foreach ($data['first'] as $first) {
-			
-			array_push($firsts, preg_quote( $first ) );
-		
-		}
-
-		$firsts_regexp = '#(' . implode("|", $firsts) . ')#';
+		$first_regexp = multi_regexp( $data['first'] );
 
 	}
 
@@ -132,17 +170,22 @@ foreach($_GET['data'] as $data) {
 	foreach($objects as $name => $object){
 
 
-
 		if (pathinfo($name, PATHINFO_EXTENSION) === 'js') {
 
 
+			$file_path = preg_replace("/\\\/", '/', $name);
 
-			$f = preg_replace("/\\\/", '/', $name);
-
-			$f = preg_replace("/" . preg_quote($path->getPath() . '/', '/') . "/", '', $f);
+			$file_path = preg_replace("/" . preg_quote($path->getPath() . '/', '/') . "/", '', $file_path);
 
 			
-			//echo $f . "<br/>";
+			if (isset($exclude_regexp) && preg_match($exclude_regexp, $file_path) ) {
+
+				continue;
+
+			}
+
+
+
 
 			switch ($_GET['type']) {
 
@@ -150,7 +193,7 @@ foreach($_GET['data'] as $data) {
 			case 'closure':
 
 				
-				$item = "// @code_url " . $data['prefix'] . $f . "?" . $date->getTimestamp();
+				$item = "// @code_url " . $data['prefix'] . $file_path . "?" . $date->getTimestamp();
 
 					
 				break;
@@ -159,7 +202,7 @@ foreach($_GET['data'] as $data) {
 			case 'script':
 
 
-				$item = "<script src=\"" . $data['prefix'] . $f . "\"></script>";
+				$item = "<script src=\"" . $data['prefix'] . $file_path . "\"></script>";
 
 					
 				break;
@@ -168,32 +211,35 @@ foreach($_GET['data'] as $data) {
 			case 'join':
 
 					
-				$filename	= $path->getPath() . $f;
+				$filename	= $path->getPath() . '/' . $file_path;
 
 					
 				$handle		= fopen($filename, "r");
 
 				
-				$item		= fread($handle, filesize($filename));
+				$item		= fread($handle, filesize( $filename ) );
 
 					
 				fclose($handle);
+
 				
 				break;
-
 					
 			}
 			
 
 			//check if a particular path should be included in the special 'top' array
-			if (isset($data['first']) && !empty($data['first']) && preg_match( $firsts_regexp, $f )) {
+			if (isset( $first_regexp ) && preg_match( $first_regexp, $file_path )) {
 
+				
 				//get corresponding key in data['first'] to correctly sort order afterwards
 				foreach ($data['first'] as $key => $value) {
 
-					if (preg_match("#" . preg_quote($value) . "#", $f)) {
+					if (preg_match("#" . preg_quote($value) . "#", $file_path)) {
 
-						$result_top[$key] = $item;
+						$result_top[$key]	= $item;
+
+						$files_top[$key]	= $file_path;
 
 						break;
 
@@ -201,16 +247,16 @@ foreach($_GET['data'] as $data) {
 
 				}
 				
+			
 			} else {
 
-				
-				array_push($result, $item);	
-				
-				
-			}
 
-			//add file path for tree structure parsing [next]
-			$files[] = $f;
+				$result[]	= $item;
+
+				$files[]	= $file_path;
+				
+			
+			}
 
 		}
 
@@ -218,14 +264,24 @@ foreach($_GET['data'] as $data) {
 	}
 
 
+	//sort array by keys - they might be unordered. ie. [2, 0, 1]
+	ksort($files_top);	
+
+
+
+	$files	= array_merge( $files_top, $files );
+
 	$tree[] = get_tree_structure( $files );
 	
 
 }
 
 
+
 //sort array by keys - they might be unordered. ie. [2, 0, 1]
-ksort($result_top);
+ksort($result_top);	
+
+
 
 
 
@@ -276,7 +332,20 @@ default:
 }
 
 
+
+
+
 $r = array_merge( $result_top, $result );
+
+
+/*print_r(array(
+
+	'tree'		=> $tree,
+	'result'	=> implode($sep, $r),
+	'success'	=> 1
+	
+)); exit;*/
+
 
 
 echo json_encode(array(
