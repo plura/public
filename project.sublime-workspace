@@ -4,8 +4,100 @@
 		"selected_items":
 		[
 			[
+				"op",
+				"opt_name"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"col",
+				"collections"
+			],
+			[
+				"co",
+				"collections"
+			],
+			[
+				"pa",
+				"parentID"
+			],
+			[
+				"par",
+				"params"
+			],
+			[
+				"bl",
+				"block"
+			],
+			[
 				"ui",
-				"ui_filter_files"
+				"ui_ctrls_visibility"
+			],
+			[
+				"o",
+				"objects"
+			],
+			[
+				"parent",
+				"parentID"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"a",
+				"activateAll"
+			],
+			[
+				"activat",
+				"activate"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"to",
+				"toggle"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"Mod",
+				"ModuleCompilerFileManagerGroup"
+			],
+			[
+				"eventC",
+				"eventControlsCheckHandler"
+			],
+			[
+				"Mo",
+				"ModuleCompilerFileManagerNavTree"
+			],
+			[
+				"fil",
+				"file_path"
+			],
+			[
+				"exc",
+				"exclude_regexp"
 			],
 			[
 				"tree",
@@ -14,14 +106,6 @@
 			[
 				"get",
 				"get_info"
-			],
-			[
-				"in",
-				"inactive"
-			],
-			[
-				"a",
-				"active"
 			],
 			[
 				"ac",
@@ -54,10 +138,6 @@
 			[
 				"di",
 				"display"
-			],
-			[
-				"pa",
-				"padding-bottom"
 			],
 			[
 				"padding",
@@ -104,10 +184,6 @@
 				"appendTo"
 			],
 			[
-				"op",
-				"options"
-			],
-			[
 				"opt",
 				"option"
 			],
@@ -126,10 +202,6 @@
 			[
 				"opti",
 				"option"
-			],
-			[
-				"fil",
-				"filter"
 			],
 			[
 				"str",
@@ -160,10 +232,6 @@
 				"ui_leaf"
 			],
 			[
-				"Mo",
-				"ModuleCompilerFileManagerNav"
-			],
-			[
 				"wid",
 				"width"
 			],
@@ -180,10 +248,6 @@
 				"result"
 			],
 			[
-				"padd",
-				"padding"
-			],
-			[
 				"mar",
 				"margin"
 			],
@@ -198,10 +262,6 @@
 			[
 				"option",
 				"options"
-			],
-			[
-				"co",
-				"collection"
 			],
 			[
 				"ret",
@@ -312,10 +372,6 @@
 				"margin-left"
 			],
 			[
-				"o",
-				"objs"
-			],
-			[
 				"text",
 				"text_h"
 			],
@@ -339,26 +395,23 @@
 			"file": "ModuleCompiler/ModuleCompiler.php",
 			"settings":
 			{
-				"buffer_size": 4724,
+				"buffer_size": 5836,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ModuleCompiler/implementation.html",
+			"file": "ModuleCompiler/test/collections.js",
 			"settings":
 			{
-				"buffer_size": 575,
+				"buffer_size": 1089,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "var ModuleCompiler = function (options) {\n	\n		\n	\"use strict\";\n	\n	\n	var defaults = {\n			process: 'ModuleCompiler.php'\n		},\n	\n	\n		core, opts, ui_filter_collections, ui_filter_files, ui_filter_types, ui_result,\n\n\n		resize = function () {\n\n			var winw = $(window).width(), winh = $(window).height(),\n\n				navh = ui_filter_collections.core.outerHeight( true );\n\n			$('body').height( winh );\n\n			core.height( winh );\n\n			ui_result.resize( winh - navh );\n\n			ui_filter_files.resize( winh - navh );\n\n		},\n	\n\n\n		refresh = function ( handler, exclude ) {\n\n			var data, i, params = [], \n\n				collection	= ui_filter_collections.get(), \n\n				type		= ui_filter_types.get();\n\n			data = collection instanceof Array ? collection : [ collection ];\n\n			for (i = 0; i < data.length; i += 1) {\n					\n				params.push({\n					path:	(options.prefix || '') + data[i].path,\n					dir:	data[i].dir || null,\n					prefix: data[i][type],\n					first:	data[i].first || null\n				});\n\n						\n			}\n\n			console.log(options.process + '?' + $.param({data: params, type: type}));\n\n			$.get( options.process,  {data: params, type: type}, handler, 'json');\n\n		},\n\n\n\n		eventDataCollectionsHandler = function (data) {\n\n			ui_filter_files.refresh( data.tree );\n\n			ui_result.refresh( data.result );\n\n		},\n\n\n		eventDataFilesHandler = function ( data ) {\n\n			ui_filter_files.get();\n\n			ui_result.refresh( data.result );\n\n		},\n\n\n		eventDataTypeHandler = function ( data ) {\n\n			ui_result.refresh( data.result );\n\n		},\n\n\n		eventFilterHandler = function (event, data) {\n\n			event.stopImmediatePropagation();\n\n			switch (event.type) {\n\n			case 'COLLECTIONS':\n\n				refresh( eventDataCollectionsHandler );\n\n				ui_filter_types.refresh( ui_filter_collections.get() );\n\n				break;\n\n			case 'FILES':\n\n				ui_filter_files.get();\n\n				//console.log(ui_filter_files.get());\n\n				//refresh( eventDataFilesHandler, ui_filter_files.get() )\n\n				break;\n\n			case 'TYPES':\n\n				refresh( eventDataTypeHandler );			\n\n				break;								\n\n			}\n\n		},\n\n		eventWindowResizeHandler = function () {\n\n			resize();\n\n		},\n			\n		init = function () {\n			\n			opts					= $.extend(true, {}, defaults, options);\n\n			core					= $('<div/>').appendTo('body').addClass('core');\n			\n\n			ui_filter_collections	= new ModuleCompilerFilterCollection({data: opts.data, target: core});\n\n			ui_filter_collections.core.on('COLLECTIONS', eventFilterHandler);\n\n\n			ui_filter_types			= new ModuleCompilerFilterType({target: core});\n\n			ui_filter_types.core.on('TYPES', eventFilterHandler);\n\n\n			ui_filter_files			= new ModuleCompilerFileManager({target: core});\n\n			ui_filter_files.core.on('FILES', eventFilterHandler);\n\n\n			ui_result		= new ModuleCompilerResultManager({target: core});\n\n\n			$(window).resize( eventWindowResizeHandler );\n\n\n			resize();\n			\n		};\n		\n\n	init();\n	\n\n};\n\n\n\n\nvar ModuleCompilerFilterCollection = function (options) {\n\n	\"use strict\";\n\n	var holder, form, select, _this = this,\n\n\n		get = function () {\n\n			return form.find('*[name=collection] option:selected').data();\n		\n		},\n\n\n		eventChangeHandler = function (event, data) {\n\n			event.stopImmediatePropagation();\n\n			holder.trigger( 'COLLECTIONS' );\n\n		},\n\n\n		init_select = function (data, target) {\n\n			var i, group, group_name, group_data, opt, opt_name;\n\n			if (!target) {\n\n				target = $('<select/>').prop({name: 'collection'}).append('<option/>');\n\n			}\n\n			for( i = 0; i < data.length; i += 1) {\n\n				if (data[i].values || data[i] instanceof Array) {\n\n                    group_name  = data[i].values && data[i].label ? data[i].label : 'group' + i;\n\n                    group_data  = data[i].values || data[i];\n\n                    group       = $('<optgroup/>').prop({label: group_name}).appendTo( target );\n\n                    init_select( group_data, group );\n\n				} else {\n\n					opt_name	= data[i].label || data[i].value;\n\n					opt			= $('<option/>').prop({value: opt_name}).appendTo( target ).html(opt_name).data( data[i].data );\n\n				}\n\n			}\n\n			return target;      \n\n		},\n\n\n\n		init = function () {\n\n			holder		= $('<div/>').appendTo( options.target ).addClass('collections');\n\n			form		= $('<form/>').appendTo( holder );\n\n			select		= init_select( options.data ).appendTo( form ).on('change', eventChangeHandler);\n\n			_this.core	= holder;\n\n		};\n\n\n	_this.get = get;		\n\n\n	init();\n\n\n};\n\n\n\n\nvar ModuleCompilerFilterType = function (options) {\n\n	\"use strict\";\n\n	var holder, form, _this = this,\n\n\n		refresh = function ( filter ) {\n\n			var label, labels = form.find('label'), types = form.find('input'), clss = 'disabled';\n\n			if ( filter ) {\n\n				types.each( function () {\n\n					label = form.find('label[for=' + $(this).prop('id') + ']');\n\n					if ( $(this).val() === 'join' || filter[ $(this).val() ] ) {\n\n						$(this).prop({disabled: false});\n\n						label.removeClass( clss );\n\n					} else {\n\n						$(this).prop({disabled: true});\n\n						label.addClass( clss );\n\n					}\n\n				});\n\n			} else {\n\n				labels.addClass( clss );\n\n				types.prop({disabled: true});\n\n			}\n\n		},\n\n		\n		get = function () {\n\n			return form.find('*[name=type]:checked').val();\n\n		},\n\n\n		eventChangeHandler = function(event, data) {\n\n			event.stopImmediatePropagation();\n\n			holder.trigger('TYPES');\n\n		},\n\n\n		init = function () {\n\n			var i, id, input, label, values = [['script', 'Script'], ['join', 'Join'], ['closure', 'Closure']];\n\n			holder	= $('<div/>').appendTo( options.target ).addClass('types');\n\n			form	= $('<form/>').appendTo(holder);\n\n			for(i = 0; i < values.length; i+=1) {\n\n				id = 'option-' + i;\n\n				input = $('<input/>').prop({type: 'radio', name: 'type', id: id}).val( values[i][0] )\n\n						.on('change', eventChangeHandler).appendTo(form);\n\n				label = $('<label/>').html( values[i][1] ).prop({'for': id}).appendTo(form);\n\n				if (!i) {\n\n					input.prop(\"checked\", true);\n\n				}\n			\n			}\n\n			refresh();\n\n			_this.core = holder;\n\n		};\n\n\n	_this.refresh	= refresh;\n	_this.get		= get;\n\n\n	init();\n\n};\n\n\n\n\n/**\n * deals with single/multiple file structures\n */\nvar ModuleCompilerFileManager = function ( options ) {\n\n	\"use strict\";\n\n	var core, inner, tree, _this = this,\n\n\n		get = function () {\n\n			var e, exclude = [], i, inactive;\n\n			for (i = 0; i < tree.length; i += 1) {\n\n				inactive	= tree[i].inactive();\n\n				console.log(inactive);\n\n				exclude[i]	= [];\n\n				for ( e in inactive ) {\n\n					if (inactive.hasOwnProperty(e)) {\n\n						exclude[i].push( inactive[e].data.path );\n\n					}\n\n				}\n\n			}\n\n			return exclude;\n			\n		},\n\n\n		clean = function () {\n\n			tree = [];\n\n			inner.empty();\n\n		},\n\n\n		//refreshes data objects\n		refresh = function (data) {\n\n			var i;\n\n			clean();\n\n			for( i = 0; i < data.length; i +=1 ) {\n\n				tree[i] = new ModuleCompilerFileManagerNav({\n					data:	data[i],\n					target:	inner\n				});\n\n				tree[i].core.on('CHANGE', eventTreeHandler);\n\n			}\n\n		},\n\n\n		resize = function (height) {\n\n			core.outerHeight(height);\n\n		},\n\n\n		eventTreeHandler = function (event) {\n\n			event.stopImmediatePropagation();\n\n			core.trigger('FILES');\n\n		},\n\n\n		init = function () {\n\n			core		= $('<div/>').appendTo(options.target).addClass('files');\n\n			inner		= $('<div/>').appendTo( core ).addClass('inner');\n\n			_this.core	= core;\n\n		};\n\n	_this.get		= get;\n	_this.refresh	= refresh;\n	_this.resize	= resize;\n\n\n	init();\n\n};\n\n\nvar ModuleCompilerFileManagerNav = function ( options ) {\n\n	\"use strict\";\n\n	var active, core, inactive, tree, tree_leaf_count, tree_leaf_active_count, _this = this,\n\n\n\n\n\n		//sets active status. adds or deletes leaf nodes from the 'active' aggregator object\n		activate = function (id, status) {\n\n			var s = status === undefined ? true : status;\n\n			if (s) {\n\n				if (is_leaf(id)){\n				\n					active[id] = tree[id].data();\n\n					tree_leaf_active_count += 1;\n\n					delete inactive[id];\n\n					tree[id].parentsUntil('.tree', '.node:not(.leaf)').each( function() {\n\n						activate( $(this).data('id') );\n\n					});					\n\n				}\n\n			} else {\n\n				if (is_leaf(id)) {\n\n					inactive[id] = tree[id].data();\n\n					tree_leaf_active_count -= 1;					\n				\n					delete active[id];\n\n				}\n\n			}\n\n			active_style(id, s);\n\n		},\n\n\n		//adds active style to nodes\n		active_style = function (id, status) {\n\n			if (status) {\n\n				tree[id].addClass('on');\n\n			} else {\n\n				tree[id].removeClass('on');\n\n			}\n\n		},\n\n\n\n		//toggle branch [and activates children accordingly]\n		open = function (id) {\n\n			var on 			= tree[id].hasClass('on'),\n				children	= tree[id].find('.node');\n\n			activate( id, !on);\n\n			if (children.length) {\n\n				children.each( function () {\n\n					activate( $(this).data('id'), !on);\n\n				});\n\n			}\n\n			core.trigger('CHANGE', get_info() );\n\n		},\n\n\n		get_active = function (active) {\n\n			var a = active === undefined ? true : active;\n\n			if ( (a && tree_leaf_active_count) || (!a && tree_leaf_active_count < tree_leaf_count) ) {\n\n				return a ? active : inactive;\n\n			}\n\n			return false;\n\n		},\n\n\n		get_info = function () {\n\n			return {\n				active:		get_active(), \n				inactive:	get_active( false ),\n				leaf:		tree_leaf_count,\n				selected:	tree_leaf_active_count\n			};\n\n		},			\n\n\n		//toggle branch [and children]\n		toggle = function (id) {\n\n			activate( id, !active[id] );\n\n			//console.log( tree_leaf_count +' : ' +  tree_leaf_active_count);\n\n			core.trigger('CHANGE', get_info() );\n\n		},\n\n\n		render = function (data, id) {\n\n			var i, nodeID, nodeData, parentID = id ? id + '_' : 'i',\n\n				ui_holder = $('<ul/>'), ui_branch, ui_leaf, ui_trigger;\n\n			for(i = 0; i < data.length; i += 1 ) {\n\n				nodeID		= parentID + i;\n\n				nodeData	= {id: nodeID, data: data[i]};\n\n				ui_leaf		= $('<li/>').appendTo( ui_holder ).addClass( 'node ' + nodeID ).data( nodeData );\n\n				ui_trigger	= trigger( data[i] ).appendTo( ui_leaf ).addClass('trigger');\n\n				if (data[i].children) {\n\n					ui_branch = render(data[i].children, nodeID).appendTo( ui_leaf ).addClass('branch');\n\n					ui_trigger.click( eventBranchClickHandler );\n\n				} else {\n\n					ui_leaf.addClass('leaf').on('click', eventLeafClickHandler);\n\n					tree_leaf_count += 1;\n\n				}\n\n				tree[nodeID] = ui_leaf;\n\n				activate( nodeID );\n\n			}\n\n			return ui_holder;\n\n		},\n\n\n\n		trigger = function( data ) {\n\n			var label = typeof data === 'string' ? data : data.name || data.vanity,\n\n				dom	= $('<span/>').html( label );\n\n			if (data.path) {\n\n				dom.attr('data-path', data.path);\n\n			}\n\n			return dom;\n\n		},\n\n\n\n		is_leaf = function (id) {\n\n			return tree[id].hasClass('leaf');\n\n		},\n\n\n	\n		eventBranchClickHandler = function (event) {\n\n			var id = $(event.currentTarget).parent().data('id');\n\n			open( id );\n\n		},\n\n\n\n		eventLeafClickHandler = function (event) {\n\n			var id = $(event.currentTarget).data('id');\n\n			toggle( id );\n\n		},\n\n\n\n		init = function () {\n\n			tree					= {};\n\n			tree_leaf_count			= 0;\n\n			tree_leaf_active_count	= 0;\n\n			active					= {};\n\n			inactive				= {};\n\n			core					= render(options.data).appendTo( options.target ).addClass('tree');\n\n			_this.core				= core;\n\n		};\n\n\n	_this.active	= function () { return get_active(); };\n	_this.inactive	= function () { return get_active( false ); };\n\n	init();\n\n\n};\n\n\n\n\nvar ModuleCompilerResultManager = function (options) {\n\n	\"use strict\";\n\n	var core, inner, textarea, _this = this,\n\n		refresh = function(data) {\n\n			textarea.val( data );\n\n		},\n\n		resize = function (height) {\n\n			core.outerHeight( height );\n\n		},\n\n		init = function () {\n\n			core	 	= $('<div/>').appendTo( options.target ).addClass('result');\n\n			inner		= $('<div/>').appendTo( core ).addClass('inner');			\n\n			textarea	= $('<textarea/>').appendTo( inner );\n\n		};\n\n\n	_this.refresh	= refresh;\n	_this.resize	= resize;\n\n\n	init();\n\n};\n\n\n\n\n\n\n/*var ModuleCompilerCollectionManager = function ( options ) {\n\n	\"use strict\";\n\n\n	var form, holder, _this = this,\n\n		eventFilterCollectionHandler = function (event, data) {\n			\n			event.stopImmediatePropagation();\n					\n			switch(event.type) {\n				\n			case 'FORM_VALIDATION_ERROR':\n			\n				alert(data.alert);\n			\n				break;\n				\n			case 'FORM_PROCESS_ERROR':\n			\n				alert('oops');\n			\n				break;\n				\n				\n			case 'FORM_PROCESS_SUCCESS':\n\n				holder.trigger('RESULT', {result: data.result, tree: data.tree} );\n			\n				break;\n				\n			}\n			\n		},\n			\n			\n		eventFilterCollectionChangeHandler = function (event) {\n				\n			var data, i, params = [],\n\n				//get collection data saved in select <option/> object\n				collection_data = form.core.find('*[name=collection] option:selected').data(),\n			\n				type			= form.core.find('*[name=type]:checked').val();\n			\n\n			//clean other params\n			form.params = {data: null};\n\n			data		= collection_data instanceof Array ? collection_data : [ collection_data ];\n				\n			for (i = 0; i < data.length; i += 1) {\n					\n				params.push({\n					path:	(options.prefix || '') + data[i].path,\n					dir:	data[i].dir || null,\n					prefix: data[i][type],\n					first:	data[i].first || null\n				});\n							\n			}\n\n			form.params = {data: params};\n\n		},	\n\n\n		init  = function () {\n\n			holder	= $('<div/>').appendTo( options.target ).addClass('collections');\n\n			form	= new plura.form.Form({\n					\n				fields:	[\n					[\n						{name: 'type', label: 'Closure', type: 'radio', value: 'closure'},\n						{name: 'type', label: 'Script',  type: 'radio', value: 'script', checked: 1},\n						{name: 'type', label: 'Join',    type: 'radio', value: 'join'}\n					],\n					{name: 'collection',   label: 'Lib',  type: 'select', values: options.data}						\n				],\n				check:	[{id: 'collection'}],\n				params:	{json: 1},				\n				path:	options.path,\n				target:	holder\n			\n			});\n			\n			\n			form.core.on('FORM_PROCESS_ERROR FORM_PROCESS_SUCCESS FORM_VALIDATION_ERROR', eventFilterCollectionHandler)\n			\n			.find('*[name=collection], *[name=type]').on('change', eventFilterCollectionChangeHandler);\n\n			_this.core = holder;\n\n		};\n\n\n\n	init();\n\n\n};*/\n",
 			"file": "ModuleCompiler/ModuleCompiler.js",
-			"file_size": 14479,
-			"file_write_time": 130824910831407583,
 			"settings":
 			{
-				"buffer_size": 13652,
+				"buffer_size": 14226,
 				"line_ending": "Windows"
 			}
 		},
@@ -366,7 +419,7 @@
 			"file": "ModuleCompiler/ModuleCompiler.css",
 			"settings":
 			{
-				"buffer_size": 2119,
+				"buffer_size": 3792,
 				"line_ending": "Windows"
 			}
 		}
@@ -473,10 +526,32 @@
 	"expanded_folders":
 	[
 		"/C/Plura/dev/code/public",
-		"/C/Plura/dev/code/public/ModuleCompiler"
+		"/C/Plura/dev/code/public/ModuleCompiler",
+		"/C/Plura/dev/code/public/ModuleCompiler/test",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework1",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/package2class1"
 	],
 	"file_history":
 	[
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/package2class1/Package2Class1SubClass1.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/package1class2/Package1Class2SubClass2.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/package1class1/Package1Class1SubClass2.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/package1class1/Package1Class1SubClass1.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/package1class2/Package1Class2SubClass1.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/package2class1/Package2Class1SubClass2.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/package2class1/Package1Class1SubClass1.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/package2class1/Package1Class1SubClass2.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/Package2Class2.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/Package2Class1.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class1.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class3.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class2.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/collections.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/implementation.html",
 		"/C/Plura/dev/code/public/ModuleCompiler/p.js",
 		"/C/Plura/dev/code/apps/showcase/addons/compiler/core/CustomCompilerTriggerUI.js",
 		"/C/Plura/dev/code/apps/showcase/addons/compiler/core/TaskSequence.js",
@@ -587,24 +662,7 @@
 		"/C/Plura/dev/code/apps/showcase/src/server/process.php",
 		"/C/Plura/dev/code/apps/showcase/dev/js/app/utils.js",
 		"/C/Plura/dev/code/apps/showcase/md5.php",
-		"/C/Plura/dev/code/apps/showcase/s.php",
-		"/C/Plura/dev/code/apps/admin/project.sublime-project",
-		"/C/Plura/dev/code/apps/admin/src/_lib/classes/_old/XMLStructure.php",
-		"/C/Plura/dev/code/apps/admin/src/_lib/js/tinymce.3.5.10/plugins/paste/pastetext.htm",
-		"/C/Plura/dev/code/apps/admin/untitled.php",
-		"/C/Plura/dev/code/apps/admin/src/index.html",
-		"/C/Plura/dev/code/apps/admin/src/index.test.html",
-		"/C/Plura/dev/code/apps/admin/src/_lib/classes/SQL.php",
-		"/C/Plura/dev/code/js/project.sublime-project",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/_content/css/transitions.css",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/style.css",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/_content/js/modules/checkout/Houses.js",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/_content/js/ohmm.js",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/_content/js/constants/Labels.js",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/_content/js/modules/Home.js",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/_content/js/layout/resize/ResizeManager.js",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/_content/process/core_services_init.php",
-		"/C/Plura/dev/sites/2013/ohmm/site/wp/wp-content/themes/plura_www_ohmm_pt/_content/process/core_services_process.php"
+		"/C/Plura/dev/code/apps/showcase/s.php"
 	],
 	"find":
 	{
@@ -638,6 +696,46 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"pID",
+			"collection",
+			"console",
+			"ui_ctrls",
+			"{",
+			"instanceof",
+			"ui_ctrls_check",
+			"efefef",
+			"}\n",
+			"id",
+			"parentID",
+			"id",
+			"status",
+			"tree_leaf_active_count",
+			"active",
+			"tree_leaf_count",
+			"get_active",
+			"core",
+			"{",
+			".files .tree",
+			"$('<div/>')",
+			"tree[i].",
+			"prefix",
+			"render_tree",
+			"ui_",
+			"ModuleCompilerFileManagerNav",
+			"eventLeafClickHandler",
+			"eventBranchClickHandler",
+			"event",
+			"render",
+			"//",
+			"eventDataFilesHandler",
+			"console",
+			"echo",
+			"$f",
+			"$dir",
+			"$objects",
+			"first",
+			"data['first']",
+			"exclude",
 			".get(",
 			"console.",
 			"{selected: active}",
@@ -725,47 +823,7 @@
 			"event",
 			".start",
 			"start",
-			".init",
-			"opts.labels.com",
-			"complete",
-			"finish",
-			"compiler.Sequence",
-			"Compiler",
-			"Compiler/",
-			"Compiler",
-			"($(this))",
-			"$(this)",
-			"complete",
-			"completed",
-			"auto",
-			"timer",
-			"get_alert",
-			"pro",
-			"get_alert",
-			"eventSequenceHandler",
-			"compiler",
-			"PROCESS_SEQUENCE_COMPLETE_ITEM",
-			"SCREE",
-			"SCREEN",
-			"screen",
-			"eventFooterSelectHandler",
-			"params",
-			"['log']",
-			"eventLogHandler",
-			"ADMIN TYPE",
-			"init",
-			"USER_ENVIRONMENT",
-			"slides",
-			"common",
-			"n3.Sections",
-			"n3.sections",
-			".sections",
-			"CUSTOM_INIT",
-			"CONTENT_COMMON_SLIDES",
-			"custom",
-			"CUSTOM",
-			"content.N3",
-			"apps.showcase.content.N3"
+			".init"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -798,15 +856,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4724,
+						"buffer_size": 5836,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2651,
-								2651
+								5836,
+								5836
 							]
 						],
 						"settings":
@@ -815,38 +873,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3784.0,
+						"translation.y": 4038.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "ModuleCompiler/implementation.html",
+					"file": "ModuleCompiler/test/collections.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 575,
+						"buffer_size": 1089,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								315,
-								315
+								490,
+								490
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 6.0,
+						"translation.y": 126.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -855,24 +914,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13652,
+						"buffer_size": 14226,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1556,
-								1556
+								4020,
+								4020
 							]
 						],
 						"settings":
 						{
+							"history_list_is_closing": true,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 899.0,
+						"translation.y": 2730.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -884,15 +944,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2119,
+						"buffer_size": 3792,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1474,
-								1474
+								2261,
+								2261
 							]
 						],
 						"settings":
@@ -900,7 +960,43 @@
 							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 798.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "ModuleCompiler/ModuleCompiler.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9948.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -926,6 +1022,12 @@
 				0,
 				1,
 				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
 			]
 		],
 		"cols":
@@ -936,6 +1038,7 @@
 		"rows":
 		[
 			0.0,
+			0.614114114114,
 			1.0
 		]
 	},
@@ -991,9 +1094,13 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
+		"last_filter": "market",
 		"selected_items":
 		[
+			[
+				"market",
+				"C:\\Plura\\dev\\installs\\apps\\showcase\\johnson-market\\project.sublime-project"
+			],
 			[
 				"p.js",
 				"C:\\Plura\\dev\\code\\js\\p.js\\test\\p.js.sublime-workspace"
@@ -1046,7 +1153,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 199.0,
+	"side_bar_width": 293.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

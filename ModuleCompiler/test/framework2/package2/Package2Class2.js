@@ -1,0 +1,1 @@
+var F2Package2Class2 = function () {};

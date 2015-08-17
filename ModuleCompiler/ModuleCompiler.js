@@ -1,3 +1,11 @@
+/**
+ *	. ModuleCompiler
+ *		. ModuleCompilerFilterCollection
+ *		. ModuleCompilerFilterType
+ *		. ModuleCompilerFileManager
+ *			. ModuleCompilerFileManagerNavTree
+ *		. ModuleCompilerResultManager
+ */
 var ModuleCompiler = function (options) {
 	
 		
@@ -43,16 +51,17 @@ var ModuleCompiler = function (options) {
 			for (i = 0; i < data.length; i += 1) {
 				
 				params.push({
+					dir:		data[i].dir,
+					name:		data[i].name,
 					path:		(options.prefix || '') + data[i].path,
-					dir:		data[i].dir || null,
 					prefix:		data[i][type],
-					first:		data[i].first || null,
-					exclude:	exclude && exclude[i] || null 
+					first:		data[i].first,
+					exclude:	exclude && exclude[i] 
 				});
 
 			}
 
-			console.log(options.process + '?' + $.param({data: params, type: type}));
+			//console.log(options.process + '?' + $.param({data: params, type: type}));
 
 			$.get( options.process,  {data: params, type: type}, handler, 'json');
 
@@ -70,8 +79,6 @@ var ModuleCompiler = function (options) {
 
 
 		eventDataFilesHandler = function ( data ) {
-
-			//ui_filter_files.get();
 
 			ui_result.refresh( data.result );
 
@@ -131,7 +138,7 @@ var ModuleCompiler = function (options) {
 			ui_filter_files.core.on('FILES', eventFilterHandler);
 
 
-			ui_result		= new ModuleCompilerResultManager({target: core});
+			ui_result				= new ModuleCompilerResultManager({target: core});
 
 
 			$(window).resize( eventWindowResizeHandler );
@@ -150,16 +157,22 @@ var ModuleCompiler = function (options) {
 
 
 
+/**
+ * Filter for collections
+ *
+ */
 var ModuleCompilerFilterCollection = function (options) {
 
 	"use strict";
 
-	var holder, form, select, _this = this,
+	var collections, holder, form, select, _this = this,
 
 
 		get = function () {
 
-			return form.find('*[name=collection] option:selected').data();
+			var id = form.find('*[name=collection] option:selected').data( 'id' );
+
+			return collections[id];
 		
 		},
 
@@ -173,9 +186,9 @@ var ModuleCompilerFilterCollection = function (options) {
 		},
 
 
-		init_select = function (data, target) {
+		init_select = function (data, target, parentID) {
 
-			var i, group, group_name, group_data, opt, opt_name;
+			var i, id, group, group_name, group_data, opt, opt_name, pID = parentID ? parentID + '_' : 'i';
 
 			if (!target) {
 
@@ -185,21 +198,25 @@ var ModuleCompilerFilterCollection = function (options) {
 
 			for( i = 0; i < data.length; i += 1) {
 
+				id = pID + i;				
+
 				if (data[i].values || data[i] instanceof Array) {
 
-                    group_name  = data[i].values && data[i].label ? data[i].label : 'group' + i;
+                    group_name  	= data[i].values && data[i].label ? data[i].label : 'group' + i;
 
-                    group_data  = data[i].values || data[i];
+                    group_data  	= data[i].values || data[i];
 
-                    group       = $('<optgroup/>').prop({label: group_name}).appendTo( target );
+                    group       	= $('<optgroup/>').prop({label: group_name}).appendTo( target );
 
-                    init_select( group_data, group );
+                    init_select( group_data, group, id );
 
 				} else {
 
-					opt_name	= data[i].label || data[i].value;
+					collections[id]	= data[i].data;
 
-					opt			= $('<option/>').prop({value: opt_name}).appendTo( target ).html(opt_name).data( data[i].data );
+					opt_name		= data[i].label || data[i].value;
+
+					opt				= $('<option/>').prop({value: opt_name}).appendTo( target ).html( opt_name ).data( 'id', id );
 
 				}
 
@@ -212,6 +229,8 @@ var ModuleCompilerFilterCollection = function (options) {
 
 
 		init = function () {
+
+			collections	= {};
 
 			holder		= $('<div/>').appendTo( options.target ).addClass('collections');
 
@@ -234,7 +253,9 @@ var ModuleCompilerFilterCollection = function (options) {
 
 
 
-
+/**
+ * Filter for output type - script, join or closure compiler *
+ */
 var ModuleCompilerFilterType = function (options) {
 
 	"use strict";
@@ -340,7 +361,7 @@ var ModuleCompilerFilterType = function (options) {
 
 
 /**
- * deals with single/multiple file structures
+ * deals with file structures groups
  */
 var ModuleCompilerFileManager = function ( options ) {
 
@@ -402,7 +423,7 @@ var ModuleCompilerFileManager = function ( options ) {
 
 			for( i = 0; i < data.length; i +=1 ) {
 
-				tree[i] = new ModuleCompilerFileManagerNav({
+				tree[i] = new ModuleCompilerFileManagerGroup({
 					data:	data[i],
 					target:	inner
 				});
@@ -450,14 +471,107 @@ var ModuleCompilerFileManager = function ( options ) {
 };
 
 
-var ModuleCompilerFileManagerNav = function ( options ) {
+
+var ModuleCompilerFileManagerGroup = function (options) {
+
+	"use strict";
+
+	var core, ui_ctrls, ui_ctrls_check, ui_ctrls_visibility, ui_tree, _this = this,
+
+
+		render_controls = function () {
+
+			var txt				= options.data.name || options.data.path;
+
+			ui_ctrls			= $('<div/>').appendTo(core).addClass('controls');
+
+			ui_ctrls_check		= $('<div/>').appendTo(ui_ctrls).addClass('controls-check on').click(eventControlsCheckHandler).html( txt );
+
+			ui_ctrls_visibility	= $('<div/>').appendTo(ui_ctrls).addClass('controls-visibility on').click(eventControlsVisibilityHandler);
+
+		},
+
+
+
+		check = function ( on ) {
+
+			if (on) {
+
+				ui_ctrls_check.addClass('on');
+
+			} else {
+
+				ui_ctrls_check.removeClass('on');
+
+			}
+
+			ui_tree.activate( on );
+
+		},
+
+
+
+		visible = function ( on ) {
+
+			if (on) {
+
+				core.addClass('on');
+
+				ui_ctrls_visibility.addClass('on');
+
+			} else {
+
+				core.removeClass('on');
+
+				ui_ctrls_visibility.removeClass('on');
+
+			}
+
+		},
+
+
+		eventControlsCheckHandler = function( event ) {
+
+			check( !ui_ctrls_check.hasClass('on') );
+
+		},
+
+		eventControlsVisibilityHandler = function( event ) {
+
+			visible( !ui_ctrls_visibility.hasClass('on') );
+
+		},
+
+		init = function () {
+
+			core		= $('<div/>').addClass('files-group on').appendTo( options.target );
+
+			ui_ctrls	= render_controls();
+
+			ui_tree		= new ModuleCompilerFileManagerNavTree({data: options.data.core, target: core});//.appendTo( options.target ).addClass('tree');
+
+			_this.core	= core;
+
+		};
+
+
+	_this.inactive = function () { return ui_tree.inactive(); };
+
+
+	init();
+
+};
+
+
+
+/**
+ * creates files structure tree
+ */
+var ModuleCompilerFileManagerNavTree = function ( options ) {
 
 	"use strict";
 
 	var active, core, inactive, tree, tree_leaf_count, tree_leaf_active_count, _this = this,
-
-
-
 
 
 		//sets active status. adds or deletes leaf nodes from the 'active' aggregator object
@@ -465,10 +579,10 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 			var s = status === undefined ? true : status;
 
-			if (s) {
+			if ( is_leaf(id) ) {			
 
-				if (is_leaf(id)){
-				
+				if (s) {
+					
 					active[id] = tree[id].data();
 
 					tree_leaf_active_count += 1;
@@ -479,13 +593,9 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 						activate( $(this).data('id') );
 
-					});					
+					});	
 
-				}
-
-			} else {
-
-				if (is_leaf(id)) {
+				} else {
 
 					inactive[id] = tree[id].data();
 
@@ -518,22 +628,17 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 		},
 
 
+	   /**
+		* Selects/unselects all nodes in the tree
+		* @param {status=} boolean - boolean value indicating selection/unselection
+		*/	
+		activateAll = function ( status ) {
 
-		//toggle branch [and activates children accordingly]
-		open = function (id) {
+			var i, s = status === undefined ? true : status;
 
-			var on 			= tree[id].hasClass('on'),
-				children	= tree[id].find('.node');
+			for (i = 0; i < options.data.length; i += 1) {
 
-			activate( id, !on);
-
-			if (children.length) {
-
-				children.each( function () {
-
-					activate( $(this).data('id'), !on);
-
-				});
+				toggle( 'i' + i, s );
 
 			}
 
@@ -542,9 +647,13 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 		},
 
 
-		get_active = function (active) {
+	   /**
+		* Get active (true || undefined) or inactive (false)
+		* @param {status=} boolean - boolean value indicating active/inactive return
+		*/		
+		get_active = function (status) {
 
-			var a = active === undefined ? true : active;
+			var a = status === undefined ? true : status;
 
 			if ( (a && tree_leaf_active_count) || (!a && tree_leaf_active_count < tree_leaf_count) ) {
 
@@ -555,6 +664,7 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 			return false;
 
 		},
+
 
 
 		get_info = function () {
@@ -569,27 +679,50 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 		},			
 
 
-		//toggle branch [and children]
-		toggle = function (id) {
+	   /**
+		* Toggle leaf and branches [and activates branches' children accordingly]
+		* @param {number} id - nodeID
+		* @param {status=} boolean - optional boolean value to force activation/deactivation of leaf/branch
+		*/
+		toggle = function (id, status) {
 
-			activate( id, !active[id] );
+			var children, s = status !== undefined ? status : ( is_leaf( id ) ? !active[id] : !tree[id].hasClass('on') );
 
-			//console.log( tree_leaf_count +' : ' +  tree_leaf_active_count);
+			activate( id, s );
 
-			core.trigger('CHANGE', get_info() );
+			if ( !is_leaf(id) ) {
+
+				children = tree[id].find('.node');
+
+				if (children.length) {
+
+					children.each( function () {
+
+						activate( $(this).data('id'), s);
+
+					});					
+
+				}
+
+			}
 
 		},
 
 
-		render = function (data, id) {
+	   /**
+		* recursive function used to render the tree
+		* @param {Object} data - node data to be parsed
+		* @param {number=} parentID - parentID, used for recursive purposes
+		*/
+		render = function (data, parentID) {
 
-			var i, nodeID, nodeData, parentID = id ? id + '_' : 'i',
+			var i, nodeID, nodeData, pID = parentID ? parentID + '_' : 'i',
 
 				ui_holder = $('<ul/>'), ui_branch, ui_leaf, ui_trigger;
 
 			for(i = 0; i < data.length; i += 1 ) {
 
-				nodeID		= parentID + i;
+				nodeID		= pID + i;
 
 				nodeData	= {id: nodeID, data: data[i]};
 
@@ -601,11 +734,11 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 					ui_branch = render(data[i].children, nodeID).appendTo( ui_leaf ).addClass('branch');
 
-					ui_trigger.click( eventBranchClickHandler );
+					ui_trigger.click( eventTreeBranchClickHandler );
 
 				} else {
 
-					ui_leaf.addClass('leaf').on('click', eventLeafClickHandler);
+					ui_leaf.addClass('leaf').on('click', eventTreeLeafClickHandler);
 
 					tree_leaf_count += 1;
 
@@ -649,21 +782,21 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 
 	
-		eventBranchClickHandler = function (event) {
+		eventTreeBranchClickHandler = function (event) {
 
-			var id = $(event.currentTarget).parent().data('id');
+			toggle( $(event.currentTarget).parent().data('id') );
 
-			open( id );
+			core.trigger('CHANGE', get_info() );
 
 		},
 
 
 
-		eventLeafClickHandler = function (event) {
+		eventTreeLeafClickHandler = function (event) {
 
-			var id = $(event.currentTarget).data('id');
+			toggle( $(event.currentTarget).data('id') );
 
-			toggle( id );
+			core.trigger('CHANGE', get_info() );			
 
 		},
 
@@ -681,13 +814,14 @@ var ModuleCompilerFileManagerNav = function ( options ) {
 
 			inactive				= {};
 
-			core					= render(options.data).appendTo( options.target ).addClass('tree');
+			core					= render( options.data ).appendTo( options.target ).addClass('tree');
 
 			_this.core				= core;
 
 		};
 
 
+	_this.activate	= activateAll;
 	_this.active	= function () { return get_active(); };
 	_this.inactive	= function () { return get_active( false ); };
 
@@ -735,113 +869,3 @@ var ModuleCompilerResultManager = function (options) {
 	init();
 
 };
-
-
-
-
-
-
-/*var ModuleCompilerCollectionManager = function ( options ) {
-
-	"use strict";
-
-
-	var form, holder, _this = this,
-
-		eventFilterCollectionHandler = function (event, data) {
-			
-			event.stopImmediatePropagation();
-					
-			switch(event.type) {
-				
-			case 'FORM_VALIDATION_ERROR':
-			
-				alert(data.alert);
-			
-				break;
-				
-			case 'FORM_PROCESS_ERROR':
-			
-				alert('oops');
-			
-				break;
-				
-				
-			case 'FORM_PROCESS_SUCCESS':
-
-				holder.trigger('RESULT', {result: data.result, tree: data.tree} );
-			
-				break;
-				
-			}
-			
-		},
-			
-			
-		eventFilterCollectionChangeHandler = function (event) {
-				
-			var data, i, params = [],
-
-				//get collection data saved in select <option/> object
-				collection_data = form.core.find('*[name=collection] option:selected').data(),
-			
-				type			= form.core.find('*[name=type]:checked').val();
-			
-
-			//clean other params
-			form.params = {data: null};
-
-			data		= collection_data instanceof Array ? collection_data : [ collection_data ];
-				
-			for (i = 0; i < data.length; i += 1) {
-					
-				params.push({
-					path:	(options.prefix || '') + data[i].path,
-					dir:	data[i].dir || null,
-					prefix: data[i][type],
-					first:	data[i].first || null
-				});
-							
-			}
-
-			form.params = {data: params};
-
-		},	
-
-
-		init  = function () {
-
-			holder	= $('<div/>').appendTo( options.target ).addClass('collections');
-
-			form	= new plura.form.Form({
-					
-				fields:	[
-					[
-						{name: 'type', label: 'Closure', type: 'radio', value: 'closure'},
-						{name: 'type', label: 'Script',  type: 'radio', value: 'script', checked: 1},
-						{name: 'type', label: 'Join',    type: 'radio', value: 'join'}
-					],
-					{name: 'collection',   label: 'Lib',  type: 'select', values: options.data}						
-				],
-				check:	[{id: 'collection'}],
-				params:	{json: 1},				
-				path:	options.path,
-				target:	holder
-			
-			});
-			
-			
-			form.core.on('FORM_PROCESS_ERROR FORM_PROCESS_SUCCESS FORM_VALIDATION_ERROR', eventFilterCollectionHandler)
-			
-			.find('*[name=collection], *[name=type]').on('change', eventFilterCollectionChangeHandler);
-
-			_this.core = holder;
-
-		};
-
-
-
-	init();
-
-
-};*/

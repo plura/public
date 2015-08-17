@@ -1,20 +1,5 @@
-
-/* FONTS */
-
-label, select									{ font: normal 14px Arial, Helvetica, sans-serif; }
-
-
-.files .tree .node:not(.leaf)>.trigger			{ font-weight: bold; }
-
-.files .tree .node>.trigger:before				{ font-family:'FontAwesome'; font-weight: normal; }
-.files .tree .node>.trigger:before				{ content: '\f096'; }
-.files .tree .node.on>.trigger:before			{ content: '\f046'; }
-
-
-
-
 /* STRUCTURE */
-body, html										{ padding: 0; width: 100%; margin: 0; height: 100%;}
+body, html													{ padding: 0; width: 100%; margin: 0; height: 100%;}
 
 body { margin: 0px; padding: 0px;}
 
@@ -23,63 +8,126 @@ html { margin: 0px; padding: 0px;}
 body {overflow: hidden;}
 
 
-/*body											{ margin: 0; padding: 0; }*/
+/*body															{ margin: 0; padding: 0; }*/
 
-*												{ box-sizing: border-box;}
+*																{ box-sizing: border-box;}
 
 
 /*CORE*/
-/*.core:after									{ content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.files .files-group .controls:after								{ content:"."; display:block; height:0; clear:both; visibility:hidden; }
+
+
+
+/*.core:after													{ content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 */
-.core>*											{ float: left;}
+.core>*															{ float: left;}
 
 /* common */
-label, input[type=radio], select, fieldset		{ float:left; }
+label, input[type=radio], select, fieldset						{ float:left; }
 
-fieldset										{ border:none; }
+fieldset														{ border:none; }
 
-label											{ margin: 0 10px 0 0; }
+label															{ margin: 0 10px 0 0; }
 
 
 /* COMMON */
-.files, .result									{ padding: 20px; }
-.files .inner, .result .inner					{ height: 100%; }	
+.files, .result													{ padding: 20px; }
+.files .inner, .result .inner									{ height: 100%; }	
 
 
 /* Collections */
-.collections									{  }
+.collections													{  }
 
 /*dims*/
-.collections									{ width: 33.3333%; height: 50px; padding: 10px; }
-.collections select								{ width: 200px; }
-.collections select								{ margin: 0 50px 0 0; }
+.collections													{ width: 33.3333%; height: 50px; padding: 10px; }
+.collections select												{ width: 200px; }
+.collections select												{ margin: 0 50px 0 0; }
 
 
-.types											{ width: 66.6666%; height: 50px; padding: 10px; }
-.types input[type=radio]						{ margin-right: 10px;}
-.types label									{ margin-right: 40px; }
+.types															{ width: 66.6666%; height: 50px; padding: 10px; }
+.types input[type=radio]										{ margin-right: 10px;}
+.types label													{ margin-right: 40px; }
 
 
 /* Files */
-.files .inner									{ overflow-y: auto;}
-.files .tree									{ padding: 0; margin: 0; }
-.files .tree .node								{ list-style: none; cursor: default; }			
-.files .tree .node>.trigger						{ display: inline-block; }
-.files .tree .node>.trigger:before				{ display: inline-block; }
+.files .inner													{ overflow-y: auto; }
+
+.files .files-group .controls .controls-check					{ float:left; }
+.files .files-group .controls .controls-visibility				{ float: right; }
+
+.files .files-group.on .tree									{ display: block; }
+.files .files-group .tree										{ padding: 0; margin: 0; display: none; }
+.files .files-group .tree .node									{ list-style: none; }			
+.files .files-group .tree .node>.trigger						{ display: inline-block; }
+
+.files .files-group .controls,
+.files .files-group .tree .node									{ cursor: default; }
+
+.files .files-group .controls .controls-check:before,
+.files .files-group .tree .node>.trigger:before					{ display: inline-block; }
 
 /*dims*/
-.files											{ width: 33.3333%; }
-.files .tree .branch							{ padding-left: 40px; }
-.files .tree .node>.trigger						{ padding-top: 2px; padding-bottom: 2px; }
-.files .tree .node>.trigger:before				{ width: 20px; }
+.files															{ width: 33.3333%; }
 
+.files .inner													{ padding-right: 20px; }
+
+.files .files-group												{ padding: 0 10px 0 10px; }
+.files .files-group:not(:last-child)							{ margin-bottom: 20px; }
+
+
+.files .files-group .controls,
+.files .files-group .tree										{ padding: 10px 0 10px;  }
+
+.files .files-group .tree .branch								{ padding-left: 40px; }
+.files .files-group .tree .node>.trigger						{ padding-top: 2px; padding-bottom: 2px; }
+
+.files .files-group .controls .controls-check:before,
+.files .files-group .tree .node>.trigger:before					{ width: 20px; }
 
 
 
 /* Result */
-.result 										{ }
+.result 														{ }
 
 /*dims*/
-.result 										{ width: 66.6666%;  }
+.result 														{ width: 66.6666%;  }
 
-.result textarea								{ width: 100%; height: 100%; }
+.result textarea												{ width: 100%; height: 100%; }
+
+
+
+
+
+/* FONTS */
+
+label, select													{ font: normal 14px Arial, Helvetica, sans-serif; }
+
+
+.files .files-group .tree .node:not(.leaf)>.trigger				{ font-weight: bold; }
+
+
+/* icons*/
+.files .files-group .controls .controls-check:before,
+.files .files-group .controls .controls-visibility:before,
+.files .files-group .tree .node>.trigger:before					{ font-family:'FontAwesome'; font-weight: normal; }
+
+/* uncheck */
+.files .files-group .controls .controls-check:before,
+.files .files-group .tree .node>.trigger:before					{ content: '\f096'; } 
+
+/* check */
+.files .files-group .controls .controls-check.on:before,
+.files .files-group .tree .node.on>.trigger:before				{ content: '\f046'; }
+
+/* visible [eye open] */
+.files .files-group .controls .controls-visibility.on:before	{ content: '\f06e';}
+
+/* visible [eye closed] */
+.files .files-group .controls .controls-visibility:before		{ content: '\f070';}
+
+
+
+
+/* COLORS | BG */
+.files .files-group												{ border: 1px solid #CCC; }
+.files .files-group.on .controls								{ border-bottom: 1px solid #CCC; }

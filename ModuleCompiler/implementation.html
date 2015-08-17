@@ -9,7 +9,21 @@
 
 <script src="test/collections.js"></script>
 <link rel="stylesheet" type="text/css" href="ModuleCompiler.css" />
-<script>$(function () { new ModuleCompiler({data: TEST}); });</script>
+<script>//$(function () { new ModuleCompiler({data: TEST}); });</script>
+
+<script>
+
+	$(function () { 
+	
+		new ModuleCompiler({
+			data:		TEST,
+			process:	'ModuleCompiler.php'/*,
+			prefix:		'../../'*/
+		}); 
+	
+	});
+    
+</script>
 
 
 

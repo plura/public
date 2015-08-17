@@ -3,25 +3,17 @@
 /**
  * Module Compiler 1.0
  *
- * Copyright (c) 2014 Plura
+ * Copyright (c) 2015 Plura
  *
- * Date: 2014-09-05 12:00:00 (Fri, 05 Sep 2014)
+ * Date: 2015-08-17 17:35:00 (Mon, 17 Aug 2015)
  * Revision: 6246
  *
  */
 
-//http://localhost/dev/code/public/ModuleCompiler/ModuleCompiler.php?type=script&collection=p.admin.js&json=1&data%5B0%5D%5Bpath%5D=..%2F..%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bdir%5D=&data%5B0%5D%5Bprefix%5D=http%3A%2F%2Flocalhost%2Fdev%2Fcode%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bfirst%5D%5B%5D=Admin.js
 
-//http://localhost/dev/code/public/ModuleCompiler/ModuleCompiler.php?data%5B0%5D%5Bpath%5D=..%2F..%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bdir%5D=&data%5B0%5D%5Bprefix%5D=http%3A%2F%2Flocalhost%2Fdev%2Fcode%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bfirst%5D%5B%5D=Admin.js&data%5B0%5D%5Bexclude%5D%5B%5D=Admin.js&data%5B0%5D%5Bexclude%5D%5B%5D=admin%2Fconstants%2FRegExp.js&type=script
+$result		= array();
 
-
-//http://localhost/dev/code/public/ModuleCompiler/ModuleCompiler.php?data%5B0%5D%5Bpath%5D=..%2F..%2Fjs%2Fp.admin.js%2Fsrc%2Fjs%2F&data%5B0%5D%5Bdir%5D=&data%5B0%5D%5Bprefix%5D=&data%5B0%5D%5Bfirst%5D%5B%5D=Admin.js&data%5B0%5D%5Bexclude%5D=&type=join
-
-$result				= array();
-
-$result_top			= array();
-
-$tree				= array();
+$tree		= array();
 
 
 //creates a directory like array structure for files
@@ -111,12 +103,18 @@ function multi_regexp ( $source ) {
 
 //INIT DATA PARSING
 
-foreach($_GET['data'] as $data) {
+foreach($_GET['data'] as $n => $data) {
 
 	//store files path for tree structure parsing
-	$files		= array();
+	$group_files		= array();
 
-	$files_top	= array();
+	$group_files_top	= array();
+
+
+	//store results
+	$group_result		= array();
+	
+	$group_result_top	= array();	
 	
 	
 	//check if dir exists
@@ -135,30 +133,18 @@ foreach($_GET['data'] as $data) {
 	$date		= new DateTime();
 
 
-	//exclude
-	if (isset($data['exclude'])) {
-
-		$exclude = array();
-
-		foreach ($exclude as $e) {
-
-			$exclude[] = preg_quote( $e );
-
-		}
-
-	}
-
 
 	//exclude files
-	if (isset($data['exclude']) && !empty($data['exclude'])) {
+	if (!empty($data['exclude'])) {
 
 		$exclude_regexp = multi_regexp( $data['exclude'] );
 
 	}
 
 	
+
 	//firsts
-	if (isset($data['first']) && !empty($data['first'])) {
+	if (!empty($data['first'])) {
 
 		$first_regexp = multi_regexp( $data['first'] );
 
@@ -183,7 +169,6 @@ foreach($_GET['data'] as $data) {
 				continue;
 
 			}
-
 
 
 
@@ -235,11 +220,11 @@ foreach($_GET['data'] as $data) {
 				//get corresponding key in data['first'] to correctly sort order afterwards
 				foreach ($data['first'] as $key => $value) {
 
-					if (preg_match("#" . preg_quote($value) . "#", $file_path)) {
+					if (preg_match("#" . preg_quote( $value ) . "#", $file_path)) {
 
-						$result_top[$key]	= $item;
+						$group_result_top[$key]	= $item;
 
-						$files_top[$key]	= $file_path;
+						$group_files_top[$key]	= $file_path;
 
 						break;
 
@@ -251,9 +236,9 @@ foreach($_GET['data'] as $data) {
 			} else {
 
 
-				$result[]	= $item;
+				$group_result[]		= $item;
 
-				$files[]	= $file_path;
+				$group_files[]	= $file_path;
 				
 			
 			}
@@ -264,94 +249,79 @@ foreach($_GET['data'] as $data) {
 	}
 
 
-	//sort array by keys - they might be unordered. ie. [2, 0, 1]
-	ksort($files_top);	
+	//sort array by keys - they might be unordered (alphabetically). ie. [2, 0, 1]
+	ksort( $group_files_top );
 
-
-
-	$files	= array_merge( $files_top, $files );
-
-	$tree[] = get_tree_structure( $files );
+	ksort( $group_result_top );
 	
 
-}
 
+	//merge files and create tree structure object
+	$group_files	= array_merge( $group_files_top, $group_files );
 
-
-//sort array by keys - they might be unordered. ie. [2, 0, 1]
-ksort($result_top);	
-
-
-
-
-
-switch ($_GET['type']) {
-	
-
-case 'closure':
-
-	
-	array_unshift(
-	
-		$result_top,
-	
-		"// ==ClosureCompiler==",
-		"// @output_file_name default.js",
-		"// ==/ClosureCompiler=="
-	
+	$tree[]			= array(
+		'core'	=> get_tree_structure( $group_files ),
+		'name'	=> !empty( $data['name'] ) ? $data['name'] : null,		
+		'path'	=> $data['path']
 	);
 
-	$sep = "\n";
+
+
+	switch ($_GET['type']) {
+
+	case 'join':
+
+		$group_sep = $sep = "\n\n\n";
+
+		break;	
+
+	case 'closure':
+
+		if ( $n === 0 ) {
+
+			array_unshift(
+			
+				$group_result_top,
+			
+				"// ==ClosureCompiler==",
+				"// @output_file_name default.js",
+				"// ==/ClosureCompiler=="
+			
+			);
+
+		}
+
+		$group_sep = $sep = "\n";
+
+		break;
+
+	case 'script':
+
+		array_unshift(
+		
+			$group_result_top,
+
+			"<!-- " . ( !empty( $data['name'] ) ? $data['name'] . " : " : "" ) . $data['path'] . "-->"
+		
+		);	
+
+		$sep 		= "\n";
+		$group_sep	= "\n\n";
+
+		break;
+
+	}
+
+
+	$result[] = implode( $sep, array_merge( $group_result_top, $group_result ) );
 	
-
-	break;
-	
-
-case 'join':
-
-
-	$sep = "\n\n\n";
-
-
-	break;	
-
-	
-case 'script':
-
-
-	$sep = "\n";
-
-
-	break;
-	
-
-default:
-
-
 
 }
-
-
-
-
-
-$r = array_merge( $result_top, $result );
-
-
-/*print_r(array(
-
-	'tree'		=> $tree,
-	'result'	=> implode($sep, $r),
-	'success'	=> 1
-	
-)); exit;*/
-
-
 
 echo json_encode(array(
 
 	'tree'		=> $tree,
-	'result'	=> implode($sep, $r),
+	'result'	=> implode($group_sep, $result),
 	'success'	=> 1
 	
 ));
