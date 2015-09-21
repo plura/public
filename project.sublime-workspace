@@ -4,8 +4,24 @@
 		"selected_items":
 		[
 			[
+				"font-",
+				"font-weight"
+			],
+			[
+				"bac",
+				"background-position"
+			],
+			[
+				"back",
+				"background-repeat"
+			],
+			[
+				"r1",
+				"r1_top"
+			],
+			[
 				"op",
-				"opt_name"
+				"options"
 			],
 			[
 				"marg",
@@ -356,14 +372,6 @@
 				"background-size"
 			],
 			[
-				"bac",
-				"background-repeat"
-			],
-			[
-				"back",
-				"background-image"
-			],
-			[
 				"class",
 				"classes"
 			],
@@ -395,23 +403,39 @@
 			"file": "ModuleCompiler/ModuleCompiler.php",
 			"settings":
 			{
-				"buffer_size": 5836,
+				"buffer_size": 5221,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ModuleCompiler/test/collections.js",
+			"file": "ModuleCompiler/test.php",
 			"settings":
 			{
-				"buffer_size": 1089,
+				"buffer_size": 81,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ModuleCompiler/ModuleCompiler.js",
+			"file": "ModuleCompiler/test/js/framework1/package1/Package1Class1.js",
 			"settings":
 			{
-				"buffer_size": 14226,
+				"buffer_size": 36,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/collections.js",
+			"settings":
+			{
+				"buffer_size": 1297,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/test/css.html",
+			"settings":
+			{
+				"buffer_size": 210,
 				"line_ending": "Windows"
 			}
 		},
@@ -420,6 +444,14 @@
 			"settings":
 			{
 				"buffer_size": 3792,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/ModuleCompiler.js",
+			"settings":
+			{
+				"buffer_size": 14996,
 				"line_ending": "Windows"
 			}
 		}
@@ -526,15 +558,19 @@
 	"expanded_folders":
 	[
 		"/C/Plura/dev/code/public",
+		"/C/Plura/dev/code/public/js",
 		"/C/Plura/dev/code/public/ModuleCompiler",
-		"/C/Plura/dev/code/public/ModuleCompiler/test",
-		"/C/Plura/dev/code/public/ModuleCompiler/test/framework1",
-		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2",
-		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2",
-		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/package2class1"
+		"/C/Plura/dev/code/public/ModuleCompiler/test/css",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/js/framework1/package1"
 	],
 	"file_history":
 	[
+		"/C/Users/Tiago Simoes/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Plura/dev/code/public/ModuleCompiler/implementation.html",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/css/images.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/css/colors.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/css/fonts.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/package2class1/Package2Class1SubClass1.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/package1class2/Package1Class2SubClass2.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/package1class1/Package1Class1SubClass2.js",
@@ -548,10 +584,8 @@
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class1.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class3.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class2.js",
-		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.css",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/collections.js",
-		"/C/Plura/dev/code/public/ModuleCompiler/implementation.html",
 		"/C/Plura/dev/code/public/ModuleCompiler/p.js",
 		"/C/Plura/dev/code/apps/showcase/addons/compiler/core/CustomCompilerTriggerUI.js",
 		"/C/Plura/dev/code/apps/showcase/addons/compiler/core/TaskSequence.js",
@@ -658,11 +692,7 @@
 		"/C/Plura/dev/code/apps/showcase/src/_lib/css/navigation.css",
 		"/C/Users/Tiago Simoes/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Plura/dev/code/apps/showcase/dev/__old/Init.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/Init.js",
-		"/C/Plura/dev/code/apps/showcase/src/server/process.php",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/utils.js",
-		"/C/Plura/dev/code/apps/showcase/md5.php",
-		"/C/Plura/dev/code/apps/showcase/s.php"
+		"/C/Plura/dev/code/apps/showcase/dev/js/app/Init.js"
 	],
 	"find":
 	{
@@ -696,6 +726,28 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			" $",
+			"$data['prefix'] . ",
+			"prefix",
+			"type",
+			"collections",
+			"'",
+			"id1",
+			"test/frame",
+			".label",
+			"$n",
+			"$files",
+			"$r1",
+			"$files_top",
+			"$files",
+			"result_top",
+			"$files",
+			"$exclude",
+			".get",
+			"$tree[",
+			"$data",
+			"$tree[",
+			"get_tree_structure",
 			"pID",
 			"collection",
 			"console",
@@ -801,29 +853,7 @@
 			"filter_collection",
 			"form",
 			"eventCollectionHandler",
-			"eventCollectionChangeHandler",
-			"eventFormHandler",
-			"eventChangeHandler",
-			"opts.prefix",
-			"'<option/>'",
-			"n",
-			"[n]",
-			"o",
-			"CON",
-			"sequence",
-			"SEQUENCE",
-			"tester",
-			"setter",
-			"getter",
-			"PATH",
-			"$a",
-			"OFFLINE",
-			"BASE",
-			"sequence.",
-			"event",
-			".start",
-			"start",
-			".init"
+			"eventCollectionChangeHandler"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -847,7 +877,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -856,15 +886,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5836,
+						"buffer_size": 5221,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5836,
-								5836
+								2549,
+								2549
 							]
 						],
 						"settings":
@@ -873,112 +903,48 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4038.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "ModuleCompiler/test/collections.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1089,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								490,
-								490
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 6.0,
-						"translation.y": 126.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "ModuleCompiler/ModuleCompiler.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14226,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4020,
-								4020
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2730.0,
+						"translation.y": 2058.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "ModuleCompiler/ModuleCompiler.css",
+					"buffer": 1,
+					"file": "ModuleCompiler/test.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3792,
+						"buffer_size": 81,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2261,
-								2261
+								58,
+								58
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
+							"open_with_edit": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 798.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 2,
-					"file": "ModuleCompiler/ModuleCompiler.js",
-					"semi_transient": false,
+					"file": "ModuleCompiler/test/js/framework1/package1/Package1Class1.js",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 14226,
+						"buffer_size": 36,
 						"regions":
 						{
 						},
@@ -991,15 +957,165 @@
 						],
 						"settings":
 						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "ModuleCompiler/collections.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1297,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1251,
+								1251
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 504.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "ModuleCompiler/test/css.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 210,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								47,
+								47
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "ModuleCompiler/ModuleCompiler.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3792,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1520,
+								1463
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 714.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "ModuleCompiler/ModuleCompiler.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14996,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1239,
+								1239
+							]
+						],
+						"settings":
+						{
 							"history_list_is_closing": true,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 9948.0,
+						"translation.y": 12071.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "ModuleCompiler/ModuleCompiler.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14996,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12681,
+								12681
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 10354.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1038,7 +1154,7 @@
 		"rows":
 		[
 			0.0,
-			0.614114114114,
+			0.924812030075,
 			1.0
 		]
 	},
@@ -1094,9 +1210,13 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "market",
+		"last_filter": "pharma",
 		"selected_items":
 		[
+			[
+				"pharma",
+				"C:\\Plura\\dev\\installs\\apps\\showcase\\johnson-pharma\\project.sublime-project"
+			],
 			[
 				"market",
 				"C:\\Plura\\dev\\installs\\apps\\showcase\\johnson-market\\project.sublime-project"
@@ -1153,7 +1273,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 293.0,
+	"side_bar_width": 245.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

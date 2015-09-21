@@ -7,10 +7,8 @@
  *		. ModuleCompilerResultManager
  */
 var ModuleCompiler = function (options) {
-	
 		
 	"use strict";
-	
 	
 	var defaults = {
 			process: 'ModuleCompiler.php'
@@ -49,13 +47,13 @@ var ModuleCompiler = function (options) {
 			data = collection instanceof Array ? collection : [ collection ];
 
 			for (i = 0; i < data.length; i += 1) {
-				
+		
 				params.push({
-					dir:		data[i].dir,
+					first:		data[i].first,
+					join: 		data[i].join,
 					name:		data[i].name,
 					path:		(options.prefix || '') + data[i].path,
-					prefix:		data[i][type],
-					first:		data[i].first,
+					type: 		data[i].type || 'js',
 					exclude:	exclude && exclude[i] 
 				});
 
@@ -168,6 +166,7 @@ var ModuleCompilerFilterCollection = function (options) {
 	var collections, holder, form, select, _this = this,
 
 
+		//gets the selected id and returns the desired collection data
 		get = function () {
 
 			var id = form.find('*[name=collection] option:selected').data( 'id' );
@@ -186,6 +185,12 @@ var ModuleCompilerFilterCollection = function (options) {
 		},
 
 
+	   /**
+		* creates select for collection & collections groups
+		* @param object	data		the collection data
+		* @param object target		the DOM target object
+		* @param number parentID	the id which will be used to target/save the collection data
+		*/
 		init_select = function (data, target, parentID) {
 
 			var i, id, group, group_name, group_data, opt, opt_name, pID = parentID ? parentID + '_' : 'i';
@@ -574,7 +579,11 @@ var ModuleCompilerFileManagerNavTree = function ( options ) {
 	var active, core, inactive, tree, tree_leaf_count, tree_leaf_active_count, _this = this,
 
 
-		//sets active status. adds or deletes leaf nodes from the 'active' aggregator object
+	   /**
+		* sets active status. adds or deletes leaf nodes from the 'active' aggregator object
+		* @param {string} id - the id that identifies the node.
+		* @param {boolean} [status=true] - the boolean value that indicates node activation or de-activation.
+		*/		
 		activate = function (id, status) {
 
 			var s = status === undefined ? true : status;
@@ -612,7 +621,11 @@ var ModuleCompilerFileManagerNavTree = function ( options ) {
 		},
 
 
-		//adds active style to nodes
+	   /**
+		* adds active style to nodes
+		* @param {string} id - the id that identifies the node.
+		* @param {boolean} [status=true] - the boolean value that indicates node style activation or de-activation.
+		*/			
 		active_style = function (id, status) {
 
 			if (status) {
@@ -630,7 +643,7 @@ var ModuleCompilerFileManagerNavTree = function ( options ) {
 
 	   /**
 		* Selects/unselects all nodes in the tree
-		* @param {status=} boolean - boolean value indicating selection/unselection
+		* @param {boolean=} status - boolean value indicating selection/unselection
 		*/	
 		activateAll = function ( status ) {
 

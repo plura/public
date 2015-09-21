@@ -101,6 +101,89 @@ function multi_regexp ( $source ) {
 
 
 
+/**
+ * returns the relative path between to file or directories path
+ * @param string to			target file or dir
+ * @param string from	 	from target file or dir
+ * @return string			relative path between two file or directory paths
+ */
+function pathTo($to, $from) {
+
+	$crumbs		= array();
+
+	$to			= realpath( $to );
+
+	$from		= realpath( preg_replace('/([^\/]+$)/', "", $from ) );
+
+	$temp_from	= explode(DIRECTORY_SEPARATOR, $from);
+
+	//b/c temp_from will be sliced, its length will reduce w/ each loop too. that's why its length must be saved 
+    $n			= count( $temp_from ); 
+
+	for ($i = 0; $i < $n; $i += 1) {
+
+		$reg = '/' . preg_quote( implode(DIRECTORY_SEPARATOR, $temp_from) ) . '/';
+
+	    if (preg_match( $reg, $to) ) {
+                        
+	        $temp_to_remain = preg_replace( $reg, '', $to);
+
+	        break;        
+	                        
+	    }
+
+	    array_splice($temp_from, -1);
+	                
+	    array_push($crumbs, '..');
+               
+	}
+  
+
+	$path = implode('/', $crumbs) . str_replace('\\', '/', $temp_to_remain);
+
+	
+	return preg_replace('/^\/?/', '', $path);
+                
+}
+
+
+
+/**
+ * searches for properties with url values (ie. url(path) | url('path') | url("path") );
+ * @param string from		compiled css file path
+ * @param string to	 		target css file
+ * @param string content	target css file content
+ * @return string
+ */
+function pathTo_css_update( $to, $from, $content ) {
+
+	if (!file_exists( $from )) {
+
+		return $content;
+
+	} else {
+
+		$to = preg_replace('/[^\/]+$/', '', $to);
+
+		return preg_replace_callback("/(url\((?:'|\")?)([^'\"]+)((?:'|\")?\))/", function ($matches) use ($to, $from) {
+
+			if (!file_exists( $to . $matches[2] ) ) {
+
+				return $matches[0];
+
+			}
+
+			return $matches[1] . pathTo($to . $matches[2], $from) . $matches[3];
+
+		}, $content);
+
+	}
+
+}
+
+
+
+
 //INIT DATA PARSING
 
 foreach($_GET['data'] as $n => $data) {
@@ -156,7 +239,7 @@ foreach($_GET['data'] as $n => $data) {
 	foreach($objects as $name => $object){
 
 
-		if (pathinfo($name, PATHINFO_EXTENSION) === 'js') {
+		if (pathinfo($name, PATHINFO_EXTENSION) === $data['type']) {
 
 
 			$file_path = preg_replace("/\\\/", '/', $name);
@@ -172,13 +255,14 @@ foreach($_GET['data'] as $n => $data) {
 
 
 
+
 			switch ($_GET['type']) {
 
 					
 			case 'closure':
 
 				
-				$item = "// @code_url " . $data['prefix'] . $file_path . "?" . $date->getTimestamp();
+				$item = "// @code_url " . $file_path . "?" . $date->getTimestamp();
 
 					
 				break;
@@ -186,8 +270,17 @@ foreach($_GET['data'] as $n => $data) {
 					
 			case 'script':
 
+				switch ($data['type']) {
 
-				$item = "<script src=\"" . $data['prefix'] . $file_path . "\"></script>";
+				case 'css':
+
+					$item = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $file_path . "\" />";
+
+				default:
+
+					$item = "<script src=\"" . $file_path . "\"></script>";
+
+				}
 
 					
 				break;
@@ -203,6 +296,15 @@ foreach($_GET['data'] as $n => $data) {
 
 				
 				$item		= fread($handle, filesize( $filename ) );
+
+				
+				//update file paths
+				if ($data['type'] === 'css' && !empty($data['join'])) {
+
+					$item = pathTo_css_update($filename, $data['join'],  $item);
+
+				}
+
 
 					
 				fclose($handle);
@@ -301,7 +403,7 @@ foreach($_GET['data'] as $n => $data) {
 		
 			$group_result_top,
 
-			"<!-- " . ( !empty( $data['name'] ) ? $data['name'] . " : " : "" ) . $data['path'] . "-->"
+			"<!-- " . ( !empty( $data['name'] ) ? $data['name'] . " : " : "" ) . $data['path'] . " -->"
 		
 		);	
 

@@ -1,0 +1,23 @@
+div.has-bg 			{
+
+	background-repeat: no-repeat; 
+
+	background-size: cover; 
+
+	background-position: center;
+
+}
+
+
+
+div#id1 			{ 
+
+	background-image: url('../img/image1.jpg');
+
+}
+
+div#id2 			{
+
+	background-image: url('../img/image2.jpg'); 
+
+}
