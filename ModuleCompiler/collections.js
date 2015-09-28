@@ -2,12 +2,11 @@ var TEST = [
 		
 		//package w/ single group	
 		{
-			value:	'test/js/framework1/package1/',
+			value:	'test/assets/js/framework1/package1/',
 			label:	'framework1/package1/',
 			data:	{
-				path:		'test/js/framework1/package1/',
-				closure:	'http://my-domain.com/closure/js/',
-				script:		'test/js/framework1/package1/'
+				path:		'test/assets/js/framework1/package1/',
+				script:		'test/assets/js/framework1/package1/'
 			}
 
 		},
@@ -15,20 +14,20 @@ var TEST = [
 
 		//package w/ multiple groups
 		{
-			value: 'test/js/framework2/',
+			value: 'test/assets/js/framework2/',
 			label: 'framework2 [package1 + package2]',
 			data:	[
 				
 				{
-					path:		'test/js/framework2/package1/',
+					path:		'test/assets/js/framework2/package1/',
 					closure:	'http://my-domain.com/closure/js/',
-					script:		'test/js/framework2/package1/'
+					script:		'test/assets/js/framework2/package1/'
 				},
 				
 				{
-					path:		'test/js/framework2/package2/',
+					path:		'test/assets/js/framework2/package2/',
 					closure:	'http://other-domain.com/closure/js/',
-					script:		'test/js/framework2/package2/'/*,									dir: '_custom/js/'*/
+					script:		'test/assets/js/framework2/package2/'
 				}
 			
 			]
@@ -41,9 +40,9 @@ var TEST = [
 			value: 'package1 + first',
 			label: 'framework1 + first',
 			data:	{			
-				path:		'test/js/framework1/package1/',				
+				path:		'test/assets/js/framework1/package1/',				
 				closure:	'http://my-domain.com/closure/js/',
-				script:		'test/js/framework1/package1/',
+				script:		'test/assets/js/framework1/package1/',
 				first:		['Package1Class3.js']				
 			}
 			
@@ -53,13 +52,55 @@ var TEST = [
 		//css package
 		{
 			label: 	'CSS package',
+			type: 	'css',			
 			data:	{			
 				first:	['images.css'],
-				join: 	'test/js/framework1/',
-				path:	'test/css/',				
-				script:	'test/css/',
-				type: 	'css'				
+				join: 	'test/compiled/',
+				path:	'test/assets/css/',				
+				script:	'test/assets/css/'		
 			}
 			
+		},
+
+
+		//package w/ multiple filtered groups
+		{
+			value: 'test/assets/js/framework2/',
+			label: 'framework2 [package1 + package2]',
+			data:	[
+
+				[
+		
+					{
+						path:		'test/assets/js/framework2/package1/',
+						closure:	'http://my-domain.com/closure/js/',
+						script:		'test/assets/js/framework2/package1/'
+					},
+					
+					{
+						path:		'test/assets/js/framework2/package2/',
+						closure:	'http://other-domain.com/closure/js/',
+						script:		'test/assets/js/framework2/package2/',
+					}
+
+				],
+
+				//css package
+				{
+					group: 	'CSS package',
+					type: 	'css',					
+					items:	{			
+						first:	['images.css'],
+						join: 	'test/assets/js/framework1/',
+						path:	'test/assets/css/',				
+						script:	'test/assets/css/'		
+					}
+					
+				}
+			
+			]
+	
 		}
+
+
 	];

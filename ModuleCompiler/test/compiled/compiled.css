@@ -1,0 +1,61 @@
+div.has-bg 			{
+
+	background-repeat: no-repeat; 
+
+	background-size: cover; 
+
+	background-position: center;
+
+}
+
+
+
+div#id1 			{ 
+
+	background-image: url('../assets/img/image1.jpg');
+
+}
+
+div#id2 			{
+
+	background-image: url('../assets/img/image2.jpg'); 
+
+}
+
+
+div {
+
+	border: 2px solid #f00;
+
+	color: #666;
+
+}
+
+div header {
+
+	color: #000;
+
+}
+
+
+
+
+body  {
+
+	font-family: Arial;
+
+}
+
+div {
+
+	font-size: 10px;
+
+}
+
+div header {
+
+	font-size: 12px;
+
+	font-weight: bold;
+
+}

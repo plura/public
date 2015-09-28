@@ -256,7 +256,7 @@ foreach($_GET['data'] as $n => $data) {
 
 
 
-			switch ($_GET['type']) {
+			switch ($_GET['returnType']) {
 
 					
 			case 'closure':
@@ -268,7 +268,7 @@ foreach($_GET['data'] as $n => $data) {
 				break;
 
 					
-			case 'script':
+			case 'link':
 
 				switch ($data['type']) {
 
@@ -276,6 +276,7 @@ foreach($_GET['data'] as $n => $data) {
 
 					$item = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $file_path . "\" />";
 
+				//js
 				default:
 
 					$item = "<script src=\"" . $file_path . "\"></script>";
@@ -369,7 +370,7 @@ foreach($_GET['data'] as $n => $data) {
 
 
 
-	switch ($_GET['type']) {
+	switch ($_GET['returnType']) {
 
 	case 'join':
 
@@ -397,7 +398,7 @@ foreach($_GET['data'] as $n => $data) {
 
 		break;
 
-	case 'script':
+	case 'link':
 
 		array_unshift(
 		

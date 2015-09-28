@@ -1,11 +1,172 @@
 /**
  *	. ModuleCompiler
  *		. ModuleCompilerFilterCollection
- *		. ModuleCompilerFilterType
+ *		. ModuleCompilerFilterReturn
  *		. ModuleCompilerFileManager
- *			. ModuleCompilerFileManagerNavTree
+ *			. ModuleCompilerFileManagerGroupNav
+ *			. ModuleCompilerFileManagerGroup
+ *			. ModuleCompilerFileManagerTree
  *		. ModuleCompilerResultManager
  */
+
+
+
+/**
+ *	. ModuleCompiler
+ */
+var DATA = function (options) {
+
+	"use strict";
+
+	var collections, _this = this,
+
+
+		add = function ( obj ) {
+
+			switch (obj.type) {
+
+			case 'collection':
+
+				collections[ obj.id ] = collection_groups( obj.data, obj.id );
+
+				break;
+			
+			}
+
+		},
+
+
+		collection_groups = function ( collection, id ) {
+
+			var groups = [], i, n, data = collection.data,
+
+				defaultFileType		= 'js',
+				defaultGroupName	= 'Group',
+				defaultReturnTypes	= ['join', 'link'];
+
+			//only for collections with "grouped" data
+			if (data instanceof Array && (data[0] instanceof Array || (data[0].group && data[0].items))) {
+
+				for( i = 0; i < data.length; i += 1) {
+						
+					groups.push({
+						id: 	id + '_' + i,
+						type: 	data[i].type || collection.type || defaultFileType,
+						name: 	data[i].group || defaultGroupName + ' ' + i,
+						items: 	data[i] instanceof Array ? data[i] : ( data[i].items instanceof Array ? data[i].items : [data[i].items] )
+					});
+
+				}
+
+			} else {
+
+				groups.push({
+					id: 	id + '_' + 0,
+					type: 	collection.type || defaultFileType,
+					name: 	defaultGroupName + ' 0',
+					items: 	data instanceof Array ? data : [data]
+				});
+
+			}
+
+			//check for available return types
+			for (i = 0; i < groups.length; i += 1) {
+
+				groups[i].returnTypes = [].concat( defaultReturnTypes );
+
+				for (n = 0; n < groups[i].items.length; n += 1) {
+
+					if (groups[i].items[n].closure) {
+
+						groups[i].returnTypes.push('closure');
+
+						break;
+
+					}
+
+				}
+
+			}
+
+			return groups;
+
+		},
+
+
+	   /**
+		* inits file gathering process.
+		* @param {Object} groupID - the groupID
+		* @param {Function} handler - the callback function
+		* @param {string} returnType - the result return type: 'join', 'script' or 'closure'
+		* @param {Object=} exclude - object containing excluded files
+		*/
+		get = function (groupID, handler, returnType, exclude) {
+
+			var i, params = [], group = getCollectionGroup( groupID ), data = group.items;
+
+			for (i = 0; i < data.length; i += 1) {
+
+				params.push({
+					first:		data[i].first,
+					join: 		data[i].join,
+					name:		data[i].name,
+					path:		(options.prefix || '') + data[i].path,
+					type: 		group.type,
+					exclude:	exclude && exclude[i] 
+				});
+
+			}
+
+			//console.log(options.process + '?' + $.param({data: params, type: returnType}));
+
+			$.get( options.process,  {data: params, returnType: returnType}, handler, 'json');
+
+		},
+
+
+		getCollection = function (id) {
+
+			return collections[ id ];
+
+		},
+
+		getCollectionGroup = function (id) {
+
+			var ids = id.match(/^(.+)_([0-9]+)$/);
+
+			return collections[ ids[1] ][ ids[2] ];
+
+		},
+
+		getCollectionGroupReturnType = function (id) {
+
+			var group = getCollectionGroup( id );
+
+			return group.returnTypes;
+
+		},
+
+
+		init = function (){
+
+			collections	= {};
+
+		};
+
+
+	_this.add			= add;
+	_this.load			= get;
+	_this.collection	= getCollection;
+	_this.group			= getCollectionGroup;
+	_this.returnTypes	= getCollectionGroupReturnType;
+
+
+	init();
+
+};
+
+
+
 var ModuleCompiler = function (options) {
 		
 	"use strict";
@@ -15,7 +176,7 @@ var ModuleCompiler = function (options) {
 		},
 	
 	
-		core, opts, ui_filter_collections, ui_filter_files, ui_filter_types, ui_result,
+		core, datahandler, id, opts, ui_filter_collections, ui_filter_files, ui_filter_return, ui_result,
 
 
 		resize = function () {
@@ -34,38 +195,6 @@ var ModuleCompiler = function (options) {
 
 		},
 	
-
-
-		refresh = function ( handler, exclude ) {
-
-			var data, i, params = [], 
-
-				collection	= ui_filter_collections.get(), 
-
-				type		= ui_filter_types.get();
-
-			data = collection instanceof Array ? collection : [ collection ];
-
-			for (i = 0; i < data.length; i += 1) {
-		
-				params.push({
-					first:		data[i].first,
-					join: 		data[i].join,
-					name:		data[i].name,
-					path:		(options.prefix || '') + data[i].path,
-					type: 		data[i].type || 'js',
-					exclude:	exclude && exclude[i] 
-				});
-
-			}
-
-			//console.log(options.process + '?' + $.param({data: params, type: type}));
-
-			$.get( options.process,  {data: params, type: type}, handler, 'json');
-
-		},
-
-
 
 		eventDataCollectionsHandler = function (data) {
 
@@ -91,16 +220,24 @@ var ModuleCompiler = function (options) {
 
 			case 'COLLECTIONS':
 
-				ui_filter_types.refresh( ui_filter_collections.get() );
+				ui_filter_files.nav( datahandler.collection( data.id ) );
 
-				refresh( eventDataCollectionsHandler );
+				break;
+
+			case 'GROUPS':
+
+				id = data.id;
+
+				ui_filter_return.refresh( datahandler.returnTypes( id ) );
+
+				datahandler.load( id, eventDataCollectionsHandler, ui_filter_return.get() );
 
 				break;
 
 			case 'FILES':
 			case 'TYPES':
 
-				refresh( eventDataFilesHandler, ui_filter_files.get() );		
+				datahandler.load( id, eventDataFilesHandler, ui_filter_return.get(), ui_filter_files.get() );
 
 				break;								
 
@@ -118,22 +255,24 @@ var ModuleCompiler = function (options) {
 			
 			opts					= $.extend(true, {}, defaults, options);
 
+			datahandler				= new DATA({prefix: options.prefix, process: options.process});
+
 			core					= $('<div/>').appendTo('body').addClass('core');
 			
 
-			ui_filter_collections	= new ModuleCompilerFilterCollection({data: opts.data, target: core});
+			ui_filter_collections	= new ModuleCompilerFilterCollection({data: opts.data, handler: datahandler, target: core});
 
 			ui_filter_collections.core.on('COLLECTIONS', eventFilterHandler);
 
 
-			ui_filter_types			= new ModuleCompilerFilterType({target: core});
+			ui_filter_return			= new ModuleCompilerFilterReturn({target: core});
 
-			ui_filter_types.core.on('TYPES', eventFilterHandler);
+			ui_filter_return.core.on('TYPES', eventFilterHandler);
 
 
-			ui_filter_files			= new ModuleCompilerFileManager({target: core});
+			ui_filter_files			= new ModuleCompilerFileManager({handler: datahandler, target: core});
 
-			ui_filter_files.core.on('FILES', eventFilterHandler);
+			ui_filter_files.core.on('FILES GROUPS', eventFilterHandler);
 
 
 			ui_result				= new ModuleCompilerResultManager({target: core});
@@ -149,7 +288,6 @@ var ModuleCompiler = function (options) {
 
 	init();
 	
-
 };
 
 
@@ -163,15 +301,13 @@ var ModuleCompilerFilterCollection = function (options) {
 
 	"use strict";
 
-	var collections, holder, form, select, _this = this,
+	var core, form, select, _this = this,
 
 
 		//gets the selected id and returns the desired collection data
-		get = function () {
+		getID = function () {
 
-			var id = form.find('*[name=collection] option:selected').data( 'id' );
-
-			return collections[id];
+			return form.find('*[name=collection] option:selected').data( 'id' );
 		
 		},
 
@@ -180,16 +316,16 @@ var ModuleCompilerFilterCollection = function (options) {
 
 			event.stopImmediatePropagation();
 
-			holder.trigger( 'COLLECTIONS' );
+			core.trigger( 'COLLECTIONS', {id: getID()} );
 
 		},
 
 
 	   /**
-		* creates select for collection & collections groups
-		* @param object	data		the collection data
-		* @param object target		the DOM target object
-		* @param number parentID	the id which will be used to target/save the collection data
+		* creates select for collection & grouped collections
+		* @param {Object} data			the collection data
+		* @param {Object} [target]		the DOM target object
+		* @param {number} [parentID]	the id which will be used to target/save the collection data
 		*/
 		init_select = function (data, target, parentID) {
 
@@ -217,11 +353,11 @@ var ModuleCompilerFilterCollection = function (options) {
 
 				} else {
 
-					collections[id]	= data[i].data;
-
 					opt_name		= data[i].label || data[i].value;
 
 					opt				= $('<option/>').prop({value: opt_name}).appendTo( target ).html( opt_name ).data( 'id', id );
+
+					options.handler.add({data: data[i], id: id, type: 'collection'});
 
 				}
 
@@ -232,23 +368,17 @@ var ModuleCompilerFilterCollection = function (options) {
 		},
 
 
-
 		init = function () {
 
-			collections	= {};
+			core		= $('<div/>').appendTo( options.target ).addClass('collections');
 
-			holder		= $('<div/>').appendTo( options.target ).addClass('collections');
-
-			form		= $('<form/>').appendTo( holder );
+			form		= $('<form/>').appendTo( core );
 
 			select		= init_select( options.data ).appendTo( form ).on('change', eventChangeHandler);
 
-			_this.core	= holder;
+			_this.core	= core;
 
 		};
-
-
-	_this.get = get;		
 
 
 	init();
@@ -258,16 +388,21 @@ var ModuleCompilerFilterCollection = function (options) {
 
 
 
+
 /**
  * Filter for output type - script, join or closure compiler *
  */
-var ModuleCompilerFilterType = function (options) {
+var ModuleCompilerFilterReturn = function (options) {
 
 	"use strict";
 
 	var holder, form, _this = this,
 
 
+	   /**
+		* refreshes filter type UI 
+		* @param {Array} [filter] - optional param indicating available filters
+		*/
 		refresh = function ( filter ) {
 
 			var label, labels = form.find('label'), types = form.find('input'), clss = 'disabled';
@@ -278,7 +413,7 @@ var ModuleCompilerFilterType = function (options) {
 
 					label = form.find('label[for=' + $(this).prop('id') + ']');
 
-					if ( $(this).val() === 'join' || filter[ $(this).val() ] ) {
+					if ( filter.indexOf( $(this).val() ) !== -1 ) {
 
 						$(this).prop({disabled: false});
 
@@ -323,7 +458,7 @@ var ModuleCompilerFilterType = function (options) {
 
 		init = function () {
 
-			var i, id, input, label, values = [['script', 'Script'], ['join', 'Join'], ['closure', 'Closure']];
+			var i, id, input, label, values = [['link', 'Link'], ['join', 'Join'], ['closure', 'Closure']];
 
 			holder	= $('<div/>').appendTo( options.target ).addClass('types');
 
@@ -372,7 +507,7 @@ var ModuleCompilerFileManager = function ( options ) {
 
 	"use strict";
 
-	var core, inner, tree, _this = this,
+	var core, group, inner, tree, _this = this,
 
 
 		get = function () {
@@ -419,7 +554,17 @@ var ModuleCompilerFileManager = function ( options ) {
 		},
 
 
-		//refreshes data objects
+		nav = function ( data ) {
+
+			group.refresh( data );
+
+		},		
+
+
+	   /**
+		* refreshes data objects
+		* @param {Object} data	the collection data
+		*/
 		refresh = function (data) {
 
 			var i;
@@ -440,9 +585,22 @@ var ModuleCompilerFileManager = function ( options ) {
 		},
 
 
+
 		resize = function (height) {
 
 			core.outerHeight(height);
+
+		},
+
+
+
+
+
+		eventFileGroupSelectHandler = function (event, data) {
+
+			event.stopImmediatePropagation();
+
+			core.trigger('GROUPS', data);
 
 		},
 
@@ -460,6 +618,10 @@ var ModuleCompilerFileManager = function ( options ) {
 
 			core		= $('<div/>').appendTo(options.target).addClass('files');
 
+			group		= new ModuleCompilerFileManagerGroupNav({handler: options.handler, target: core});
+
+			group.core.on('SELECT', eventFileGroupSelectHandler);
+
 			inner		= $('<div/>').appendTo( core ).addClass('inner');
 
 			_this.core	= core;
@@ -467,8 +629,110 @@ var ModuleCompilerFileManager = function ( options ) {
 		};
 
 	_this.get		= get;
+	_this.nav		= nav;
 	_this.refresh	= refresh;
 	_this.resize	= resize;
+
+
+	init();
+
+};
+
+
+
+/**
+ * Filter for file groups
+ */
+var ModuleCompilerFileManagerGroupNav = function (options) {
+
+	"use strict";
+
+	var active, core, data, select_obj, _this = this,
+
+
+		refresh = function ( groups ) {
+
+			core.empty();
+
+			active	= null;
+
+			data	= groups;
+
+			if( data.length ) {
+
+				render( data );
+
+			}
+
+			select();
+
+		},
+
+
+		render = function ( data ) {
+
+			var i, node, select_wrapper;	
+
+			select_wrapper	= $('<div/>').appendTo( core ).addClass('select-wrapper');
+
+			select_obj		= $('<select/>').appendTo( select_wrapper ).on('change', eventSelectChangeHandler);
+
+			for (i = 0; i < data.length; i += 1) {
+
+				node = $('<option/>').appendTo( select_obj ).html( data[i].name ).val(i);
+
+			}
+
+		},
+
+
+		select = function ( index ) {
+
+			var n = index === undefined ? 0 : index;
+
+			if (n !== active) {
+
+				if (data.length) {
+
+					show( n );
+
+				}
+
+				active = n;
+
+				core.trigger('SELECT', {id: data[n].id});
+
+			}
+
+		},
+
+
+		show = function ( index ) {
+
+			select_obj.val( index );
+
+		},
+
+
+		eventSelectChangeHandler = function (event) {
+
+			var index = select_obj.children('option:selected').val();
+
+			select( index );
+
+		},
+
+
+		init = function () {
+
+			core = $('<div/>').appendTo( options.target ).addClass('nav');
+
+			_this.core = core;
+
+		};
+
+
+	_this.refresh = refresh;
 
 
 	init();
@@ -553,7 +817,7 @@ var ModuleCompilerFileManagerGroup = function (options) {
 
 			ui_ctrls	= render_controls();
 
-			ui_tree		= new ModuleCompilerFileManagerNavTree({data: options.data.core, target: core});//.appendTo( options.target ).addClass('tree');
+			ui_tree		= new ModuleCompilerFileManagerTree({data: options.data.core, target: core});
 
 			_this.core	= core;
 
@@ -569,10 +833,11 @@ var ModuleCompilerFileManagerGroup = function (options) {
 
 
 
+
 /**
  * creates files structure tree
  */
-var ModuleCompilerFileManagerNavTree = function ( options ) {
+var ModuleCompilerFileManagerTree = function ( options ) {
 
 	"use strict";
 
@@ -679,7 +944,6 @@ var ModuleCompilerFileManagerNavTree = function ( options ) {
 		},
 
 
-
 		get_info = function () {
 
 			return {
@@ -695,7 +959,7 @@ var ModuleCompilerFileManagerNavTree = function ( options ) {
 	   /**
 		* Toggle leaf and branches [and activates branches' children accordingly]
 		* @param {number} id - nodeID
-		* @param {status=} boolean - optional boolean value to force activation/deactivation of leaf/branch
+		* @param {boolean} [status] - optional boolean value to force activation/deactivation of leaf/branch
 		*/
 		toggle = function (id, status) {
 
@@ -725,7 +989,7 @@ var ModuleCompilerFileManagerNavTree = function ( options ) {
 	   /**
 		* recursive function used to render the tree
 		* @param {Object} data - node data to be parsed
-		* @param {number=} parentID - parentID, used for recursive purposes
+		* @param {number} [parentID] - parentID, used for recursive purposes
 		*/
 		render = function (data, parentID) {
 
@@ -766,7 +1030,6 @@ var ModuleCompilerFileManagerNavTree = function ( options ) {
 			return ui_holder;
 
 		},
-
 
 
 		trigger = function( data ) {
