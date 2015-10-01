@@ -14,7 +14,8 @@ body {overflow: hidden;}
 
 
 /*CORE*/
-.files .files-group .controls:after								{ content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.files .files-group .controls:after,
+.preferences fieldset:after										{ content:"."; display:block; height:0; clear:both; visibility:hidden; }
 
 
 
@@ -23,7 +24,7 @@ body {overflow: hidden;}
 .core>*															{ float: left;}
 
 /* common */
-label, input[type=radio], select, fieldset						{ float:left; }
+/*label, input[type=radio], select, fieldset						{ float:left; }*/
 
 fieldset														{ border:none; }
 
@@ -44,9 +45,17 @@ label															{ margin: 0 10px 0 0; }
 .collections select												{ margin: 0 50px 0 0; }
 
 
-.types															{ width: 66.6666%; height: 50px; padding: 10px; }
-.types input[type=radio]										{ margin-right: 10px;}
-.types label													{ margin-right: 40px; }
+/* Preferences */
+.preferences fieldset 											{ display: inline-block; }
+.preferences label,
+.preferences input[type=radio],
+.preferences input[type=checkbox] 								{ float: left; }
+
+/* dims */
+.preferences													{ width: 66.6666%; height: 50px; padding: 10px; }
+.preferences input[type=radio],
+.preferences input[type=checkbox]								{ margin-right: 10px;}
+.preferences label												{ margin-right: 40px; }
 
 
 /* Files */

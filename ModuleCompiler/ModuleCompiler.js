@@ -1,12 +1,13 @@
 /**
+ *	. DATA - Data Handling
  *	. ModuleCompiler
- *		. ModuleCompilerFilterCollection
- *		. ModuleCompilerFilterReturn
- *		. ModuleCompilerFileManager
- *			. ModuleCompilerFileManagerGroupNav
- *			. ModuleCompilerFileManagerGroup
- *			. ModuleCompilerFileManagerTree
- *		. ModuleCompilerResultManager
+ *		. ModuleCompilerFilterCollection			- Collection selector
+ *		. ModuleCompilerPreferences					- Preferences: return type, minification
+ *		. ModuleCompilerFileManager					- File handling
+ *			. ModuleCompilerFileManagerGroupNav		- File group selector
+ *			. ModuleCompilerFileManagerGroup		- File group handler 
+ *			. ModuleCompilerFileManagerTree			- File group tree
+ *		. ModuleCompilerResultManager				- return output
  */
 
 
@@ -97,29 +98,30 @@ var DATA = function (options) {
 		* inits file gathering process.
 		* @param {Object} groupID - the groupID
 		* @param {Function} handler - the callback function
-		* @param {string} returnType - the result return type: 'join', 'script' or 'closure'
+		* @param {Object} preferences - return preferences ('join', 'script' or 'closure') and minification
 		* @param {Object=} exclude - object containing excluded files
 		*/
-		get = function (groupID, handler, returnType, exclude) {
+		get = function (groupID, handler, preferences, exclude) {
 
-			var i, params = [], group = getCollectionGroup( groupID ), data = group.items;
+			var i, data = [], group = getCollectionGroup( groupID ), items = group.items, params;
 
-			for (i = 0; i < data.length; i += 1) {
+			for (i = 0; i < items.length; i += 1) {
 
-				params.push({
-					first:		data[i].first,
-					join: 		data[i].join,
-					name:		data[i].name,
-					path:		(options.prefix || '') + data[i].path,
-					type: 		group.type,
+				data.push({
+					first:		items[i].first,
+					join: 		items[i].join,
+					name:		items[i].name,
+					path:		(options.prefix || '') + items[i].path,
 					exclude:	exclude && exclude[i] 
 				});
 
 			}
 
-			//console.log(options.process + '?' + $.param({data: params, type: returnType}));
+			params = $.extend(preferences, {data: data, type: group.type});
 
-			$.get( options.process,  {data: params, returnType: returnType}, handler, 'json');
+			console.log(options.process + '?' + $.param( params ));
+
+			$.get( options.process,  params, handler, 'json');
 
 		},
 
@@ -265,7 +267,7 @@ var ModuleCompiler = function (options) {
 			ui_filter_collections.core.on('COLLECTIONS', eventFilterHandler);
 
 
-			ui_filter_return			= new ModuleCompilerFilterReturn({target: core});
+			ui_filter_return			= new ModuleCompilerPreferences({target: core});
 
 			ui_filter_return.core.on('TYPES', eventFilterHandler);
 
@@ -392,11 +394,22 @@ var ModuleCompilerFilterCollection = function (options) {
 /**
  * Filter for output type - script, join or closure compiler *
  */
-var ModuleCompilerFilterReturn = function (options) {
+var ModuleCompilerPreferences = function (options) {
 
 	"use strict";
 
-	var holder, form, _this = this,
+	var core, form, _this = this,
+
+		fields = [
+			{name: 'returntype', values: [
+				{name: 'returnType', type: 'radio', label: 'Link', value: 'link', checked: true},
+				{name: 'returnType', type: 'radio', label: 'Join', value: 'join'},
+				{name: 'returnType', type: 'radio', label: 'Closure', value: 'closure'}									
+			]},
+			{name: 'others', values: [
+				{name: 'minify', type: 'checkbox', label: 'Minify'}
+			]}
+		],
 
 
 	   /**
@@ -404,14 +417,14 @@ var ModuleCompilerFilterReturn = function (options) {
 		* @param {Array} [filter] - optional param indicating available filters
 		*/
 		refresh = function ( filter ) {
+		
+			var label, types = form.find('input[name=type]'), clss = 'disabled';
 
-			var label, labels = form.find('label'), types = form.find('input'), clss = 'disabled';
+			types.each( function () {
 
-			if ( filter ) {
+				label = form.find('label[for=' + $(this).prop('id') + ']');
 
-				types.each( function () {
-
-					label = form.find('label[for=' + $(this).prop('id') + ']');
+				if ( filter ) {
 
 					if ( filter.indexOf( $(this).val() ) !== -1 ) {
 
@@ -427,22 +440,82 @@ var ModuleCompilerFilterReturn = function (options) {
 
 					}
 
-				});
+				} else {
 
-			} else {
+					$(this).prop({disabled: true});
 
-				labels.addClass( clss );
+					label.addClass( clss );
 
-				types.prop({disabled: true});
+				}
 
-			}
+			});
 
 		},
 
 		
 		get = function () {
 
-			return form.find('*[name=type]:checked').val();
+			return {
+				minify: 	val('*[name=minify]'),
+				returnType: val('*[name=returnType]')
+			};
+
+		},
+
+
+		val = function ( target ) {
+
+			var element = form.find( target ), type = element.prop('type');
+
+			if (type.match(/checkbox/)) {
+
+				return element.is(':checked') ? 1 : 0;
+
+			} else if (type.match(/radio/)) {
+
+				return element.filter(':checked').val();
+
+			}
+
+			return element.val();
+		},
+
+
+		render = function ( data ) {
+
+			var element, elements, fieldset, form, id, i, label, n;
+
+			form = $('<form/>').appendTo(core);
+
+			for ( n = 0; n < data.length; n += 1) {
+
+				fieldset	= $('<fieldset/>').appendTo(form).prop({name: data[n].name});
+
+				elements	= data[n].values;
+
+				for( i = 0; i < elements.length; i += 1) {
+
+					id		= 'option-' + n + '-' + i;
+
+					element	= $('<input/>').appendTo(fieldset)
+
+								.prop({name: elements[i].name, value: elements[i].value, type: elements[i].type, id: id})
+
+								.on('change', eventChangeHandler);
+
+					label	= $('<label/>').appendTo(fieldset).prop({'for': id}).html( elements[i].label );								
+
+					if (elements[i].checked) {
+
+						element.prop({checked: true});
+
+					}
+
+				}
+
+			}
+
+			return form;
 
 		},
 
@@ -451,40 +524,22 @@ var ModuleCompilerFilterReturn = function (options) {
 
 			event.stopImmediatePropagation();
 
-			holder.trigger('TYPES');
+			core.trigger('TYPES');
 
 		},
 
 
 		init = function () {
 
-			var i, id, input, label, values = [['link', 'Link'], ['join', 'Join'], ['closure', 'Closure']];
+			core	= $('<div/>').appendTo( options.target ).addClass('preferences');
 
-			holder	= $('<div/>').appendTo( options.target ).addClass('types');
+			//init_returntype();
 
-			form	= $('<form/>').appendTo(holder);
-
-			for(i = 0; i < values.length; i+=1) {
-
-				id = 'option-' + i;
-
-				input = $('<input/>').prop({type: 'radio', name: 'type', id: id}).val( values[i][0] )
-
-						.on('change', eventChangeHandler).appendTo(form);
-
-				label = $('<label/>').html( values[i][1] ).prop({'for': id}).appendTo(form);
-
-				if (!i) {
-
-					input.prop("checked", true);
-
-				}
-			
-			}
+			form	= render( fields );
 
 			refresh();
 
-			_this.core = holder;
+			_this.core = core;
 
 		};
 
@@ -658,7 +713,7 @@ var ModuleCompilerFileManagerGroupNav = function (options) {
 
 			data	= groups;
 
-			if( data.length ) {
+			if( data.length > 1 ) {
 
 				render( data );
 
@@ -692,7 +747,7 @@ var ModuleCompilerFileManagerGroupNav = function (options) {
 
 			if (n !== active) {
 
-				if (data.length) {
+				if (data.length > 1) {
 
 					show( n );
 

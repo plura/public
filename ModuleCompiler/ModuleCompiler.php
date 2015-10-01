@@ -1,5 +1,7 @@
 <?php
 
+include('fn.php');
+
 /**
  * Module Compiler 1.0
  *
@@ -239,7 +241,7 @@ foreach($_GET['data'] as $n => $data) {
 	foreach($objects as $name => $object){
 
 
-		if (pathinfo($name, PATHINFO_EXTENSION) === $data['type']) {
+		if (pathinfo($name, PATHINFO_EXTENSION) === $_GET['type']) {
 
 
 			$file_path = preg_replace("/\\\/", '/', $name);
@@ -270,7 +272,7 @@ foreach($_GET['data'] as $n => $data) {
 					
 			case 'link':
 
-				switch ($data['type']) {
+				switch ($_GET['type']) {
 
 				case 'css':
 
@@ -300,14 +302,13 @@ foreach($_GET['data'] as $n => $data) {
 
 				
 				//update file paths
-				if ($data['type'] === 'css' && !empty($data['join'])) {
+				if ($_GET['type'] === 'css' && !empty($data['join'])) {
 
 					$item = pathTo_css_update($filename, $data['join'],  $item);
 
 				}
 
 
-					
 				fclose($handle);
 
 				
@@ -339,7 +340,7 @@ foreach($_GET['data'] as $n => $data) {
 			} else {
 
 
-				$group_result[]		= $item;
+				$group_result[]	= $item;
 
 				$group_files[]	= $file_path;
 				
@@ -417,14 +418,76 @@ foreach($_GET['data'] as $n => $data) {
 
 
 	$result[] = implode( $sep, array_merge( $group_result_top, $group_result ) );
-	
+
 
 }
+
+
+/**
+ * if minify option is set, use Google's Closure RESTful or CSSMinifier APIs
+ * to generate a minified version of the joined result
+ */
+if ($_GET['returnType'] === 'join' && $_GET['minify']) {
+
+
+	$src = implode('', $result);
+
+	//CSSMinifier API params for css filetypes
+	if ( $_GET['type'] === 'css' ) {
+
+
+		$min_url	= 'http://cssminifier.com/raw';
+
+	    $params		= array(
+	    	'input' => urlencode( $src )
+	    );
+
+	//Google Closure API params for js filetypes
+	} else {
+
+
+		$min_url	= 'http://closure-compiler.appspot.com/compile';
+
+		$params = array( 
+			'compilation_level'	=> 'SIMPLE_OPTIMIZATIONS',
+			'output_format'		=> 'text',
+			'output_info'		=> 'compiled_code',
+			'js_code'			=> urlencode( $src )
+		);
+
+
+	}
+
+	$min_data = array();
+
+	foreach( $params as $key => $value ) {
+
+		$min_data[] = $key . "=" . $value;
+
+	}	
+
+    // init the request, set some info, send it and finally close it
+    $ch = curl_init( $min_url );
+
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, implode('&', $min_data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $result = curl_exec($ch);
+
+    curl_close($ch);
+
+} else {
+
+	$result = implode($group_sep, $result);
+
+}
+
 
 echo json_encode(array(
 
 	'tree'		=> $tree,
-	'result'	=> implode($group_sep, $result),
+	'result'	=> $result,
 	'success'	=> 1
 	
 ));
