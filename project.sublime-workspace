@@ -4,6 +4,110 @@
 		"selected_items":
 		[
 			[
+				"ch_",
+				"ch_crt"
+			],
+			[
+				"js",
+				"js_code"
+			],
+			[
+				"url",
+				"urldecode"
+			],
+			[
+				"l",
+				"length"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"retut",
+				"returnType"
+			],
+			[
+				"font-",
+				"font-family"
+			],
+			[
+				"tex",
+				"text-transform"
+			],
+			[
+				"ta",
+				"table-cell"
+			],
+			[
+				"in",
+				"inline-table"
+			],
+			[
+				"inn",
+				"innerh"
+			],
+			[
+				"inner",
+				"innerHeight"
+			],
+			[
+				"res",
+				"resize"
+			],
+			[
+				"ou",
+				"outerHeight"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"acti",
+				"active"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"ma",
+				"margin-right"
+			],
+			[
+				"bo",
+				"border-radius"
+			],
+			[
+				"nav",
+				"nav_index"
+			],
+			[
+				"pa",
+				"padding-right"
+			],
+			[
+				"ini",
+				"inline-block"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"ov",
+				"overflow"
+			],
+			[
+				"select",
+				"select_wrapper"
+			],
+			[
+				"border-r",
+				"border-radius"
+			],
+			[
 				"retur",
 				"returnType"
 			],
@@ -30,10 +134,6 @@
 			[
 				"val",
 				"value"
-			],
-			[
-				"l",
-				"label"
 			],
 			[
 				"el",
@@ -120,20 +220,12 @@
 				"options"
 			],
 			[
-				"con",
-				"content"
-			],
-			[
 				"temp",
 				"temp_to_remain"
 			],
 			[
 				"str_r",
 				"str_replace"
-			],
-			[
-				"font-",
-				"font-weight"
 			],
 			[
 				"bac",
@@ -154,14 +246,6 @@
 			[
 				"marg",
 				"margin-bottom"
-			],
-			[
-				"co",
-				"collections"
-			],
-			[
-				"pa",
-				"parentID"
 			],
 			[
 				"par",
@@ -212,10 +296,6 @@
 				"padding"
 			],
 			[
-				"in",
-				"inline-block"
-			],
-			[
 				"Mod",
 				"ModuleCompilerFileManagerGroup"
 			],
@@ -250,10 +330,6 @@
 			[
 				"e",
 				"exclude"
-			],
-			[
-				"acti",
-				"actives"
 			],
 			[
 				"ui_filt",
@@ -364,10 +440,6 @@
 				"margin"
 			],
 			[
-				"res",
-				"result"
-			],
-			[
 				"mar",
 				"margin"
 			],
@@ -442,68 +514,16 @@
 			[
 				"IT",
 				"ITEM"
-			],
-			[
-				"T",
-				"TABLE_FILES"
-			],
-			[
-				"TABL",
-				"TABLE_TREE"
-			],
-			[
-				"TABLE",
-				"TABLE_FILES"
-			],
-			[
-				"enviro",
-				"enviro_switch"
-			],
-			[
-				"ba",
-				"background-size"
-			],
-			[
-				"class",
-				"classes"
-			],
-			[
-				"ma",
-				"margin-left"
-			],
-			[
-				"text",
-				"text_h"
-			],
-			[
-				"z",
-				"z-index"
-			],
-			[
-				"wi",
-				"width"
-			],
-			[
-				"it",
-				"items"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "ModuleCompiler/ModuleCompiler.css",
-			"settings":
-			{
-				"buffer_size": 4076,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "ModuleCompiler/ModuleCompiler.js",
 			"settings":
 			{
-				"buffer_size": 20740,
+				"buffer_size": 21963,
 				"line_ending": "Windows"
 			}
 		},
@@ -511,7 +531,15 @@
 			"file": "ModuleCompiler/trash.html",
 			"settings":
 			{
-				"buffer_size": 150,
+				"buffer_size": 218,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/ModuleCompiler.css",
+			"settings":
+			{
+				"buffer_size": 5817,
 				"line_ending": "Windows"
 			}
 		},
@@ -519,7 +547,7 @@
 			"file": "ModuleCompiler/collections.js",
 			"settings":
 			{
-				"buffer_size": 2112,
+				"buffer_size": 2096,
 				"line_ending": "Windows"
 			}
 		},
@@ -527,23 +555,15 @@
 			"file": "ModuleCompiler/ModuleCompiler.php",
 			"settings":
 			{
-				"buffer_size": 7406,
+				"buffer_size": 9223,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ModuleCompiler/fn.php",
+			"file": "ModuleCompiler/certificates/-appspotcom.crt",
 			"settings":
 			{
-				"buffer_size": 1233,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": ".ignore/pathTo.php",
-			"settings":
-			{
-				"buffer_size": 2096,
+				"buffer_size": 1354,
 				"line_ending": "Windows"
 			}
 		},
@@ -576,6 +596,14 @@
 			"settings":
 			{
 				"buffer_size": 1974,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/test.php",
+			"settings":
+			{
+				"buffer_size": 44,
 				"line_ending": "Windows"
 			}
 		}
@@ -684,12 +712,14 @@
 		"/C/Plura/dev/code/public",
 		"/C/Plura/dev/code/public/.ignore",
 		"/C/Plura/dev/code/public/ModuleCompiler",
-		"/C/Plura/dev/code/public/ModuleCompiler/test/assets"
+		"/C/Plura/dev/code/public/ModuleCompiler/certificates"
 	],
 	"file_history":
 	[
-		"/C/Plura/dev/code/public/ModuleCompiler/fn.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/trash.html",
+		"/C/Plura/dev/code/public/.ignore/fn.php",
+		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.copy.php",
+		"/C/Plura/dev/code/public/ModuleCompiler/fn.js",
 		"/C/Plura/dev/code/public/.gitignore",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/css/images.css",
 		"/C/Plura/dev/code/public/ModuleCompiler/collections.js",
@@ -813,9 +843,7 @@
 		"/C/Plura/dev/code/apps/showcase/src/admin/_lib/fn/db.php",
 		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/custom/Table.js",
 		"/C/Plura/dev/code/apps/showcase/src/_lib/css/transitions.css",
-		"/C/Plura/dev/code/apps/showcase/src/_lib/css/frontend.css",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/n3/Guide",
-		"/C/Plura/dev/code/apps/showcase/src/admin/process/admin_common_slides_content.php"
+		"/C/Plura/dev/code/apps/showcase/src/_lib/css/frontend.css"
 	],
 	"find":
 	{
@@ -849,6 +877,42 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"$min_data",
+			"$min_url",
+			"$src ",
+			"$min_url",
+			"min_url",
+			"pr",
+			"pru",
+			"echo",
+			"ModuleCompilerResultManager",
+			".get(",
+			"ModuleCompiler",
+			"ModuleCompilerPreferences",
+			"ModuleCompilerResultManager",
+			"items",
+			"script:",
+			".returnType",
+			"$file_path",
+			"script",
+			"15px",
+			"8px",
+			"data",
+			"collection_groups",
+			".returnTypes",
+			".inner",
+			"height",
+			"resize",
+			"height",
+			"10px",
+			"select_obj",
+			"ui_files.",
+			";}",
+			"select-w",
+			"$data",
+			"$url",
+			"$query",
+			"query",
 			"$data['type']",
 			"params",
 			"data",
@@ -940,43 +1004,7 @@
 			"s.",
 			" $",
 			"$data['prefix'] . ",
-			"prefix",
-			"type",
-			"collections",
-			"'",
-			"id1",
-			"test/frame",
-			".label",
-			"$n",
-			"$files",
-			"$r1",
-			"$files_top",
-			"$files",
-			"result_top",
-			"$files",
-			"$exclude",
-			".get",
-			"$tree[",
-			"$data",
-			"$tree[",
-			"get_tree_structure",
-			"pID",
-			"collection",
-			"console",
-			"ui_ctrls",
-			"{",
-			"instanceof",
-			"ui_ctrls_check",
-			"efefef",
-			"}\n",
-			"id",
-			"parentID",
-			"id",
-			"status",
-			"tree_leaf_active_count",
-			"active",
-			"tree_leaf_count",
-			"get_active"
+			"prefix"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1000,186 +1028,107 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "ModuleCompiler/ModuleCompiler.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4076,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1196,
-								1196
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 225.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "ModuleCompiler/ModuleCompiler.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20740,
+						"buffer_size": 21963,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1325,
-								1325
+								21576,
+								21576
 							]
 						],
 						"settings":
 						{
 							"history_list_is_closing": true,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"sftp_duplicate_views": 0,
+							"synced": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1710.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "ModuleCompiler/trash.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 150,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								57,
-								57
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "ModuleCompiler/collections.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2112,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								757,
-								757
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 17763.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "ModuleCompiler/ModuleCompiler.php",
+					"buffer": 1,
+					"file": "ModuleCompiler/trash.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7406,
+						"buffer_size": 218,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7206,
-								7206
+								69,
+								69
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 6033.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "ModuleCompiler/fn.php",
+					"buffer": 2,
+					"file": "ModuleCompiler/ModuleCompiler.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1233,
+						"buffer_size": 5817,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1182,
-								1182
+								3253,
+								3253
 							]
 						],
 						"settings":
 						{
-							"open_with_edit": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 540.0,
+						"translation.y": 1140.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": ".ignore/pathTo.php",
-					"semi_transient": true,
+					"buffer": 3,
+					"file": "ModuleCompiler/collections.js",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 2096,
@@ -1189,24 +1138,90 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								450,
+								450
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 882.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "ModuleCompiler/ModuleCompiler.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9223,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7931,
+								7931
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6751.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "ModuleCompiler/certificates/-appspotcom.crt",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1354,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1354,
+								1354
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": ".ignore/styles.css",
 					"semi_transient": false,
 					"settings":
@@ -1225,17 +1240,19 @@
 						"settings":
 						{
 							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "ModuleCompiler/test/index.html",
 					"semi_transient": false,
 					"settings":
@@ -1254,6 +1271,8 @@
 						"settings":
 						{
 							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -1261,11 +1280,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "ModuleCompiler/test/compiled/compiled.css",
 					"semi_transient": false,
 					"settings":
@@ -1284,6 +1303,8 @@
 						"settings":
 						{
 							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/CSS/CSS.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -1291,11 +1312,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 9,
 					"file": "ModuleCompiler/README.md",
 					"semi_transient": false,
 					"settings":
@@ -1313,51 +1334,81 @@
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
 							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/Markdown/Markdown.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1134.0,
+						"translation.y": 264.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 4,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 1,
-					"file": "ModuleCompiler/ModuleCompiler.js",
+					"buffer": 10,
+					"file": "ModuleCompiler/test.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20740,
+						"buffer_size": 44,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7904,
-								7904
+								44,
+								44
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 0,
+					"file": "ModuleCompiler/ModuleCompiler.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2982,
+								2987
 							]
 						],
 						"settings":
 						{
 							"history_list_is_closing": true,
+							"incomplete_sync": null,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5775.0,
+						"translation.y": 1578.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1380,18 +1431,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.769124341447,
 			1.0
 		],
 		"rows":
@@ -1402,6 +1446,10 @@
 	},
 	"menu_visible": true,
 	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
 	{
 		"height": 0.0
 	},
@@ -1496,7 +1544,7 @@
 				"C:\\Plura\\dev\\code\\apps\\showcase\\project.sublime-project"
 			]
 		],
-		"width": 380.0
+		"width": 632.0
 	},
 	"select_symbol":
 	{
@@ -1515,7 +1563,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 173.0,
+	"side_bar_width": 341.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

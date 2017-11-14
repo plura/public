@@ -1,7 +1,5 @@
 <?php
 
-include('fn.php');
-
 /**
  * Module Compiler 1.0
  *
@@ -276,12 +274,12 @@ foreach($_GET['data'] as $n => $data) {
 
 				case 'css':
 
-					$item = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $file_path . "\" />";
+					$item = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $data['prefix'] . $file_path . "\" />";
 
 				//js
 				default:
 
-					$item = "<script src=\"" . $file_path . "\"></script>";
+					$item = "<script src=\"" . $data['prefix'] . $file_path . "\"></script>";
 
 				}
 
@@ -436,7 +434,8 @@ if ($_GET['returnType'] === 'join' && $_GET['minify']) {
 	if ( $_GET['type'] === 'css' ) {
 
 
-		$min_url	= 'http://cssminifier.com/raw';
+		$ch_url	= 'https://cssminifier.com/raw';
+		$ch_crt	= 'cssminifiercom.crt';
 
 	    $params		= array(
 	    	'input' => urlencode( $src )
@@ -446,7 +445,8 @@ if ($_GET['returnType'] === 'join' && $_GET['minify']) {
 	} else {
 
 
-		$min_url	= 'http://closure-compiler.appspot.com/compile';
+		$ch_url	= 'https://closure-compiler.appspot.com/compile';
+		$ch_crt	= '-appspotcom.crt';	
 
 		$params = array( 
 			'compilation_level'	=> 'SIMPLE_OPTIMIZATIONS',
@@ -458,20 +458,31 @@ if ($_GET['returnType'] === 'join' && $_GET['minify']) {
 
 	}
 
-	$min_data = array();
+	$ch_data = array();
 
 	foreach( $params as $key => $value ) {
 
-		$min_data[] = $key . "=" . $value;
+		$ch_data[] = $key . "=" . $value;
 
 	}	
 
+
     // init the request, set some info, send it and finally close it
-    $ch = curl_init( $min_url );
+    $ch = curl_init( $ch_url );
 
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, implode('&', $min_data));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, implode('&', $ch_data));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/x-www-form-urlencoded'));    
+
+    //The usage of https requires a 'trusted' CA certificate - saved as 'certificate with chain (PEM). For more
+    //info check this link: http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/
+	//You can also not-so-safe 'workaround' [via https://stackoverflow.com/a/4372730].
+	//In that case, comment the following 3 lines of code and uncomment this one below.
+	//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);	
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+	curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/certificates/" . $ch_crt);    
 
     $result = curl_exec($ch);
 
@@ -482,7 +493,6 @@ if ($_GET['returnType'] === 'join' && $_GET['minify']) {
 	$result = implode($group_sep, $result);
 
 }
-
 
 echo json_encode(array(
 

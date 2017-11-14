@@ -14,12 +14,12 @@ body {overflow: hidden;}
 
 
 /*CORE*/
-.files .files-group .controls:after,
-.preferences fieldset:after										{ content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.files .files-group .controls::after,
+.preferences fieldset::after										{ content:"."; display:block; height:0; clear:both; visibility:hidden; }
 
 
 
-/*.core:after													{ content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+/*.core::after													{ content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 */
 .core>*															{ float: left;}
 
@@ -33,16 +33,28 @@ label															{ margin: 0 10px 0 0; }
 
 /* COMMON */
 .files, .result													{ padding: 20px; }
-.files .inner, .result .inner									{ height: 100%; }	
+.result .inner													{ height: 100%; }	
+
+
+.select-wrapper 												{ position: relative; overflow: hidden; }
+.select-wrapper::after											{ position: absolute; right: 5px; pointer-events:none; }
+
+/* dims */
+.select-wrapper::after											{ right: 5px; top: 2px;}
+
+
+/* Collections | File Manager */
+.collections select,
+.files .group-nav select										{ -webkit-appearance: none; appearance: none; border: 0; }
 
 
 /* Collections */
 .collections													{  }
+.collections select												{ width: 100%; height: 30px;  }
 
 /*dims*/
-.collections													{ width: 33.3333%; height: 50px; padding: 10px; }
-.collections select												{ width: 200px; }
-.collections select												{ margin: 0 50px 0 0; }
+.collections													{ width: 33.3333%; height: 50px; padding: 10px 20px 10px 20px; }
+
 
 
 /* Preferences */
@@ -58,8 +70,22 @@ label															{ margin: 0 10px 0 0; }
 .preferences label												{ margin-right: 40px; }
 
 
-/* Files */
-.files .inner													{ overflow-y: auto; }
+/* Files: Group Nav */
+.files .group-nav												{ text-align: center;}
+.files .group-nav .index .i,
+.files .group-nav .select-wrapper								{ display: inline-block;}
+.files .group-nav .index 										{ font-size: 0; } /* removes strange children inline-block margin */
+
+/*dims*/
+.files .group-nav .index										{ padding: 3px 0 7px 0; }
+.files .group-nav .index .i 									{ width: 8px; height: 8px; }
+.files .group-nav .index .i:not(:last-child) 					{ margin-right: 10px; }
+
+/* dims */
+.files .group-nav select										{ height: 18px; padding-right: 20px; }
+
+/* Files: Group */
+.files .inner.has-scroll										{ overflow-y: auto; }
 
 .files .files-group .controls .controls-check					{ float:left; }
 .files .files-group .controls .controls-visibility				{ float: right; }
@@ -72,13 +98,13 @@ label															{ margin: 0 10px 0 0; }
 .files .files-group .controls,
 .files .files-group .tree .node									{ cursor: default; }
 
-.files .files-group .controls .controls-check:before,
-.files .files-group .tree .node>.trigger:before					{ display: inline-block; }
+.files .files-group .controls .controls-check::before,
+.files .files-group .tree .node>.trigger::before				{ display: inline-block; }
 
 /*dims*/
 .files															{ width: 33.3333%; }
 
-.files .inner													{ padding-right: 20px; }
+.files .inner.has-scroll										{ padding-right: 20px; }
 
 .files .files-group												{ padding: 0 10px 0 10px; }
 .files .files-group:not(:last-child)							{ margin-bottom: 20px; }
@@ -90,8 +116,8 @@ label															{ margin: 0 10px 0 0; }
 .files .files-group .tree .branch								{ padding-left: 40px; }
 .files .files-group .tree .node>.trigger						{ padding-top: 2px; padding-bottom: 2px; }
 
-.files .files-group .controls .controls-check:before,
-.files .files-group .tree .node>.trigger:before					{ width: 20px; }
+.files .files-group .controls .controls-check::before,
+.files .files-group .tree .node>.trigger::before				{ width: 20px; }
 
 
 
@@ -112,31 +138,62 @@ label															{ margin: 0 10px 0 0; }
 label, select													{ font: normal 14px Arial, Helvetica, sans-serif; }
 
 
+.collections select												{ font-size: 16px; }
+
+
+
 .files .files-group .tree .node:not(.leaf)>.trigger				{ font-weight: bold; }
 
 
 /* icons*/
-.files .files-group .controls .controls-check:before,
-.files .files-group .controls .controls-visibility:before,
-.files .files-group .tree .node>.trigger:before					{ font-family:'FontAwesome'; font-weight: normal; }
+.select-wrapper::after,
+.files .files-group .controls .controls-check::before,
+.files .files-group .controls .controls-visibility::before,
+.files .files-group .tree .node>.trigger::before				{ font-family:'FontAwesome'; font-weight: normal; }
 
 /* uncheck */
-.files .files-group .controls .controls-check:before,
-.files .files-group .tree .node>.trigger:before					{ content: '\f096'; } 
+.files .files-group .controls .controls-check::before,
+.files .files-group .tree .node>.trigger::before				{ content: '\f096'; } 
 
 /* check */
-.files .files-group .controls .controls-check.on:before,
-.files .files-group .tree .node.on>.trigger:before				{ content: '\f046'; }
+.files .files-group .controls .controls-check.on::before,
+.files .files-group .tree .node.on>.trigger::before				{ content: '\f046'; }
 
 /* visible [eye open] */
-.files .files-group .controls .controls-visibility.on:before	{ content: '\f06e';}
+.files .files-group .controls .controls-visibility.on::before	{ content: '\f06e'; }
 
 /* visible [eye closed] */
-.files .files-group .controls .controls-visibility:before		{ content: '\f070';}
+.files .files-group .controls .controls-visibility::before		{ content: '\f070'; }
+
+/* arrow circle down */
+.collections .select-wrapper::after								{ content: '\f0ab'; font-size: 1.5em; }
+
+/* caret down */
+.files .group-nav .select-wrapper::after						{ content: '\f0d7'; font-size: 1em; }
 
 
 
+/* COLORS | BG | BORDER-RADIUS */
 
-/* COLORS | BG */
-.files .files-group												{ border: 1px solid #CCC; }
+.select-wrapper::after											{ color: #666; }
+.files .group-nav .index .i 									{ background-color: #666; }
+
+.collections .select-wrapper,
+.files .files-group,
+.result textarea												{ border: 1px solid #CCC; }
 .files .files-group.on .controls								{ border-bottom: 1px solid #CCC; }
+
+
+
+.files .group-nav .index .i.active								{ background-color: #f00; }
+
+
+
+
+/* border radius*/
+.collections .select-wrapper									{ border-radius: 10px; }
+
+.files .files-group												{ border-radius: 5px; }
+.result textarea 												{ border-radius: 5px 0 0 0; }
+
+.files .group-nav .index .i 									{ border-radius: 100%; }

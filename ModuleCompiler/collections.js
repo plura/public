@@ -6,7 +6,7 @@ var TEST = [
 			label:	'framework1/package1/',
 			data:	{
 				path:		'test/assets/js/framework1/package1/',
-				script:		'test/assets/js/framework1/package1/'
+				link:		'test/assets/js/framework1/package1/'
 			}
 
 		},
@@ -21,13 +21,13 @@ var TEST = [
 				{
 					path:		'test/assets/js/framework2/package1/',
 					closure:	'http://my-domain.com/closure/js/',
-					script:		'test/assets/js/framework2/package1/'
+					link:		'test/assets/js/framework2/package1/'
 				},
 				
 				{
 					path:		'test/assets/js/framework2/package2/',
 					closure:	'http://other-domain.com/closure/js/',
-					script:		'test/assets/js/framework2/package2/'
+					link:		'test/assets/js/framework2/package2/'
 				}
 			
 			]
@@ -42,7 +42,7 @@ var TEST = [
 			data:	{			
 				path:		'test/assets/js/framework1/package1/',				
 				closure:	'http://my-domain.com/closure/js/',
-				script:		'test/assets/js/framework1/package1/',
+				link:		'test/assets/js/framework1/package1/',
 				first:		['Package1Class3.js']				
 			}
 			
@@ -57,7 +57,7 @@ var TEST = [
 				first:	['images.css'],
 				join: 	'test/compiled/',
 				path:	'test/assets/css/',				
-				script:	'test/assets/css/'		
+				link:	'test/assets/css/'		
 			}
 			
 		},
@@ -74,13 +74,13 @@ var TEST = [
 					{
 						path:		'test/assets/js/framework2/package1/',
 						closure:	'http://my-domain.com/closure/js/',
-						script:		'test/assets/js/framework2/package1/'
+						link:		'test/assets/js/framework2/package1/'
 					},
 					
 					{
 						path:		'test/assets/js/framework2/package2/',
 						closure:	'http://other-domain.com/closure/js/',
-						script:		'test/assets/js/framework2/package2/',
+						link:		'test/assets/js/framework2/package2/',
 					}
 
 				],
@@ -93,7 +93,7 @@ var TEST = [
 						first:	['images.css'],
 						join: 	'test/assets/js/framework1/',
 						path:	'test/assets/css/',				
-						script:	'test/assets/css/'		
+						link:	'test/assets/css/'		
 					}
 					
 				}

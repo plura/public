@@ -28,7 +28,7 @@ var DATA = function (options) {
 
 			case 'collection':
 
-				collections[ obj.id ] = collection_groups( obj.data, obj.id );
+				collections[ obj.id ] = collection( obj.data, obj.id );
 
 				break;
 			
@@ -37,7 +37,7 @@ var DATA = function (options) {
 		},
 
 
-		collection_groups = function ( collection, id ) {
+		collection = function ( collection, id ) {
 
 			var groups = [], i, n, data = collection.data,
 
@@ -89,7 +89,7 @@ var DATA = function (options) {
 
 			}
 
-			return groups;
+			return {groups: groups, label: collection.label};
 
 		},
 
@@ -112,6 +112,7 @@ var DATA = function (options) {
 					join: 		items[i].join,
 					name:		items[i].name,
 					path:		(options.prefix || '') + items[i].path,
+					prefix: 	preferences.returnType.match(/link/) && items[i][ preferences.returnType ] || '',
 					exclude:	exclude && exclude[i] 
 				});
 
@@ -136,7 +137,7 @@ var DATA = function (options) {
 
 			var ids = id.match(/^(.+)_([0-9]+)$/);
 
-			return collections[ ids[1] ][ ids[2] ];
+			return collections[ ids[1] ].groups[ ids[2] ];
 
 		},
 
@@ -178,14 +179,14 @@ var ModuleCompiler = function (options) {
 		},
 	
 	
-		core, datahandler, id, opts, ui_filter_collections, ui_filter_files, ui_filter_return, ui_result,
+		core, datahandler, id, opts, ui_collections, ui_files, ui_preferences, ui_result,
 
 
 		resize = function () {
 
 			var winw = $(window).width(), winh = $(window).height(),
 
-				navh = ui_filter_collections.core.outerHeight( true );
+				navh = ui_collections.core.outerHeight( true );
 
 			$('body').height( winh );
 
@@ -193,16 +194,18 @@ var ModuleCompiler = function (options) {
 
 			ui_result.resize( winh - navh );
 
-			ui_filter_files.resize( winh - navh );
+			ui_files.resize( winh - navh );
 
 		},
 	
 
 		eventDataCollectionsHandler = function (data) {
 
-			ui_filter_files.refresh( data.tree );
+			ui_files.refresh( data.tree );
 
 			ui_result.refresh( data.result );
+
+			resize();
 
 		},
 
@@ -222,7 +225,7 @@ var ModuleCompiler = function (options) {
 
 			case 'COLLECTIONS':
 
-				ui_filter_files.nav( datahandler.collection( data.id ) );
+				ui_files.start( datahandler.collection( data.id ) );
 
 				break;
 
@@ -230,16 +233,16 @@ var ModuleCompiler = function (options) {
 
 				id = data.id;
 
-				ui_filter_return.refresh( datahandler.returnTypes( id ) );
+				ui_preferences.refresh( datahandler.returnTypes( id ) );
 
-				datahandler.load( id, eventDataCollectionsHandler, ui_filter_return.get() );
+				datahandler.load( id, eventDataCollectionsHandler, ui_preferences.get() );
 
 				break;
 
 			case 'FILES':
 			case 'TYPES':
 
-				datahandler.load( id, eventDataFilesHandler, ui_filter_return.get(), ui_filter_files.get() );
+				datahandler.load( id, eventDataFilesHandler, ui_preferences.get(), ui_files.get() );
 
 				break;								
 
@@ -247,37 +250,39 @@ var ModuleCompiler = function (options) {
 
 		},
 
+
 		eventWindowResizeHandler = function () {
 
 			resize();
 
 		},
-			
+
+
 		init = function () {
 			
-			opts					= $.extend(true, {}, defaults, options);
+			opts			= $.extend(true, {}, defaults, options);
 
-			datahandler				= new DATA({prefix: options.prefix, process: options.process});
+			datahandler		= new DATA({prefix: options.prefix, process: options.process});
 
-			core					= $('<div/>').appendTo('body').addClass('core');
+			core			= $('<div/>').appendTo('body').addClass('core');
 			
 
-			ui_filter_collections	= new ModuleCompilerFilterCollection({data: opts.data, handler: datahandler, target: core});
+			ui_collections	= new ModuleCompilerFilterCollection({data: opts.data, handler: datahandler, target: core});
 
-			ui_filter_collections.core.on('COLLECTIONS', eventFilterHandler);
-
-
-			ui_filter_return			= new ModuleCompilerPreferences({target: core});
-
-			ui_filter_return.core.on('TYPES', eventFilterHandler);
+			ui_collections.core.on('COLLECTIONS', eventFilterHandler);
 
 
-			ui_filter_files			= new ModuleCompilerFileManager({handler: datahandler, target: core});
+			ui_preferences	= new ModuleCompilerPreferences({target: core});
 
-			ui_filter_files.core.on('FILES GROUPS', eventFilterHandler);
+			ui_preferences.core.on('TYPES', eventFilterHandler);
 
 
-			ui_result				= new ModuleCompilerResultManager({target: core});
+			ui_files		= new ModuleCompilerFileManager({handler: datahandler, target: core});
+
+			ui_files.core.on('FILES GROUPS', eventFilterHandler);
+
+
+			ui_result		= new ModuleCompilerResultManager({target: core});
 
 
 			$(window).resize( eventWindowResizeHandler );
@@ -372,13 +377,17 @@ var ModuleCompilerFilterCollection = function (options) {
 
 		init = function () {
 
-			core		= $('<div/>').appendTo( options.target ).addClass('collections');
+			var select_wrapper;
 
-			form		= $('<form/>').appendTo( core );
+			core			= $('<div/>').appendTo( options.target ).addClass('collections');
 
-			select		= init_select( options.data ).appendTo( form ).on('change', eventChangeHandler);
+			form			= $('<form/>').appendTo( core );
 
-			_this.core	= core;
+			select_wrapper	= $('<div/>').appendTo( form ).addClass('select-wrapper');
+
+			select			= init_select( options.data ).appendTo( select_wrapper ).on('change', eventChangeHandler);
+
+			_this.core		= core;
 
 		};
 
@@ -609,18 +618,11 @@ var ModuleCompilerFileManager = function ( options ) {
 		},
 
 
-		nav = function ( data ) {
-
-			group.refresh( data );
-
-		},		
-
-
 	   /**
 		* refreshes data objects
 		* @param {Object} data	the collection data
 		*/
-		refresh = function (data) {
+		refresh = function ( data ) {
 
 			var i;
 
@@ -640,15 +642,34 @@ var ModuleCompilerFileManager = function ( options ) {
 		},
 
 
+		resize = function ( height ) {
 
-		resize = function (height) {
+			var innerh = ( height - parseInt(core.css('padding'), 10) * 2 ) -  group.core.height();
 
-			core.outerHeight(height);
+			core.outerHeight( height );
+
+			inner.outerHeight('').removeClass('has-scroll');
+
+			if ( innerh < inner.outerHeight() ) {
+
+				inner.outerHeight( innerh ).addClass('has-scroll');
+
+			}
 
 		},
 
 
+	   /**
+		* refresh file manager title + group navigation
+		* @param {Object} collection - the collectionn data object
+		*/
+		start = function ( collection ) {
 
+			group.refresh( collection.groups );
+
+			core.attr('data-title', collection.label);
+
+		},
 
 
 		eventFileGroupSelectHandler = function (event, data) {
@@ -684,10 +705,9 @@ var ModuleCompilerFileManager = function ( options ) {
 		};
 
 	_this.get		= get;
-	_this.nav		= nav;
 	_this.refresh	= refresh;
 	_this.resize	= resize;
-
+	_this.start		= start;
 
 	init();
 
@@ -702,7 +722,7 @@ var ModuleCompilerFileManagerGroupNav = function (options) {
 
 	"use strict";
 
-	var active, core, data, select_obj, _this = this,
+	var active, core, data, nav_index, nav_select, _this = this,
 
 
 		refresh = function ( groups ) {
@@ -724,23 +744,35 @@ var ModuleCompilerFileManagerGroupNav = function (options) {
 		},
 
 
+	   /**
+		* render group select box navigation and index 'position' indicator
+		* @param {Array} data - the array containing group data
+		*/
 		render = function ( data ) {
 
-			var i, node, select_wrapper;	
+			var i, index, option, select_wrapper;	
 
 			select_wrapper	= $('<div/>').appendTo( core ).addClass('select-wrapper');
 
-			select_obj		= $('<select/>').appendTo( select_wrapper ).on('change', eventSelectChangeHandler);
+			nav_select		= $('<select/>').appendTo( select_wrapper ).on('change', eventSelectChangeHandler);
+
+			nav_index		= $('<div/>').appendTo( core ).addClass('index');
 
 			for (i = 0; i < data.length; i += 1) {
 
-				node = $('<option/>').appendTo( select_obj ).html( data[i].name ).val(i);
+				option	= $('<option/>').appendTo( nav_select ).html( data[i].name ).val(i);
+
+				index	= $('<div/>').appendTo( nav_index ).addClass('i');
 
 			}
 
 		},
 
 
+	   /**
+		* selects group by its data index
+		* @param {number} [index=0] - the group index
+		*/
 		select = function ( index ) {
 
 			var n = index === undefined ? 0 : index;
@@ -764,14 +796,19 @@ var ModuleCompilerFileManagerGroupNav = function (options) {
 
 		show = function ( index ) {
 
-			select_obj.val( index );
+			nav_select.val( index );
+
+			nav_index.children().removeClass('active')
+
+			.filter(':nth-child(' + (index + 1) + ')').addClass('active');
 
 		},
 
 
+		//activates selection. turns value into integer - ie. for 'index' DOM targeting
 		eventSelectChangeHandler = function (event) {
 
-			var index = select_obj.children('option:selected').val();
+			var index = Number( nav_select.children('option:selected').val() );
 
 			select( index );
 
@@ -780,9 +817,9 @@ var ModuleCompilerFileManagerGroupNav = function (options) {
 
 		init = function () {
 
-			core = $('<div/>').appendTo( options.target ).addClass('nav');
+			core		= $('<div/>').appendTo( options.target ).addClass('group-nav');
 
-			_this.core = core;
+			_this.core	= core;
 
 		};
 
@@ -1171,6 +1208,8 @@ var ModuleCompilerResultManager = function (options) {
 	var core, inner, textarea, _this = this,
 
 		refresh = function(data) {
+
+			console.log(data);
 
 			textarea.val( data );
 
