@@ -4,18 +4,6 @@
 		"selected_items":
 		[
 			[
-				"top",
-				"top_regexp"
-			],
-			[
-				"fil",
-				"filter_regexp"
-			],
-			[
-				"filt",
-				"filter"
-			],
-			[
 				"ch_",
 				"ch_crt"
 			],
@@ -316,6 +304,10 @@
 				"eventControlsCheckHandler"
 			],
 			[
+				"fil",
+				"file_path"
+			],
+			[
 				"exc",
 				"exclude_regexp"
 			],
@@ -514,6 +506,14 @@
 			[
 				"_s",
 				"_self"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"IT",
+				"ITEM"
 			]
 		]
 	},
@@ -523,8 +523,15 @@
 			"file": "ModuleCompiler/ModuleCompiler.js",
 			"settings":
 			{
-				"buffer_size": 22441,
-				"encoding": "UTF-8",
+				"buffer_size": 21963,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/trash.html",
+			"settings":
+			{
+				"buffer_size": 218,
 				"line_ending": "Windows"
 			}
 		},
@@ -540,8 +547,7 @@
 			"file": "ModuleCompiler/collections.js",
 			"settings":
 			{
-				"buffer_size": 2599,
-				"encoding": "UTF-8",
+				"buffer_size": 2096,
 				"line_ending": "Windows"
 			}
 		},
@@ -549,7 +555,7 @@
 			"file": "ModuleCompiler/ModuleCompiler.php",
 			"settings":
 			{
-				"buffer_size": 9932,
+				"buffer_size": 9223,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -698,7 +704,8 @@
 	[
 		"/C/Plura/dev/code/public",
 		"/C/Plura/dev/code/public/.ignore",
-		"/C/Plura/dev/code/public/ModuleCompiler"
+		"/C/Plura/dev/code/public/ModuleCompiler",
+		"/C/Plura/dev/code/public/ModuleCompiler/certificates"
 	],
 	"file_history":
 	[
@@ -837,10 +844,9 @@
 	},
 	"find_in_files":
 	{
-		"height": 104.0,
+		"height": 90.0,
 		"where_history":
 		[
-			"C:\\Plura\\dev\\code\\public\\ModuleCompiler",
 			"C:\\Plura\\dev\\code\\apps\\showcase\\src\\admin\\process\\compiler",
 			"C:\\Plura\\dev\\code\\apps\\showcase\\dev\\js",
 			"C:\\Plura\\dev\\code\\apps\\showcase\\src\\admin",
@@ -864,38 +870,6 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"exclude_regexp",
-			"top_regexp",
-			"top",
-			"multi_regexp",
-			"first",
-			"$first_regexp",
-			"['first']",
-			"first",
-			"first:",
-			".get(",
-			"exclude",
-			"excludes",
-			"exclude",
-			"get",
-			"eventDataFilesHandler",
-			"DATA",
-			"datahandler",
-			"ui_files.ge",
-			"get",
-			"ui_files",
-			"ui_files.get(",
-			"ui_files",
-			"ui_files.get",
-			"ModuleCompilerFileManager",
-			".get(",
-			"datahandler",
-			"\t\t\t\n",
-			"datahandler",
-			"ModuleCompilerFileManager",
-			"exclude",
-			"exclude_regexp",
-			"multi_regexp",
 			"pathTo_css_update",
 			"$min_data",
 			"$min_url",
@@ -991,7 +965,39 @@
 			"ModuleCompilerFileManagerNavTree",
 			"g =",
 			"ModuleCompilerFilterType",
-			"eventChangeHandler"
+			"eventChangeHandler",
+			"});\n",
+			".get",
+			"instanceof",
+			"ModuleCompilerFileManagerGroup",
+			"groups",
+			"ModuleCompilerFileManager",
+			"{object}",
+			"ModuleCompilerFileManagerGroup",
+			"ModuleCompilerFileManager",
+			"filter",
+			"object",
+			"object\t",
+			"@param",
+			"'dir",
+			"pathTo_css_update",
+			"path2Dir",
+			"get_tree_structure",
+			"$path",
+			"');\n",
+			"path_update",
+			"update_path",
+			"$path",
+			"png",
+			":?",
+			"'",
+			"preg_quote( implode('/', $temp_from) )",
+			"$from",
+			";\n",
+			"'..');\n",
+			"s.",
+			" $",
+			"$data['prefix'] . "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1024,45 +1030,66 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22441,
+						"buffer_size": 21963,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2648,
-								2648
+								21576,
+								21576
 							]
 						],
 						"settings":
 						{
-							"SL.49.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
-							"SL.63.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
 							"history_list_is_closing": true,
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"sftp_duplicate_views": 0,
 							"synced": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"word_wrap": false
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1264.0,
+						"translation.y": 17763.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "ModuleCompiler/trash.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 218,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								69,
+								69
+							]
+						],
+						"settings":
+						{
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "ModuleCompiler/ModuleCompiler.css",
 					"semi_transient": false,
 					"settings":
@@ -1074,66 +1101,44 @@
 						"selection":
 						[
 							[
-								1724,
-								1724
+								3253,
+								3253
 							]
 						],
 						"settings":
 						{
-							"SL.51.region_keys":
-							[
-								"SL.csslint.Highlights.|7b3605a03ec91aa73100e834c409ad73208cadd6c963187ab4fe82b11bd41a9a|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Gutter.|region.yellowish markup.warning.sublime_linter|dot",
-								"sublime_linter.protected_regions",
-								"SL.csslint.Highlights.|b9da3793b5c02383182a8320dec15fc941b4e97199ba0216721fb3f62f47ca01|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|da078b312fcdb908e836c384b93cd94f0c31c4ab14bf3b8e9c8fc16e9985e8d5|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|ba263263a5c87b90d9c51a955331e1525ca6237dd4b027236c2293ceac481b87|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|dcb318a7e0d14863d15be2889ec7d651ade15fbe90134be8617897d60ec6f586|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|fe10c4757a01b3d6b2fdb9a66089e6afb5e6576b2a61777f74d2e23afc264424|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|7a8f73a0bb98ec83532dccd593272b1723227fe1ee49a1a3de4a0449f0341fbf|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|a6d162a40461acb6fc98d95d11a81162b57c6bc37a785a4b27b3cc3384ebe691|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|6b4da928791a2b6d24978971992006ad528139a29b4f737274ec86f2eeb3b951|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|d5dc5013152cbcc9f2bbcf199a383864328e91247dec41cf212a3236b3786e6c|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|7b62cd7da8180919174de113307eacc473792a4d0bf636a010a3cc920b75efff|region.yellowish markup.warning.sublime_linter|32",
-								"SL.csslint.Highlights.|e8fa9d4366c69b94e945933e48c387fdbf0f17b7730464fccdf06ecdb91c009c|region.yellowish markup.warning.sublime_linter|32"
-							],
-							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1399.0,
+						"translation.y": 1140.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "ModuleCompiler/collections.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2599,
+						"buffer_size": 2096,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1160,
-								1160
+								450,
+								450
 							]
 						],
 						"settings":
 						{
 							"SL.113.region_keys":
 							[
-							],
-							"SL.52.region_keys":
-							[
-								"sublime_linter.protected_regions"
 							],
 							"incomplete_sync": null,
 							"remote_loading": false,
@@ -1142,44 +1147,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 350.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "ModuleCompiler/ModuleCompiler.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9932,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6926,
-								6926
-							]
-						],
-						"settings":
-						{
-							"SL.53.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5146.0,
+						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1187,6 +1155,42 @@
 				},
 				{
 					"buffer": 4,
+					"file": "ModuleCompiler/ModuleCompiler.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9223,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2971,
+								2988
+							],
+							[
+								5379,
+								5396
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1445.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": ".ignore/styles.css",
 					"semi_transient": false,
 					"settings":
@@ -1213,11 +1217,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "ModuleCompiler/test/index.html",
 					"semi_transient": false,
 					"settings":
@@ -1249,7 +1253,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "ModuleCompiler/test/compiled/compiled.css",
 					"semi_transient": false,
 					"settings":
@@ -1281,7 +1285,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "ModuleCompiler/README.md",
 					"semi_transient": false,
 					"settings":
@@ -1310,11 +1314,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 9,
 					"file": "ModuleCompiler/test.php",
 					"semi_transient": false,
 					"settings":
@@ -1342,7 +1346,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1351,82 +1355,29 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22441,
+						"buffer_size": 21963,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3107,
-								3112
+								2982,
+								2987
 							]
 						],
 						"settings":
 						{
-							"SL.59.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
 							"history_list_is_closing": true,
 							"incomplete_sync": null,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1533.0,
+						"translation.y": 1578.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "ModuleCompiler/ModuleCompiler.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 22441,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2732,
-								2732
-							]
-						],
-						"settings":
-						{
-							"SL.49.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
-							"SL.63.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
-							"history_list_is_closing": true,
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"sftp_duplicate_views": 0,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1359.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1434,7 +1385,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 25.0
 	},
 	"input":
 	{
@@ -1449,18 +1400,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.503537735849,
 			1.0
 		],
 		"rows":
@@ -1486,7 +1430,7 @@
 	"project": "project.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1604,7 +1548,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 224.0,
+	"side_bar_width": 341.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

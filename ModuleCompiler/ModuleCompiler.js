@@ -207,8 +207,6 @@ var ModuleCompiler = function (options) {
 
 			ui_files.refresh( data.tree );
 
-			console.log( data )
-
 			ui_result.refresh( data.result );
 
 			resize();
@@ -1224,7 +1222,7 @@ var ModuleCompilerResultManager = function (options) {
 
 		refresh = function(data) {
 
-			//console.log(data);
+			console.log(data);
 
 			textarea.val( data );
 
