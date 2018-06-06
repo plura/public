@@ -43,7 +43,11 @@ var TEST = [
 				path:		'test/assets/js/framework1/package1/',				
 				closure:	'http://my-domain.com/closure/js/',
 				link:		'test/assets/js/framework1/package1/',
+<<<<<<< HEAD
 				top:		['Package1Class3.js']				
+=======
+				first:		['Package1Class3.js']				
+>>>>>>> cfa9fed6e555b2da8f567aa0a61db9fb9360244c
 			}
 			
 		},
