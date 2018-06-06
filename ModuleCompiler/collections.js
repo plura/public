@@ -3,10 +3,10 @@ var TEST = [
 		//package w/ single group	
 		{
 			value:	'test/assets/js/framework1/package1/',
-			label:	'framework1/package1/',
+			label:	'single group package',							//framework1/package1/',
 			data:	{
 				path:		'test/assets/js/framework1/package1/',
-				script:		'test/assets/js/framework1/package1/'
+				link:		'test/assets/js/framework1/package1/'
 			}
 
 		},
@@ -15,19 +15,19 @@ var TEST = [
 		//package w/ multiple groups
 		{
 			value: 'test/assets/js/framework2/',
-			label: 'framework2 [package1 + package2]',
+			label: 'multiple groups package',							//'framework2 [package1 + package2]',
 			data:	[
 				
 				{
 					path:		'test/assets/js/framework2/package1/',
 					closure:	'http://my-domain.com/closure/js/',
-					script:		'test/assets/js/framework2/package1/'
+					link:		'test/assets/js/framework2/package1/'
 				},
 				
 				{
 					path:		'test/assets/js/framework2/package2/',
 					closure:	'http://other-domain.com/closure/js/',
-					script:		'test/assets/js/framework2/package2/'
+					link:		'test/assets/js/framework2/package2/'
 				}
 			
 			]
@@ -38,14 +38,27 @@ var TEST = [
 		//package w/ single group including precedence ["first"]
 		{
 			value: 'package1 + first',
-			label: 'framework1 + first',
+			label: 'single group package with precedence ["first"]',	//'framework1 + first',
 			data:	{			
 				path:		'test/assets/js/framework1/package1/',				
 				closure:	'http://my-domain.com/closure/js/',
-				script:		'test/assets/js/framework1/package1/',
-				first:		['Package1Class3.js']				
+				link:		'test/assets/js/framework1/package1/',
+				top:		['Package1Class3.js']				
 			}
 			
+		},
+
+
+		//single group package with file filtering
+		{
+			value:	'test/assets/js/framework1/package1/',
+			label:	'single group package with file filtering',			//framework1/package1/',
+			data:	{
+				path:		'test/assets/js/framework1/package1/',
+				link:		'test/assets/js/framework1/package1/',
+				filter:		['Package1Class2SubClass2.js']
+			}
+
 		},
 
 
@@ -54,10 +67,10 @@ var TEST = [
 			label: 	'CSS package',
 			type: 	'css',			
 			data:	{			
-				first:	['images.css'],
+				top:	['images.css'],
 				join: 	'test/compiled/',
 				path:	'test/assets/css/',				
-				script:	'test/assets/css/'		
+				link:	'test/assets/css/'		
 			}
 			
 		},
@@ -66,7 +79,7 @@ var TEST = [
 		//package w/ multiple filtered groups
 		{
 			value: 'test/assets/js/framework2/',
-			label: 'framework2 [package1 + package2]',
+			label: 'package w/ multiple filtered groups',				//'framework2 [package1 + package2]',
 			data:	[
 
 				[
@@ -74,13 +87,13 @@ var TEST = [
 					{
 						path:		'test/assets/js/framework2/package1/',
 						closure:	'http://my-domain.com/closure/js/',
-						script:		'test/assets/js/framework2/package1/'
+						link:		'test/assets/js/framework2/package1/'
 					},
 					
 					{
 						path:		'test/assets/js/framework2/package2/',
 						closure:	'http://other-domain.com/closure/js/',
-						script:		'test/assets/js/framework2/package2/',
+						link:		'test/assets/js/framework2/package2/',
 					}
 
 				],
@@ -90,10 +103,10 @@ var TEST = [
 					group: 	'CSS package',
 					type: 	'css',					
 					items:	{			
-						first:	['images.css'],
+						top:	['images.css'],
 						join: 	'test/assets/js/framework1/',
 						path:	'test/assets/css/',				
-						script:	'test/assets/css/'		
+						link:	'test/assets/css/'		
 					}
 					
 				}
