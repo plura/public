@@ -1,0 +1,62 @@
+.p-app-modulecompiler form {
+	--formpadding: 10px;
+	--inputheight: 30px;
+}
+
+
+
+.p-app-modulecompiler form select		{ 
+	-webkit-appearance: none;
+	appearance: none;
+	border: none;
+}
+
+
+.p-app-modulecompiler form .off {
+	display: none;
+}
+
+.p-app-modulecompiler form label {
+	transition:	opacity .4s linear;
+}
+
+.p-app-modulecompiler form label.disabled {
+	opacity: .5;
+}
+
+
+.p-app-modulecompiler form select {
+	height: var( --inputheight );
+}
+
+
+
+.p-app-modulecompiler form input,
+.p-app-modulecompiler form fieldset {
+	margin: 0;
+}
+
+.p-app-modulecompiler form label[align-type=right] {
+	padding-left: var( --formpadding );
+}
+
+.p-app-modulecompiler form input[type=radio] + label[align-type=right]:not(:last-of-type),
+.p-app-modulecompiler form input[type=checkbox] + label[align-type=right]:not(:last-of-type) {
+	margin-right: 30px;
+}
+
+.p-app-modulecompiler form select {
+	font-family: var( --font );
+	font-size: var( --fontsize );
+}
+
+.p-app-modulecompiler form fieldset {
+	border: none;
+	padding: 0;
+}
+
+
+
+
+/*.p-app-modulecompiler form label,
+.p-app-modulecompiler form select 	{ font: normal 14px Arial, Helvetica, sans-serif; }*/

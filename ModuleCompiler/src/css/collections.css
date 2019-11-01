@@ -1,0 +1,27 @@
+/* Collections */
+
+.p-app-modulecompiler-collections form {
+	overflow: hidden;
+	position: relative;
+}
+
+.p-app-modulecompiler-collections form::after {
+	pointer-events: none;
+	position: absolute;
+	top: 50%;
+	right: 5px;	
+	transform: translateY(-50%);
+}
+
+.p-app-modulecompiler-collections select	{ 
+	height: 30px;
+	width: 100%;
+}
+
+
+/*dims*/
+.p-app-modulecompiler-collections {
+
+	height: var( --headerheight );
+
+}

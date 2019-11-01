@@ -1,0 +1,81 @@
+/* Files: Group Nav */
+.p-app-modulecompiler-files .files-group-nav												{ text-align: center;}
+.p-app-modulecompiler-files .files-group-nav .index .i										{ display: inline-block;}
+.p-app-modulecompiler-files .files-group-nav .index .i:not(.active)						{ cursor: pointer; }
+.p-app-modulecompiler-files .files-group-nav .index 										{ font-size: 0; } /* removes strange children inline-block margin */
+
+
+.p-app-modulecompiler-files .files-group-nav form {
+	display: inline-block;
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.p-app-modulecompiler-files .files-group-nav form:after 									{
+	pointer-events:none;
+	position: absolute;
+	right: 5px;	
+	top: 50%;
+	transform: translateY(-50%);	
+}
+
+/*dims*/
+.p-app-modulecompiler-files .files-group-nav .index	{
+	padding: 3px 0 7px 0;
+}
+
+.p-app-modulecompiler-files .files-group-nav .index .i {
+	height: 8px;
+	width: 8px;
+}
+
+.p-app-modulecompiler-files .files-group-nav .index .i:not(:last-child) {
+	margin-right: 10px;
+}
+
+
+
+/* dims */
+.p-app-modulecompiler-files .files-group-nav select {
+	padding-right: 20px;
+}
+
+/* Files: Group */
+.p-app-modulecompiler-files .inner/*.has-scroll*/									{ overflow-y: auto; }
+
+
+/* Controls */
+.p-app-modulecompiler-files .files-group .controls {
+	display: flex;
+	justify-content: space-between;
+}
+
+
+
+
+.p-app-modulecompiler-files .files-group.on .tree									{ display: block; }
+.p-app-modulecompiler-files .files-group .tree										{ display: none; margin: 0; padding: 0; }
+.p-app-modulecompiler-files .files-group .tree .node								{ list-style: none; }			
+.p-app-modulecompiler-files .files-group .tree .node>.trigger						{ display: inline-block; }
+
+.p-app-modulecompiler-files .files-group .controls,
+.p-app-modulecompiler-files .files-group .tree .node									{ cursor: default; }
+
+.p-app-modulecompiler-files .files-group .controls .controls-check:before,
+.p-app-modulecompiler-files .files-group .tree .node>.trigger:before					{ display: inline-block; }
+
+/*dims*/
+.p-app-modulecompiler-files .inner.has-scroll										{ padding-right: 20px; }
+
+.p-app-modulecompiler-files .files-group											{ padding: 0 10px; }
+.p-app-modulecompiler-files .files-group:not(:last-child)							{ margin-bottom: 20px; }
+
+
+.p-app-modulecompiler-files .files-group .controls,
+.p-app-modulecompiler-files .files-group .tree										{ padding: 10px 0;  }
+
+.p-app-modulecompiler-files .files-group .tree .branch								{ padding-left: 40px; }
+.p-app-modulecompiler-files .files-group .tree .node>.trigger						{ padding-top: 2px; padding-bottom: 2px; }
+
+.p-app-modulecompiler-files .files-group .controls .controls-check:before,
+.p-app-modulecompiler-files .files-group .tree .node>.trigger:before				{ width: 20px; }

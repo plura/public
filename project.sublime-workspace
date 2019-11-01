@@ -4,24 +4,424 @@
 		"selected_items":
 		[
 			[
+				"spa",
+				"space-between\tjustify-content"
+			],
+			[
+				"lis",
+				"list-style\tproperty"
+			],
+			[
+				"pr",
+				"prefix"
+			],
+			[
+				"PR",
+				"PRFX"
+			],
+			[
+				"t",
+				"target"
+			],
+			[
+				"ret",
+				"returnType"
+			],
+			[
+				"lo",
+				"loading"
+			],
+			[
+				"ui_",
+				"ui_preferences"
+			],
+			[
+				"retu",
+				"return"
+			],
+			[
+				"pare",
+				"parentID"
+			],
+			[
+				"tr",
+				"traverse"
+			],
+			[
+				"ac",
+				"activate_branch"
+			],
+			[
+				"parent",
+				"parents"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"activ",
+				"activate_branch"
+			],
+			[
+				"acti",
+				"activate_branch"
+			],
+			[
+				"act",
+				"activate_branch"
+			],
+			[
+				"n",
+				"nodeID"
+			],
+			[
+				"no",
+				"nodeData"
+			],
+			[
+				"par",
+				"parentID"
+			],
+			[
+				"node",
+				"nodeID"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"to",
+				"toggle"
+			],
+			[
+				"map_",
+				"map_inactive"
+			],
+			[
+				"map",
+				"map_active"
+			],
+			[
+				"ui",
+				"ui_tree"
+			],
+			[
+				"eve",
+				"eventTreeHandler"
+			],
+			[
+				"elementa",
+				"elementData"
+			],
+			[
+				"padd",
+				"padding-top\tproperty"
+			],
+			[
+				"coll",
+				"collectionsGroups"
+			],
+			[
+				"pro",
+				"process"
+			],
+			[
+				"ele",
+				"element"
+			],
+			[
+				"qu",
+				"querySelector"
+			],
+			[
+				"quye",
+				"querySelectorAll"
+			],
+			[
+				"input",
+				"inputheight"
+			],
+			[
+				"fiel",
+				"fieldset"
+			],
+			[
+				"elmen",
+				"elementData"
+			],
+			[
+				"margin-",
+				"margin-right\tproperty"
+			],
+			[
+				"paddin",
+				"padding-left\tproperty"
+			],
+			[
+				"op",
+				"opacity\tproperty"
+			],
+			[
+				"query",
+				"querySelectorAll"
+			],
+			[
+				"re",
+				"returnType"
+			],
+			[
+				"chan",
+				"change"
+			],
+			[
+				"el",
+				"element"
+			],
+			[
+				"rende",
+				"renderProp"
+			],
+			[
+				"c",
+				"checked"
+			],
+			[
+				"la",
+				"labelAlign"
+			],
+			[
+				"tex",
+				"textContent"
+			],
+			[
+				"rend",
+				"renderLabel"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"fie",
+				"fields"
+			],
+			[
+				"in",
+				"inline-block\tdisplay"
+			],
+			[
+				"font-s",
+				"font-size\tproperty"
+			],
+			[
+				"font",
+				"fontsize"
+			],
+			[
+				"nav",
+				"nav_index"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"sele",
+				"select"
+			],
+			[
+				"over",
+				"overflow\tproperty"
+			],
+			[
+				"pos",
+				"position\tproperty"
+			],
+			[
+				"col",
+				"collectionsGroups"
+			],
+			[
+				"co",
+				"const"
+			],
+			[
+				"v",
+				"value"
+			],
+			[
+				"el_",
+				"el_name"
+			],
+			[
+				"data",
+				"datahandler"
+			],
+			[
+				"da",
+				"datahandler"
+			],
+			[
+				"fl",
+				"filter_items"
+			],
+			[
+				"fil",
+				"filter_items"
+			],
+			[
+				"l",
+				"label"
+			],
+			[
+				"elem",
+				"elementData"
+			],
+			[
+				"render",
+				"renderSelect"
+			],
+			[
+				"e",
+				"element"
+			],
+			[
+				"d",
+				"data"
+			],
+			[
+				"set",
+				"setAttribute"
+			],
+			[
+				"cl",
+				"classList"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"pa",
+				"padding-top\tproperty"
+			],
+			[
+				"f",
+				"flex-start\talign-items"
+			],
+			[
+				"align",
+				"align-items\tproperty"
+			],
+			[
+				"wi",
+				"width\tproperty"
+			],
+			[
+				"gro",
+				"group_files"
+			],
+			[
+				"gr",
+				"group_files"
+			],
+			[
+				"cla",
+				"classes"
+			],
+			[
+				"inpu",
+				"input1"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"js",
+				"json"
+			],
+			[
+				"ch",
+				"checked"
+			],
+			[
+				"get",
+				"getAttribute"
+			],
+			[
+				"prop",
+				"props"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"do",
+				"document"
+			],
+			[
+				"p",
+				"path"
+			],
+			[
+				"na",
+				"name"
+			],
+			[
+				"option",
+				"option"
+			],
+			[
+				"se",
+				"select"
+			],
+			[
+				"s",
+				"select-wrapper"
+			],
+			[
+				"opt",
+				"opt_name"
+			],
+			[
+				"app",
+				"appendChild"
+			],
+			[
+				"cre",
+				"createElement"
+			],
+			[
+				"grou",
+				"group_name"
+			],
+			[
+				"inn",
+				"inner"
+			],
+			[
+				"add",
+				"addEventListener"
+			],
+			[
+				"ev",
+				"eventFilterHandler"
+			],
+			[
 				"ch_",
 				"ch_crt"
 			],
 			[
-				"js",
-				"js_code"
-			],
-			[
 				"url",
 				"urldecode"
-			],
-			[
-				"l",
-				"length"
-			],
-			[
-				"co",
-				"console"
 			],
 			[
 				"retut",
@@ -32,28 +432,12 @@
 				"font-family"
 			],
 			[
-				"tex",
-				"text-transform"
-			],
-			[
 				"ta",
 				"table-cell"
 			],
 			[
-				"in",
-				"inline-table"
-			],
-			[
-				"inn",
-				"innerh"
-			],
-			[
 				"inner",
 				"innerHeight"
-			],
-			[
-				"res",
-				"resize"
 			],
 			[
 				"ou",
@@ -64,28 +448,12 @@
 				"border-radius"
 			],
 			[
-				"acti",
-				"active"
-			],
-			[
-				"con",
-				"console"
-			],
-			[
 				"ma",
 				"margin-right"
 			],
 			[
 				"bo",
 				"border-radius"
-			],
-			[
-				"nav",
-				"nav_index"
-			],
-			[
-				"pa",
-				"padding-right"
 			],
 			[
 				"ini",
@@ -116,28 +484,12 @@
 				"_GET"
 			],
 			[
-				"ret",
-				"returnType"
-			],
-			[
 				"pref",
 				"preferences"
 			],
 			[
-				"elem",
-				"element"
-			],
-			[
 				"event",
 				"eventChangeHandler"
-			],
-			[
-				"val",
-				"value"
-			],
-			[
-				"el",
-				"elements"
 			],
 			[
 				"fi",
@@ -152,451 +504,119 @@
 				"args"
 			],
 			[
-				"da",
-				"data"
-			],
-			[
 				"return",
 				"returnTypes"
-			],
-			[
-				"col",
-				"collection"
-			],
-			[
-				"gro",
-				"group"
 			],
 			[
 				"def",
 				"defaultType"
 			],
 			[
-				"get",
-				"getCollectionGroup"
-			],
-			[
 				"ge",
 				"getCollection"
-			],
-			[
-				"coll",
-				"collection"
-			],
-			[
-				"dat",
-				"data"
-			],
-			[
-				"data",
-				"datahandler"
-			],
-			[
-				"D",
-				"DATA"
-			],
-			[
-				"gr",
-				"groups"
-			],
-			[
-				"Mo",
-				"ModuleCompilerFileManagerGroupNav"
-			],
-			[
-				"appen",
-				"appendTo"
-			],
-			[
-				"sel",
-				"select"
-			],
-			[
-				"appe",
-				"appendTo"
-			],
-			[
-				"opti",
-				"options"
-			],
-			[
-				"temp",
-				"temp_to_remain"
-			],
-			[
-				"str_r",
-				"str_replace"
-			],
-			[
-				"bac",
-				"background-position"
-			],
-			[
-				"back",
-				"background-repeat"
-			],
-			[
-				"r1",
-				"r1_top"
-			],
-			[
-				"op",
-				"options"
-			],
-			[
-				"marg",
-				"margin-bottom"
-			],
-			[
-				"par",
-				"params"
-			],
-			[
-				"bl",
-				"block"
-			],
-			[
-				"ui",
-				"ui_ctrls_visibility"
-			],
-			[
-				"o",
-				"objects"
-			],
-			[
-				"parent",
-				"parentID"
-			],
-			[
-				"le",
-				"length"
-			],
-			[
-				"a",
-				"activateAll"
-			],
-			[
-				"activat",
-				"activate"
-			],
-			[
-				"to",
-				"toggle"
-			],
-			[
-				"margin",
-				"margin-bottom"
-			],
-			[
-				"padd",
-				"padding"
-			],
-			[
-				"pad",
-				"padding"
-			],
-			[
-				"Mod",
-				"ModuleCompilerFileManagerGroup"
-			],
-			[
-				"eventC",
-				"eventControlsCheckHandler"
-			],
-			[
-				"fil",
-				"file_path"
-			],
-			[
-				"exc",
-				"exclude_regexp"
-			],
-			[
-				"tree",
-				"tree_leaf_active_count"
-			],
-			[
-				"ac",
-				"active"
-			],
-			[
-				"tr",
-				"tree_leaf_active_count"
-			],
-			[
-				"re",
-				"refresh"
-			],
-			[
-				"e",
-				"exclude"
-			],
-			[
-				"ui_filt",
-				"ui_filter_files"
-			],
-			[
-				"file",
-				"files_top"
-			],
-			[
-				"di",
-				"display"
-			],
-			[
-				"padding",
-				"padding-top"
-			],
-			[
-				"cur",
-				"cursor"
-			],
-			[
-				"ui_fil",
-				"ui_filter_types"
-			],
-			[
-				"ui_filter",
-				"ui_filter_types"
-			],
-			[
-				"ev",
-				"eventDataHandler"
-			],
-			[
-				"eve",
-				"eventDataHandler"
-			],
-			[
-				"pro",
-				"process"
-			],
-			[
-				"ui_f",
-				"ui_filter_types"
-			],
-			[
-				"grou",
-				"group_data"
-			],
-			[
-				"app",
-				"appendTo"
-			],
-			[
-				"opt",
-				"option"
-			],
-			[
-				"MO",
-				"ModuleCompilerFilterType"
-			],
-			[
-				"add",
-				"addClass"
-			],
-			[
-				"for",
-				"form"
-			],
-			[
-				"str",
-				"strict"
-			],
-			[
-				"stri",
-				"strict"
-			],
-			[
-				"list-s",
-				"list-style"
-			],
-			[
-				"st",
-				"status"
-			],
-			[
-				"node",
-				"nodeID"
-			],
-			[
-				"t",
-				"target"
-			],
-			[
-				"ui_",
-				"ui_leaf"
-			],
-			[
-				"wid",
-				"width"
-			],
-			[
-				"M",
-				"ModuleCompilerFileManager"
-			],
-			[
-				"mari",
-				"margin"
-			],
-			[
-				"mar",
-				"margin"
-			],
-			[
-				"h",
-				"height"
-			],
-			[
-				"colle",
-				"collections"
-			],
-			[
-				"option",
-				"options"
-			],
-			[
-				"print",
-				"print_r"
-			],
-			[
-				"d",
-				"data"
-			],
-			[
-				"value",
-				"values"
-			],
-			[
-				"els",
-				"else"
-			],
-			[
-				"com",
-				"compile"
-			],
-			[
-				"is",
-				"isset"
-			],
-			[
-				"P",
-				"PARAMS"
-			],
-			[
-				"do",
-				"down"
-			],
-			[
-				"fun",
-				"function"
-			],
-			[
-				"act",
-				"activate"
-			],
-			[
-				"i",
-				"inactive"
-			],
-			[
-				"sC",
-				"SCREEN"
-			],
-			[
-				"_s",
-				"_self"
-			],
-			[
-				"fu",
-				"function"
-			],
-			[
-				"IT",
-				"ITEM"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "ModuleCompiler/ModuleCompiler.js",
+			"file": "ModuleCompiler/src/js/ModuleCompilerFileManager.js",
 			"settings":
 			{
-				"buffer_size": 21963,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ModuleCompiler/trash.html",
-			"settings":
-			{
-				"buffer_size": 218,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ModuleCompiler/ModuleCompiler.css",
-			"settings":
-			{
-				"buffer_size": 5817,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ModuleCompiler/collections.js",
-			"settings":
-			{
-				"buffer_size": 2096,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ModuleCompiler/ModuleCompiler.php",
-			"settings":
-			{
-				"buffer_size": 9223,
+				"buffer_size": 2768,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": ".ignore/styles.css",
+			"file": "ModuleCompiler/src/js/ModuleCompilerFileManager/ModuleCompilerFileManagerGroupNav.js",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 2353,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ModuleCompiler/test/index.html",
+			"file": "ModuleCompiler/src/js/ModuleCompilerForm.js",
 			"settings":
 			{
-				"buffer_size": 285,
+				"buffer_size": 4578,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ModuleCompiler/test/compiled/compiled.css",
+			"file": "ModuleCompiler/src/js/ModuleCompilerPreferences.js",
 			"settings":
 			{
-				"buffer_size": 460,
+				"buffer_size": 3481,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ModuleCompiler/README.md",
+			"file": "ModuleCompiler/src/js/ModuleCompilerResultManager.js",
 			"settings":
 			{
-				"buffer_size": 1974,
+				"buffer_size": 499,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ModuleCompiler/test.php",
+			"file": "ModuleCompiler/src/css/preferences.css",
 			"settings":
 			{
-				"buffer_size": 44,
+				"buffer_size": 1676,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/src/css/styles.css",
+			"settings":
+			{
+				"buffer_size": 3862,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/src/js/ModuleCompilerSystemStatus.js",
+			"settings":
+			{
+				"buffer_size": 531,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 39,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<h1>Hoje é um bom dia<br/>para aquecer o seu negócio</h1>\n\n\n\n<p>Porquê escolher o gasóleo de aquecimento Galp?</p>\n\n<ul>\n\t<li>Melhor combustão que promove a eficiência energética.</li>\n\t<li>Funcionamento mais limpo do sistema de aquecimento pelo seu poder detergente e dispersante.</li>\n\t<li>Prevenção contra a corrosão no sistema de alimentação e restante equipamento. </li>\n\t<li>Prolongamento do tempo de vida da instalação.</li>\n\t<li>Menor impacto ambiental no planeta.</li>\n</ul>",
+			"file": "test.html",
+			"file_size": 59,
+			"file_write_time": 132169156794527266,
+			"settings":
+			{
+				"buffer_size": 483,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ModuleCompiler/src/js/ModuleCompiler.js",
+			"settings":
+			{
+				"buffer_size": 2279,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -613,6 +633,14 @@
 		"selected_items":
 		[
 			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"jav",
+				"Set Syntax: JavaScript"
+			],
+			[
 				"php",
 				"Set Syntax: PHP"
 			],
@@ -623,10 +651,6 @@
 			[
 				"lin",
 				"SublimeLinter: Choose Lint Mode"
-			],
-			[
-				"java",
-				"Set Syntax: JavaScript"
 			],
 			[
 				"sublinter",
@@ -703,26 +727,64 @@
 	"expanded_folders":
 	[
 		"/C/Plura/dev/code/public",
-		"/C/Plura/dev/code/public/.ignore",
 		"/C/Plura/dev/code/public/ModuleCompiler",
-		"/C/Plura/dev/code/public/ModuleCompiler/certificates"
+		"/C/Plura/dev/code/public/ModuleCompiler/src"
 	],
 	"file_history":
 	[
+		"/C/Plura/dev/code/public/ModuleCompiler/src/css/collections.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/css/files.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/css/form.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/css/result.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/css/status.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompilerFileManager/ModuleCompilerFileManagerTree.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompilerFilterCollection.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/implementation.dev.html",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleDataManager.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/css/styles.css",
 		"/C/Plura/dev/code/public/ModuleCompiler/trash.html",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompilerFileManager/ModuleCompilerFileManagerGroupNav.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompilerFileManager/ModuleCompilerFileManagerGroup.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompilerPreferences.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompiler.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/css/preferences.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.php",
+		"/C/Plura/dev/code/public/ModuleCompiler/src2/js/ModuleCompilerPreferences.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompilerForm.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompilerFileManager.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/collections.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/assets/js/es6/code.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/data.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/js/ModuleCompilerResultManager.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/ModuleCompiler.COPY.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/src/ModuleCompiler.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/ModuleCompiler.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/data.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/ModuleCompilerFilterCollection.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/ModuleCompilerPreferences.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/ModuleCompilerFileManager/ModuleCompilerFileManagerTree.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/ModuleCompilerFileManager/ModuleCompilerFileManagerGroup.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/ModuleCompilerFileManager.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/ModuleCompilerFileManager/ModuleCompilerFileManagerGroupNav.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/.ignore/ModuleCompilerResultManager.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.js",
+		"/C/Plura/dev/code/public/ModuleCompiler/test.php",
+		"/C/Plura/dev/code/public/ModuleCompiler/README.md",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/compiled/compiled.css",
+		"/C/Plura/dev/code/public/ModuleCompiler/test/index.html",
+		"/C/Plura/dev/code/public/.ignore/styles.css",
+		"/C/Plura/dev/code/public/.gitignore",
 		"/C/Plura/dev/code/public/.ignore/fn.php",
 		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.copy.php",
 		"/C/Plura/dev/code/public/ModuleCompiler/fn.js",
-		"/C/Plura/dev/code/public/.gitignore",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/css/images.css",
-		"/C/Plura/dev/code/public/ModuleCompiler/collections.js",
 		"/C/Plura/dev/code/public/README.md",
 		"/C/Plura/dev/code/public/.ignore/pathTo.php",
 		"/C/Users/Tiago Simoes/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Plura/dev/code/public/ModuleCompiler/implementation.html",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/css/colors.css",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/css/fonts.css",
-		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package2/package2class1/Package2Class1SubClass1.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/package1class2/Package1Class2SubClass2.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/package1class1/Package1Class1SubClass2.js",
@@ -736,7 +798,6 @@
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class1.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class3.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/framework2/package1/Package1Class2.js",
-		"/C/Plura/dev/code/public/ModuleCompiler/ModuleCompiler.css",
 		"/C/Plura/dev/code/public/ModuleCompiler/test/collections.js",
 		"/C/Plura/dev/code/public/ModuleCompiler/p.js",
 		"/C/Plura/dev/code/apps/showcase/addons/compiler/core/CustomCompilerTriggerUI.js",
@@ -798,55 +859,24 @@
 		"/C/Plura/dev/code/apps/showcase/src/admin/process/content/main_ism_campaigns.php",
 		"/C/Plura/dev/code/apps/showcase/src/admin/process/content/main_news.php",
 		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/Index.js",
-		"/C/Plura/dev/code/apps/showcase/src/admin/fn/files.php",
-		"/C/Plura/dev/code/apps/showcase/src/admin/js/addons/addon.hub.js",
-		"/C/Plura/dev/code/apps/showcase/src/admin/js/addons/addon.compiler.js",
-		"/C/Plura/dev/code/apps/showcase/addons/Compiler/core/Compiler.js",
-		"/C/Plura/dev/code/apps/showcase/addons/Compiler/core/CompilerUI.js",
-		"/C/Plura/dev/code/apps/showcase/addons/Compiler/core/CompileSequence.js",
-		"/C/Plura/dev/code/apps/showcase/src/admin/fn/archive.php",
-		"/C/Plura/dev/code/apps/showcase/.gitignore",
-		"/C/Plura/dev/code/apps/showcase/addons/Hub/core/Header.js",
-		"/C/Plura/dev/code/apps/showcase/src/offline/assets/johnson.html",
-		"/C/Plura/dev/code/apps/showcase/addons/Hub/core/Hub.js",
-		"/C/Plura/dev/code/apps/showcase/addons/Hub/core/Orders.js",
-		"/C/Plura/dev/code/apps/showcase/addons/Hub/core/Map.js",
-		"/C/Plura/dev/code/apps/showcase/addons/Hub/core/Notes.js",
-		"/C/Plura/dev/code/apps/showcase/.ignore/reference.js",
-		"/C/Plura/dev/code/apps/showcase/src/admin/_lib/fn/tree.php",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/init/Toggle.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/init/Log.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/custom/Table.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/n3/Sections.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/n3/Section.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/n3/ProductSlider.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/n3/Product.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/n3/MenuTrigger.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/index/News.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/Guide.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/Showcase.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/utils/sup.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/utils/Slide_Controls.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/utils/Scroll.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/utils/Previous_Next.js",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/utils/Load.js",
-		"/C/Plura/dev/code/apps/showcase/src/admin/_lib/classes/structures/Structure.php",
-		"/C/Plura/dev/code/apps/showcase/src/admin/_lib/classes/structures/Basic.php",
-		"/C/Plura/dev/code/apps/showcase/src/admin/_lib/classes/SQL.php",
-		"/C/Plura/dev/code/apps/showcase/src/admin/_lib/fn/db.php",
-		"/C/Plura/dev/code/apps/showcase/dev/js/app/content/custom/Table.js",
-		"/C/Plura/dev/code/apps/showcase/src/_lib/css/transitions.css",
-		"/C/Plura/dev/code/apps/showcase/src/_lib/css/frontend.css"
+		"/C/Plura/dev/code/apps/showcase/src/admin/fn/files.php"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 101.0,
 		"where_history":
 		[
+			"C:\\Plura\\dev\\code\\public\\ModuleCompiler\\src\\css",
+			"C:\\Plura\\dev\\code\\public\\ModuleCompiler\\src\\js",
+			"C:\\Plura\\dev\\code\\public\\ModuleCompiler\\src\\css",
+			"C:\\Plura\\dev\\code\\public\\ModuleCompiler\\src\\js",
+			"C:\\Plura\\dev\\code\\public\\ModuleCompiler\\src2\\js",
+			"C:\\Plura\\dev\\code\\public\\ModuleCompiler\\src\\js",
+			"C:\\Plura\\dev\\code\\public\\ModuleCompiler\\.ignore",
 			"C:\\Plura\\dev\\code\\apps\\showcase\\src\\admin\\process\\compiler",
 			"C:\\Plura\\dev\\code\\apps\\showcase\\dev\\js",
 			"C:\\Plura\\dev\\code\\apps\\showcase\\src\\admin",
@@ -870,134 +900,134 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"pathTo_css_update",
-			"$min_data",
-			"$min_url",
-			"$src ",
-			"$min_url",
-			"min_url",
-			"pr",
-			"pru",
-			"echo",
-			"ModuleCompilerResultManager",
-			".get(",
-			"ModuleCompiler",
-			"ModuleCompilerPreferences",
-			"ModuleCompilerResultManager",
-			"items",
-			"script:",
-			".returnType",
-			"$file_path",
-			"script",
-			"15px",
-			"8px",
-			"data",
-			"collection_groups",
-			".returnTypes",
-			".inner",
-			"height",
-			"resize",
-			"height",
-			"10px",
-			"select_obj",
-			"ui_files.",
-			";}",
-			"select-w",
-			"$data",
-			"$url",
-			"$query",
-			"query",
-			"$data['type']",
-			"params",
-			"data",
-			"ui_returntype",
-			"type",
-			"target",
-			"returnType",
-			"labels",
-			"type",
-			"core,",
-			"holder",
-			"name: 'type'",
-			"link",
-			"ui_returntype",
-			"(form)",
-			"(holder)",
-			".types",
-			"ModuleCompilerResultManager",
-			"ModuleCompilerFilterReturn",
-			"$js",
-			"test/",
-			"GroupN",
-			"get_info",
-			"data.id",
-			"ModuleCompilerFilterType",
-			"ui_filter_types",
-			"filter",
-			".returnTypes",
-			"'script'",
-			"returnType",
-			"],",
-			".group",
-			"defaultType",
-			"defaultName",
-			"'js'",
-			"name +",
-			"$_GET['type']",
-			"[i]",
-			"i",
-			"n",
-			"a.",
-			"data",
-			"console.lo",
-			"ui_filter_files",
-			"collections_group",
+			"· ",
+			"iles .files-group .controls",
+			".p-app-modulecompiler-files .group",
+			"border",
+			"prefix",
+			".p-app-modulecompiler formpadding",
+			".p-app-modulecompiler ",
 			"form",
-			"holder",
-			"get",
-			"data",
-			"options.data",
-			";\n",
-			"'COLLECTIO",
+			".p-app-modulecompiler-files-group",
+			"..group",
+			"p-app-modulecompiler-files-group",
+			".core",
+			".result",
+			".preferences",
+			".files",
+			".collections",
+			".files",
+			"animation",
+			"visible",
+			"app",
+			"FILES",
+			"eventDataFilesHandler",
+			"detail",
+			".load",
+			"TYPES",
+			"data-path",
+			"data[i]",
+			"data[i",
+			"eventControlsCheckHandler",
+			"eventControlsVisibilityHandler",
+			"visible",
+			"'[id",
+			"[id]",
+			".active",
+			"inactive",
+			"has_active_children",
+			"has_active",
+			"nodeID",
+			".children",
+			"activate_branch",
+			"map_leaf",
+			"togg",
+			"nodeData",
+			"ui_leaf",
+			"tree",
+			"tree[",
+			"map.get",
+			"node",
+			"tree[",
+			"tree",
+			"tree[id]",
+			"tree[",
+			"console",
+			"toggle",
+			"map_leaf",
+			"tree",
+			"map.get",
+			"item.data",
+			".data",
+			"item.data",
+			"nodeData",
+			"map.set",
+			"mp",
+			"map.get",
+			"map.get( element ).no",
+			"tree",
+			"map.get",
+			"console",
+			"eventTreeLeafClickHandler",
+			"map_leaf",
+			"is_leaf",
+			"load",
+			"console.lo",
+			"inactive[e]",
+			"eventTreeBranchClickHandler",
+			"tree",
+			"get_active",
+			"activateAll",
+			"inactive",
+			"get_active",
+			"inactive",
+			"activateAll",
+			"get_info",
 			"eventTreeHandler",
-			"ModuleCompilerFileManagerGroupNav",
-			"groups",
-			"ModuleCompilerFileManagerNavTree",
-			"g =",
-			"ModuleCompilerFilterType",
+			"eventTreeBranchClickHandler",
+			"eventControlsCheckHandler",
+			"eventControlsVisibilityHandler",
+			"ui_ctrls",
+			"exclude[i]",
+			"groups[i]",
+			"tree",
+			"renderSelect",
+			"console",
+			"eventSelectChangeHandler",
+			"eventFileGroupSelectHandler",
+			"nav_select",
+			"group",
+			"se",
+			"GROUPS",
+			"ui_files",
+			"refresh",
+			"eventTreeHandler",
+			"ssList[",
+			"data.types",
+			"returnTypes",
+			"returnType",
+			"preferences",
+			".arrow_box",
+			"30px",
+			"getRequest",
+			"parse",
+			"type",
+			"getRequest",
+			"refresh",
+			"[set]",
+			"name=join",
+			"fieldset",
+			"5s",
+			"form ",
+			"value",
 			"eventChangeHandler",
-			"});\n",
-			".get",
-			"instanceof",
-			"ModuleCompilerFileManagerGroup",
-			"groups",
-			"ModuleCompilerFileManager",
-			"{object}",
-			"ModuleCompilerFileManagerGroup",
-			"ModuleCompilerFileManager",
-			"filter",
-			"object",
-			"object\t",
-			"@param",
-			"'dir",
-			"pathTo_css_update",
-			"path2Dir",
-			"get_tree_structure",
-			"$path",
-			"');\n",
-			"path_update",
-			"update_path",
-			"$path",
-			"png",
-			":?",
-			"'",
-			"preg_quote( implode('/', $temp_from) )",
-			"$from",
-			";\n",
-			"'..');\n",
-			"s.",
-			" $",
-			"$data['prefix'] . "
+			"},",
+			"alu",
+			"label: ",
+			"},",
+			"attrs",
+			"label",
+			"element"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1005,6 +1035,14 @@
 		"regex": false,
 		"replace_history":
 		[
+			".p-app-modulecompiler-files .files-group",
+			".p-app-modulecompiler form",
+			".group",
+			".p-app-modulecompiler-result",
+			".p-app-modulecompiler-preferences",
+			".p-app-modulecompiler-files",
+			".p-app-modulecompiler-collections",
+			"$_REQUEST",
 			"<ul>",
 			"<li>",
 			"app_file_",
@@ -1021,326 +1059,337 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 9,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "ModuleCompiler/ModuleCompiler.js",
+					"file": "ModuleCompiler/src/js/ModuleCompilerFileManager.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 21963,
+						"buffer_size": 2768,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								21576,
-								21576
+								2320,
+								2320
 							]
 						],
 						"settings":
 						{
-							"history_list_is_closing": true,
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"sftp_duplicate_views": 0,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 17763.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "ModuleCompiler/trash.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 218,
-						"regions":
-						{
-						},
-						"selection":
-						[
+							"SL.13.region_keys":
 							[
-								69,
-								69
-							]
-						],
-						"settings":
-						{
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "ModuleCompiler/ModuleCompiler.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5817,
-						"regions":
-						{
-						},
-						"selection":
-						[
+							],
+							"SL.14.region_keys":
 							[
-								3253,
-								3253
-							]
-						],
-						"settings":
-						{
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1140.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "ModuleCompiler/collections.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2096,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								450,
-								450
-							]
-						],
-						"settings":
-						{
-							"SL.113.region_keys":
+							],
+							"SL.26.region_keys":
 							[
 							],
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "ModuleCompiler/ModuleCompiler.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9223,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2971,
-								2988
-							],
-							[
-								5379,
-								5396
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1445.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": ".ignore/styles.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"open_with_edit": true,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1596.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "ModuleCompiler/test/index.html",
+					"buffer": 1,
+					"file": "ModuleCompiler/src/js/ModuleCompilerFileManager/ModuleCompilerFileManagerGroupNav.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 285,
+						"buffer_size": 2353,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								80,
-								80
+								2288,
+								2288
 							]
 						],
 						"settings":
 						{
-							"open_with_edit": true,
+							"SL.144.region_keys":
+							[
+							],
+							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1522.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "ModuleCompiler/src/js/ModuleCompilerForm.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1094,
+								1094
+							]
+						],
+						"settings":
+						{
+							"SL.14.region_keys":
+							[
+							],
+							"SL.16.region_keys":
+							[
+							],
+							"SL.18.region_keys":
+							[
+							],
+							"SL.19.region_keys":
+							[
+							],
+							"SL.34.region_keys":
+							[
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 420.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "ModuleCompiler/test/compiled/compiled.css",
+					"buffer": 3,
+					"file": "ModuleCompiler/src/js/ModuleCompilerPreferences.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 460,
+						"buffer_size": 3481,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								460,
-								460
+								122,
+								122
 							]
 						],
 						"settings":
 						{
-							"open_with_edit": true,
+							"SL.15.region_keys":
+							[
+							],
+							"SL.28.region_keys":
+							[
+							],
+							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1532.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "ModuleCompiler/src/js/ModuleCompilerResultManager.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								204,
+								204
+							]
+						],
+						"settings":
+						{
+							"SL.140.region_keys":
+							[
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "ModuleCompiler/src/css/preferences.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1676,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								52,
+								52
+							]
+						],
+						"settings":
+						{
+							"SL.136.region_keys":
+							[
+								"SL.csslint.Highlights.|fd81d8fd52b798beb045e78389ac8187e843973901736a806294bbb6d58d721d|region.redish markup.error.sublime_linter|32",
+								"SL.csslint.Highlights.|6ff730c15ff797ff7320732194b11f6678f1a2ea1e3e4151d328812e8825e90e|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|9a58e550884fef563c33f5126fe3ba6f8e6925d0ea55de3c61b425796f4fead6|region.redish markup.error.sublime_linter|32",
+								"SL.csslint.Highlights.|5b20198c629d56659d99c6ece8500fc7be2f7003e696aa2061ee74957f880e53|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|b46980c9752af830d049a73170e0877a392f724a5c1f017fcac6cd50bc8bfe4f|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|8f3038a924ba2be3125afc5e4e8c4dd5f9226f75af349cfdfa7177642321e388|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|27da1610dd91f1dff2ac931f16f2d395313531ae1cfdf1456b1eaa74309329ae|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|86e27b9f8d4ef9ddeaf5e8099aa8bd989a467fb18f0f61db84073ba1b0af45bd|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|dd0b4b843b883a6e4e67b378eb98ed990fa7c9fe4366b39f908b79a374acb887|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|9893efbf69637c6b1a010965dcdd391d7261e3626934345e5e324ac7fb35303e|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|1b2927c4022c30110b0326698921c2def1be34b8d256c9f486b65472dbc9b5cf|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|295d36349a11b9fa62f2a90a64e5aacd85655d7f899f415bac5578f31ced4ab2|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|7e78de902a175317d5ca0923345f14e385209697e4379d40e49cfcf277ce39fd|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|2670c413dcf494c67a2857e39f01cdc4ebea85f2feb5348a8a71e69045c2dfa9|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Gutter.|region.yellowish markup.warning.sublime_linter|dot",
+								"SL.csslint.Highlights.|8e1622fab179008d7b4030c92d603bbfa52c56931af86aeb59bc20dfa7895b57|region.yellowish markup.warning.sublime_linter|32",
+								"sublime_linter.protected_regions",
+								"SL.csslint.Highlights.|54404bccb724165c9e9a78d887bb69b2849e7b541762e6b86c880d220e27d91e|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Gutter.|region.redish markup.error.sublime_linter|dot",
+								"SL.csslint.Highlights.|8d3cb0e62851b1bd76982080b8b0f3315fa0b8ad47979838661a5bc3d6b82993|region.yellowish markup.warning.sublime_linter|32"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 630.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "ModuleCompiler/README.md",
+					"buffer": 6,
+					"file": "ModuleCompiler/src/css/styles.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1974,
+						"buffer_size": 3862,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1430,
+								1430
 							]
 						],
 						"settings":
 						{
+							"SL.141.region_keys":
+							[
+								"SL.csslint.Highlights.|fb30cc7b6b1983a09324496330993f2e19c7d8eccd58b9890252f9944b567be7|region.redish markup.error.sublime_linter|32",
+								"SL.csslint.Highlights.|1cf292a5b30590b3d93c9a57c3134dc0e109a77b21540c6bcfe1e835dbea1578|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|cb15972bd709be9dea2ac8e203d9084d199a48b405aeebf1b6796662f17423a5|region.redish markup.error.sublime_linter|32",
+								"SL.csslint.Gutter.|region.yellowish markup.warning.sublime_linter|dot",
+								"SL.csslint.Highlights.|bba9cb7e15785767cf21cf4de2e40c83298c47af588b35919bc3452098aacfe9|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|d8c5207e2bef7eb9baf956d1eee69fa55865200640ea1fb069d2256c75758136|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|535adc7e4919cbe3d4d431836307ee4ed7007f4fdb5fec61cd3f1ed891d67734|region.yellowish markup.warning.sublime_linter|32",
+								"SL.csslint.Highlights.|f78fea15bffde385fc5a6055070b5691052213141678006911f1463aaecfb738|region.redish markup.error.sublime_linter|32",
+								"SL.csslint.Highlights.|a4fcd2f7bc5e19f1531fe7e4a6db34b372230244d06e53cbf7051cdbdca13cc8|region.redish markup.error.sublime_linter|32",
+								"SL.csslint.Highlights.|d799f26a183db815546a7b9ed82c20586de472ca0958e081ab1b7a2683adccb6|region.redish markup.error.sublime_linter|32",
+								"sublime_linter.protected_regions",
+								"SL.csslint.Gutter.|region.redish markup.error.sublime_linter|dot"
+							],
 							"incomplete_sync": null,
-							"open_with_edit": true,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 315.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "ModuleCompiler/test.php",
+					"buffer": 7,
+					"file": "ModuleCompiler/src/js/ModuleCompilerSystemStatus.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 44,
+						"buffer_size": 531,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								44,
-								44
+								269,
+								269
 							]
 						],
 						"settings":
 						{
+							"SL.20.region_keys":
+							[
+							],
+							"SL.23.region_keys":
+							[
+							],
 							"incomplete_sync": null,
 							"open_with_edit": true,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1350,34 +1399,104 @@
 					"type": "text"
 				},
 				{
-					"buffer": 0,
-					"file": "ModuleCompiler/ModuleCompiler.js",
-					"semi_transient": false,
+					"buffer": 8,
+					"file": "README.md",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 21963,
+						"buffer_size": 39,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2982,
-								2987
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"history_list_is_closing": true,
 							"incomplete_sync": null,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "test.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 483,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								483,
+								61
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "ModuleCompiler/src/js/ModuleCompiler.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2279,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1433,
+								1433
+							]
+						],
+						"settings":
+						{
+							"SL.17.region_keys":
+							[
+							],
+							"SL.35.region_keys":
+							[
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1578.0,
+						"translation.y": 767.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1385,11 +1504,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 24.0
 	},
 	"input":
 	{
-		"height": 35.0
+		"height": 36.0
 	},
 	"layout":
 	{
@@ -1430,7 +1549,7 @@
 	"project": "project.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 70.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1473,16 +1592,28 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "p.admin",
+		"last_filter": "ohmm",
 		"selected_items":
 		[
 			[
-				"p.admin",
-				"C:\\Plura\\dev\\code\\js\\p.admin.js\\project.sublime-project"
+				"ohmm",
+				"C:\\Plura\\dev\\sites\\2013\\ohmm\\ohmm.sublime-project"
+			],
+			[
+				"admin",
+				"C:\\Plura\\dev\\code\\apps\\admin\\project.sublime-project"
 			],
 			[
 				"js",
 				"C:\\Plura\\dev\\code\\js\\project.sublime-project"
+			],
+			[
+				"cete",
+				"C:\\Plura\\dev\\sites\\2016\\cetera\\project.sublime-project"
+			],
+			[
+				"p.admin",
+				"C:\\Plura\\dev\\code\\js\\p.admin.js\\project.sublime-project"
 			],
 			[
 				"amenina",
@@ -1505,20 +1636,12 @@
 				"C:\\Plura\\dev\\sites\\2014\\novasotecma\\project.sublime-project"
 			],
 			[
-				"admin",
-				"C:\\Plura\\dev\\code\\apps\\admin\\project.sublime-project"
-			],
-			[
 				"code\\js",
 				"C:\\Plura\\dev\\code\\js\\project.sublime-project"
 			],
 			[
 				"admi",
 				"C:\\Plura\\dev\\code\\apps\\admin\\project.sublime-project"
-			],
-			[
-				"ohmm",
-				"C:\\Plura\\dev\\sites\\2013\\ohmm\\ohmm.sublime-project"
 			],
 			[
 				"sotec",
@@ -1548,7 +1671,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 341.0,
+	"side_bar_width": 443.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -1,0 +1,75 @@
+/* Preferences */
+.p-app-modulecompiler-preferences {
+	
+	--arrowsize: 10px;
+	--borderwidth: 1px;
+
+	height: var( --headerheight );
+
+}
+
+.p-app-modulecompiler-preferences fieldset 											{ display: inline-block; }
+
+.p-app-modulecompiler-preferences [type=set] {
+	align-items: center;
+	display: flex;
+	justify-content: center;	
+}
+
+.p-app-modulecompiler-preferences [type=set][name=main] {
+	height: var( --inputheight );
+}
+
+.p-app-modulecompiler-preferences [type=set]:not([name=main]) {
+	margin-top: var( --arrowsize );
+	height: calc( var( --headerheight ) - var( --inputheight ) - var( --arrowsize ) / 2 );
+	opacity: .5;
+	/*visibility: hidden;*/
+	transition:	/*visibility 0s linear .4s,*/ opacity .4s linear;
+}
+
+.p-app-modulecompiler-preferences [type=set]:not([name=main]).on {
+	opacity: 1;
+	transition-delay: 0s;
+	/*visibility: visible;*/
+}
+
+
+/* via http://www.cssarrowplease.com/ */
+
+
+
+.p-app-modulecompiler-preferences [type=set]:not([name=main]) {
+	position: relative;
+	background: #ffffff;
+	border-top: 1px solid #333;
+}
+
+.p-app-modulecompiler-preferences [type=set]:not([name=main]):after,
+.p-app-modulecompiler-preferences [type=set]:not([name=main]):before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.p-app-modulecompiler-preferences [type=set]:not([name=main]):after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #ffffff;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.p-app-modulecompiler-preferences [type=set]:not([name=main]):before {
+	border-color: rgba(51, 51, 51, 0);
+	border-bottom-color: #333;
+	border-width: 11px;
+	margin-left: -11px;
+}
+
+
+
+

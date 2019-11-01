@@ -2,6 +2,40 @@ var TEST = [
 		
 		//package w/ single group	
 		{
+			value:	'src/js/',
+			label:	'Module Compiler',							//framework1/package1/',
+			data:	[
+
+				[
+
+					{
+						path:		'src/js/',
+						link:		'src/js/',
+						top:		['data.js']				
+					},
+
+				],
+
+								//css package
+				{
+					group: 	'CSS package',
+					type: 	'css',					
+					items:	{			
+						top:	['styles.css'],
+						join: 	'src/css/',
+						path:	'src/css/',				
+						link:	'src/css/'		
+					}
+					
+				}
+
+			]
+
+		},
+
+
+		//package w/ single group	
+		{
 			value:	'test/assets/js/framework1/package1/',
 			label:	'single group package',							//framework1/package1/',
 			data:	{
@@ -60,6 +94,27 @@ var TEST = [
 			}
 
 		},
+
+
+
+		//collection groups
+		{label: 'Collection Group', values: [
+
+			//single group package with file filtering
+			{
+				value:	'test/assets/js/es6/',
+				label:	'es6 test',			//es6/',
+				data:	{
+					path:		'test/assets/js/es6/',
+					link:		'test/assets/js/es6/',
+				}
+
+			}
+
+
+		]},
+
+
 
 
 		//css package

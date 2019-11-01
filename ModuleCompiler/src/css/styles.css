@@ -1,0 +1,144 @@
+/* STRUCTURE */
+/*body, html													{ padding: 0; width: 100%; margin: 0; height: 100%;}
+
+body { margin: 0px; padding: 0px;}
+
+html { margin: 0px; padding: 0px;}
+
+body {overflow: hidden;}*/
+
+
+
+
+
+/*body															{ margin: 0; padding: 0; }*/
+
+*																{ box-sizing: border-box;}
+
+:root {
+	--pad: 30px;
+	--headerheight: 80px;
+	--groupheaderheight: 80px;
+	--font: 'Roboto', sans-serif;
+	--fontsize: .875rem;
+}
+
+body {
+	font-family: var( --font );
+	font-size: var( --fontsize );
+	height: 100vh;
+	margin: 0;
+}
+
+
+/*CORE*/
+.p-app-modulecompiler {
+	align-items: flex-start;
+	display: flex;
+	flex-wrap: wrap;
+	height: 100%;
+	justify-content: space-evenly;
+	padding-top: var( --pad );
+}
+
+.p-app-modulecompiler-collections,
+.p-app-modulecompiler-files {
+	width: calc( (100vw - var(--pad) * 3) / 3 );
+}
+
+.p-app-modulecompiler-preferences,
+.p-app-modulecompiler-result,
+.p-app-modulecompiler-systemstatus {
+	width: calc( (100vw - var(--pad) * 3) * 2 / 3 );
+}
+
+.p-app-modulecompiler-files,
+.p-app-modulecompiler-result,
+.p-app-modulecompiler-systemstatus {
+	height: calc( 100vh - var(--headerheight) - 3 * var(--pad)  );
+}
+
+.p-app-modulecompiler-files .files-group-nav {
+	height: var( --groupheaderheight );
+}
+
+.p-app-modulecompiler-files>.inner {
+	height: calc( 100vh - var(--headerheight) - 3 * var(--pad) - var( --groupheaderheight ) );
+}
+
+.p-app-modulecompiler-systemstatus {
+	right: var( --pad );
+	top: calc( var( --headerheight ) + 2 * var( --pad ) );	
+}
+
+
+
+
+
+/* COMMON */
+.p-app-modulecompiler-result .inner													{ height: 100%; }	
+
+
+
+/* FONTS */
+.p-app-modulecompiler-files .files-group .tree .node:not(.leaf)>.trigger				{ font-weight: bold; }
+
+
+/* icons*/
+.p-app-modulecompiler-collections form:after,
+.p-app-modulecompiler-files .files-group-nav form:after,
+.p-app-modulecompiler-files .files-group .controls .controls-check:before,
+.p-app-modulecompiler-files .files-group .controls .controls-visibility:before,
+.p-app-modulecompiler-files .files-group .tree .node>.trigger:before {
+
+	font-family:'FontAwesome'; font-weight: normal;
+
+}
+
+/* uncheck */
+.p-app-modulecompiler-files .files-group .controls .controls-check:before,
+.p-app-modulecompiler-files .files-group .tree .node>.trigger:before					{ content: '\f096'; } 
+
+/* check */
+.p-app-modulecompiler-files .files-group .controls .controls-check.on:before,
+.p-app-modulecompiler-files .files-group .tree .node.on>.trigger:before				{ content: '\f046'; }
+
+/* visible [eye open] */
+.p-app-modulecompiler-files .files-group .controls .controls-visibility.on:before	{ content: '\f06e'; }
+
+/* visible [eye closed] */
+.p-app-modulecompiler-files .files-group .controls .controls-visibility:before		{ content: '\f070'; }
+
+/* arrow circle down */
+.p-app-modulecompiler-collections form:after											{ content: '\f0ab'; font-size: 1.5em; }
+
+/* caret down */
+.p-app-modulecompiler-files .files-group-nav form:after									{ content: '\f0d7'; font-size: 1em; }
+
+
+
+/* COLORS | BG | BORDER-RADIUS */
+
+.p-app-modulecompiler-collections form:after,		
+.p-app-modulecompiler-files .files-group-nav form:after									{ color: #666; }
+.p-app-modulecompiler-files .files-group-nav .index .i 									{ background-color: #666; }
+
+.p-app-modulecompiler-collections form,
+.p-app-modulecompiler-files .files-group,
+.p-app-modulecompiler-result textarea												{ border: 1px solid #CCC; }
+.p-app-modulecompiler-files .files-group.on .controls								{ border-bottom: 1px solid #CCC; }
+
+
+
+.p-app-modulecompiler-files .files-group-nav .index .i.active								{ background-color: #f00; }
+
+
+
+
+/* border radius*/
+.p-app-modulecompiler-collections form												{ border-radius: 10px; }
+
+.p-app-modulecompiler-files .files-group												{ border-radius: 5px; }
+.p-app-modulecompiler-result textarea 												{ border-radius: 5px 0 0 0; }
+
+.p-app-modulecompiler-files .files-group-nav .index .i 									{ border-radius: 100%; }

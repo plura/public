@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ModuleCompiler</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<!-- src/js/ -->
+<script src="src/js/ModuleCompiler.js"></script>
+<script src="src/js/ModuleCompilerFileManager/ModuleCompilerFileManagerGroup.js"></script>
+<script src="src/js/ModuleCompilerFileManager/ModuleCompilerFileManagerGroupNav.js"></script>
+<script src="src/js/ModuleCompilerFileManager/ModuleCompilerFileManagerTree.js"></script>
+<script src="src/js/ModuleCompilerFileManager.js"></script>
+<script src="src/js/ModuleCompilerFilterCollection.js"></script>
+<script src="src/js/ModuleCompilerForm.js"></script>
+<script src="src/js/ModuleCompilerPreferences.js"></script>
+<script src="src/js/ModuleCompilerResultManager.js"></script>
+<script src="src/js/ModuleCompilerSystemStatus.js"></script>
+<script src="src/js/ModuleDataManager.js"></script>
+
+<!-- src/css/ -->
+<link rel="stylesheet" type="text/css" href="src/css/styles.css" />
+<link rel="stylesheet" type="text/css" href="src/css/collections.css" />
+<link rel="stylesheet" type="text/css" href="src/css/files.css" />
+<link rel="stylesheet" type="text/css" href="src/css/form.css" />
+<link rel="stylesheet" type="text/css" href="src/css/preferences.css" />
+<link rel="stylesheet" type="text/css" href="src/css/result.css" />
+<link rel="stylesheet" type="text/css" href="src/css/status.css" />
+
+
+<script src="collections.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+
+	new ModuleCompiler({
+		data:		TEST,
+		process:	'ModuleCompiler.php'/*,
+		prefix:		'../../'*/
+	}); 
+
+});
+
+</script>
+
+</head>
+<body>
+</body>
+</html>

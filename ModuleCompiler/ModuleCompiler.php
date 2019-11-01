@@ -16,14 +16,18 @@ $result		= array();
 $tree		= array();
 
 
-//creates a directory like array structure for files
-function get_tree_structure ( $source ) {
+/**
+ * creates a directory like array structure for files
+ * @param  string|array $source 		source
+ * @return array         				directory like array
+ */
+function get_tree_structure ( $source ): array {
 
 	$tree	= array();
 
 	$flat	= array();
 
-	$paths	= is_string( $source ) ? array($source) : $source;
+	$paths	= is_string( $source ) ? array( $source ) : $source;
 
 	foreach ($paths as $value) {
 
@@ -85,7 +89,7 @@ function get_tree_structure ( $source ) {
  * @param  [string|array] $source 		a string or an array of strings
  * @return [string]         			[description]
  */		
-function regexp_alternation ( $source ) {
+function regexp_alternation ( $source ): string {
 
 	$a = array();
 		
@@ -113,7 +117,7 @@ function regexp_alternation ( $source ) {
  * @param string from	 	from target file or dir
  * @return string			relative path between two file or directory paths
  */
-function pathTo($to, $from) {
+function pathTo(string $to, string $from): string {
 
 	$crumbs		= array();
 
@@ -161,7 +165,7 @@ function pathTo($to, $from) {
  * @param string content	target css file content
  * @return string
  */
-function pathTo_css_update( $to, $from, $content ) {
+function pathTo_css_update( string $to, string $from, string $content ): string {
 
 	if (!file_exists( $from )) {
 
@@ -189,11 +193,26 @@ function pathTo_css_update( $to, $from, $content ) {
 
 
 
-
 //INIT DATA PARSING
 
+//ATTN: ['data'] is not being recognized as string anymore but as an array!?
+if( is_array( $_REQUEST['data'] ) ) {
+
+	$DATA = $_REQUEST['data'];
+
+//else decode json string
+} else {
+
+	$DATA = json_decode( $_REQUEST['data'], true );
+
+}
+
+
+
+
+
 //iterate each group
-foreach($_GET['data'] as $n => $data) {
+foreach( $DATA as $n => $data) {
 
 	//store files path for tree structure parsing
 	$group_files		= array();
@@ -225,7 +244,7 @@ foreach($_GET['data'] as $n => $data) {
 
 
 	//exclude files
-	if (!empty($data['exclude'])) {
+	if ( !empty( $data['exclude'] ) ) {
 
 		$exclude_regexp = regexp_alternation( $data['exclude'] );
 
@@ -233,7 +252,7 @@ foreach($_GET['data'] as $n => $data) {
 	
 
 	//top (first) files
-	if (!empty($data['top'])) {
+	if ( !empty( $data['top'] ) ) {
 
 		$top_regexp = regexp_alternation( $data['top'] );
 
@@ -241,7 +260,7 @@ foreach($_GET['data'] as $n => $data) {
 
 
 	//files filter
-	if (!empty($data['filter'])) {
+	if ( !empty( $data['filter'] ) ) {
 
 		$filter_regexp = regexp_alternation( $data['filter'] );
 
@@ -253,7 +272,7 @@ foreach($_GET['data'] as $n => $data) {
 	foreach($objects as $name => $object){
 
 
-		if (pathinfo($name, PATHINFO_EXTENSION) === $_GET['type']) {
+		if (pathinfo($name, PATHINFO_EXTENSION) === $_REQUEST['type']) {
 
 
 			$file_path = preg_replace("/\\\/", '/', $name);
@@ -277,7 +296,7 @@ foreach($_GET['data'] as $n => $data) {
 
 
 
-			switch ($_GET['returnType']) {
+			switch ($_REQUEST['returnType']) {
 
 					
 			case 'closure':
@@ -292,7 +311,7 @@ foreach($_GET['data'] as $n => $data) {
 			case 'link':
 
 
-				switch ($_GET['type']) {
+				switch ($_REQUEST['type']) {
 
 				case 'css':
 
@@ -311,7 +330,7 @@ foreach($_GET['data'] as $n => $data) {
 				break;
 
 
-			//join CSS or JavaScript files into a single plain text output
+			//join JavaScript or CSS files into a single plain text output
 			case 'join':
 
 					
@@ -325,7 +344,7 @@ foreach($_GET['data'] as $n => $data) {
 
 				
 				//update file paths
-				if ($_GET['type'] === 'css' && !empty($data['join'])) {
+				if ($_REQUEST['type'] === 'css' && !empty( $data['join'] ) ) {
 
 					$item = pathTo_css_update($filename, $data['join'],  $item);
 
@@ -366,7 +385,7 @@ foreach($_GET['data'] as $n => $data) {
 				$group_result[]	= $item;
 
 				$group_files[]	= $file_path;
-				
+			
 			
 			}
 
@@ -396,7 +415,7 @@ foreach($_GET['data'] as $n => $data) {
 
 
 
-	switch ($_GET['returnType']) {
+	switch ($_REQUEST['returnType']) {
 
 	case 'join':
 
@@ -414,6 +433,7 @@ foreach($_GET['data'] as $n => $data) {
 			
 				"// ==ClosureCompiler==",
 				"// @output_file_name default.js",
+				"// @language_out ECMASCRIPT_2015",
 				"// ==/ClosureCompiler=="
 			
 			);
@@ -452,13 +472,13 @@ foreach($_GET['data'] as $n => $data) {
  * if minify option is set, use Google's Closure RESTful or CSSMinifier APIs
  * to generate a minified version of the joined result
  */
-if ($_GET['returnType'] === 'join' && $_GET['minify']) {
+if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify']) {
 
 
 	$src = implode('', $result);
 
 	//CSSMinifier API params for css filetypes
-	if ( $_GET['type'] === 'css' ) {
+	if ( $_REQUEST['type'] === 'css' ) {
 
 
 		$ch_url	= 'https://cssminifier.com/raw';
@@ -476,10 +496,18 @@ if ($_GET['returnType'] === 'join' && $_GET['minify']) {
 		$ch_crt	= '-appspotcom.crt';	
 
 		$params = array( 
-			'compilation_level'	=> 'SIMPLE_OPTIMIZATIONS',
-			'output_format'		=> 'text',
-			'output_info'		=> 'compiled_code',
-			'js_code'			=> urlencode( $src )
+			'compilation_level'		=> 'SIMPLE_OPTIMIZATIONS',
+			'output_format'			=> 'text',
+			'output_info'			=> 'compiled_code',
+			'language_out'			=> 'ECMASCRIPT_2015',
+			'js_code'				=> urlencode( $src ),
+			
+			/*'language'			=> 'ECMASCRIPT6_STRICT',
+			'rewrite_polyfills'		=> false,
+			'inject_libraries'		=> false
+			'rewrite_polyfills' 	=> 'false',
+			'--inject_libraries'	=> 'false'*/
+
 		);
 
 

@@ -6,22 +6,19 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="ModuleCompiler.js"></script>
-
-<script src="collections.js"></script>
 <link rel="stylesheet" type="text/css" href="ModuleCompiler.css" />
-<script>//$(function () { new ModuleCompiler({data: TEST}); });</script>
-
+<script src="collections.js"></script>
 <script>
 
-	$(function () { 
+document.addEventListener('DOMContentLoaded', () => {
 	
-		new ModuleCompiler({
-			data:		TEST,
-			process:	'ModuleCompiler.php'/*,
-			prefix:		'../../'*/
-		}); 
+	new ModuleCompiler({
+		data:		TEST,
+		process:	'ModuleCompiler.php'/*,
+		prefix:		'../../'*/
+	}); 
 	
-	});
+});
     
 </script>
 

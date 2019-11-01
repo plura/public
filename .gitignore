@@ -2,6 +2,7 @@
 _notes/
 _old/
 .ignore/
+.jshintrc
 *.ignore.css
 *.ignore.html
 *.ignore.js
