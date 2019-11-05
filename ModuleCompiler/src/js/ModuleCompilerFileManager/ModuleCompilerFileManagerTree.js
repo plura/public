@@ -341,8 +341,7 @@ var ModuleCompilerFileManagerTree = function ({data, target}) {
 
 
 	_this.activate	= activateAll;
-	_this.active	= () => get_active();
-	_this.inactive	= () => get_active( false );
+	_this.active	= get_active;
 
 	init();
 

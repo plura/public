@@ -22,5 +22,4 @@ var ModuleCompilerSystemStatus = function({app, prefix, target}) {
 
 	_this.set = set;
 
-
-}
+};

@@ -11,7 +11,7 @@ var ModuleCompilerFileManagerGroupNav = function({target}) {
 
 		_this = this,
 
-		refresh = function ( groups ) {
+		refresh = groups => {
 
 			//empty
 			while (core.firstChild) {

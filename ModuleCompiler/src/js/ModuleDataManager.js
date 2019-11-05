@@ -1,7 +1,7 @@
 /**
  *	. ModuleCompiler
  */
-var ModuleDataManager = function ({data, prefix, process}) {
+var ModuleDataManager = function ({data, handler, prefix, process}) {
 
 	
 	let collections, collectionsGroups, filter;
@@ -10,6 +10,117 @@ var ModuleDataManager = function ({data, prefix, process}) {
 	const
 
 		_this = this,
+
+
+		/**
+		 * Create request object to retrieve data
+		 * @param  {string}    path   	process path url
+		 * @param  {...[type]} params 	[description]
+		 * @return {Object}           	Request object
+		 */
+		getRequest = function( path, ...params ) {
+
+			let data = new FormData();
+
+			params.forEach( paramsGroup => {
+
+				for( let key in paramsGroup ) {
+
+					if( paramsGroup.hasOwnProperty(key) ) {
+
+						let value = paramsGroup[key];
+
+						if( typeof value === 'object' ) {
+
+							value = JSON.stringify( value );
+
+						}
+
+						data.append( key, value );
+
+					}
+
+				}
+
+			});
+
+			return new Request(path, {body: data, method: 'POST'});
+
+		},
+
+
+
+		init = async function(data) {
+
+
+			if( typeof data === 'object' ) {
+
+				filter = parse( data );
+
+			} else if( typeof data === 'string' ) {
+
+				filter = await fetch( data )
+
+							.then( response => response.json() )
+
+							.then( response => parse(response) );
+
+			}
+
+			if( handler ) {
+
+				handler();
+
+			}
+
+		},
+
+
+
+		/**
+		 * loads/inits file gathering process.
+		 * @param  {Object} groupID     		the groupID
+		 * @param  {Function} handler     		the callback function
+		 * @param  {Object} preferences 		return preferences ('join', 'script' or 'closure') and minification
+		 * @param  {Object|boolean} exclude     object containing excluded files
+		 * @return {undefined}             	
+		 */
+		load = function (groupID, handler, preferences, groupItemsData) {
+
+			let data = [], group = collectionsGroups.get( groupID ), request;
+
+
+			group.items.forEach( (item, index) => {
+
+				//if groupitemsData is definem, exclude any group item without data (active files)
+				if( !groupItemsData || groupItemsData[ index ] ) {
+	
+					data.push({
+						exclude:	groupItemsData && groupItemsData[ index ].exclude,
+						filter:		item.filter,
+						join: 		item.join,
+						name:		item.name,
+						path:		(prefix || '') + item.path,
+						prefix: 	preferences.returnType.match(/link/) && item[ preferences.returnType ] || '',
+						top:		item.top
+					});
+
+				}
+
+			});
+
+
+			request = getRequest( process, preferences, {data: data, type: group.type} );
+
+
+			fetch( request )
+
+			.then( response => response.json() )
+
+			.then( data => handler( data ) );
+
+		},
+
 
 
 		parse = (collectionsData, collectionGroupID) => {
@@ -107,99 +218,25 @@ var ModuleDataManager = function ({data, prefix, process}) {
 
 			return filter_items;
 
-		},
-
-
-
-
-		/**
-		 * Create request object to retrieve data
-		 * @param  {string}    path   	process path url
-		 * @param  {...[type]} params 	[description]
-		 * @return {Object}           	Request object
-		 */
-		getRequest = function( path, ...params ) {
-
-			let data = new FormData();
-
-			params.forEach( paramsGroup => {
-
-				for( let key in paramsGroup ) {
-
-					if( paramsGroup.hasOwnProperty(key) ) {
-
-						let value = paramsGroup[key];
-
-						if( typeof value === 'object' ) {
-
-							value = JSON.stringify( value );
-
-						}
-
-						data.append( key, value );
-
-					}
-
-				}
-
-			});
-
-			return new Request(path, {body: data, method: 'POST'});
-
-		},
-
-
-		/**
-		 * loads/inits file gathering process.
-		 * @param  {Object} groupID     		the groupID
-		 * @param  {Function} handler     		the callback function
-		 * @param  {Object} preferences 		return preferences ('join', 'script' or 'closure') and minification
-		 * @param  {Object|boolean} exclude     object containing excluded files
-		 * @return {undefined}             	
-		 */
-		load = function (groupID, handler, preferences, exclude) {
-
-			let data = [], group = collectionsGroups.get( groupID ), request;
-
-
-			group.items.forEach( (item, index) => {
-
-				data.push({
-					exclude:	exclude && exclude[ index ],
-					filter:		item.filter,
-					join: 		item.join,
-					name:		item.name,
-					path:		(prefix || '') + item.path,
-					prefix: 	preferences.returnType.match(/link/) && item[ preferences.returnType ] || '',
-					top:		item.top
-				});
-
-			});
-
-
-			request = getRequest( process, preferences, {data: data, type: group.type} );
-
-
-			fetch( request )
-
-			.then( response => response.json() )
-
-			.then( data => handler( data ) );
-
 		};
+
 
 
 	collections			= new Map();
 
 	collectionsGroups	= new Map();
 
-	filter				= parse( data );
+
+	if( data ) {
+
+		init( data );
+
+	}	
 
 
 	_this.load			= load;
 	_this.filter		= () => filter;
 	_this.collection	= id => collections.get( id );
-	_this.group			= id => collectionsGroups.get( id );
 	_this.returnTypes	= id => collectionsGroups.get( id ).returnTypes;
 	_this.type			= id => collectionsGroups.get( id ).type;
 

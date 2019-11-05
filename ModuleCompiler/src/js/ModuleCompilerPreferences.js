@@ -17,7 +17,7 @@ var ModuleCompilerPreferences = function ({prefix, target}) {
 
 				params = { ...params,
 					'minify': el('[name=minify]').checked ? 1 : 0
-				}
+				};
 
 			}
 	

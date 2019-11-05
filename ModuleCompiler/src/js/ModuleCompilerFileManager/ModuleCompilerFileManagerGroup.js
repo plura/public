@@ -2,7 +2,9 @@
 var ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 
-	var core, ui_ctrls, ui_ctrls_check, ui_ctrls_visibility, ui_tree;
+	var core, status, status_visibility,
+
+		ui_ctrls, ui_ctrls_check, ui_ctrls_visibility, ui_tree;
 
 
 	const 
@@ -10,21 +12,26 @@ var ModuleCompilerFileManagerGroup = function ({data, target}) {
 		_this = this,
 
 
-		render_controls = function () {
+		render_controls = () => {
 
 
 			( ui_ctrls = core.appendChild( document.createElement('div') ) ).classList.add('controls');
 
-			( ui_ctrls_check = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['controls-check', 'on'] );
+			( ui_ctrls_check = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['controls-check'] );
 
 			ui_ctrls_check.addEventListener('click', eventControlsCheckHandler);
 
 			ui_ctrls_check.textContent = data.name || data.path;
 
+			check( true, false );
 
-			( ui_ctrls_visibility = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['controls-visibility', 'on'] );
+
+			( ui_ctrls_visibility = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['controls-visibility'] );
 
 			ui_ctrls_visibility.addEventListener('click', eventControlsVisibilityHandler);
+
+
+			visible( true );
 
 		},
 
@@ -36,7 +43,7 @@ var ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 * @param  {Boolean}  on       	indicates toggle status
 		 * @param  {Boolean} traverse 	if true, activates-dectivates tree
 		 */
-		check = function ( on, traverse = true ) {
+		check = (on, traverse = true ) => {
 
 			if (on) {
 
@@ -54,6 +61,8 @@ var ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 			}
 
+			status = on;
+
 		},
 
 
@@ -61,7 +70,7 @@ var ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 * Visibility trigger click event
 		 * @param  {Boolean} on  	visibility status
 		 */
-		visible = function ( on ) {
+		visible = on => {
 
 			if (on) {
 
@@ -73,6 +82,8 @@ var ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 			}
 
+			status_visibility = on;
+
 		},
 
 
@@ -82,7 +93,7 @@ var ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 */
 		eventControlsCheckHandler = function( event ) {
 
-			check( !ui_ctrls_check.classList.contains('on') );
+			check( !status );
 
 		},
 
@@ -93,7 +104,7 @@ var ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 */
 		eventControlsVisibilityHandler = function( event ) {
 
-			visible( !ui_ctrls_visibility.classList.contains('on') );
+			visible( !status_visibility );
 
 		},
 
@@ -125,6 +136,6 @@ var ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 	
 	_this.core		= core;
-	_this.inactive	= () => ui_tree.inactive();
+	_this.active	= ui_tree.active;
 
 };

@@ -1,0 +1,198 @@
+[
+		
+	
+	{
+
+		"_comment": "package w/ single group",
+
+		"value":	"src/js/",
+		"label":	"Module Compiler",
+		"data":	[
+
+			[
+
+				{
+					"path":		"src/js/",
+					"link":		"src/js/",
+					"top":		["data.js"]				
+				}
+
+			],
+
+							
+			{
+				"_comment": "css package",
+
+				"group": 	"CSS package",
+				"type": 	"css",					
+				"items":	{			
+					"top":	["styles.css"],
+					"join": 	"src/css/",
+					"path":	"src/css/",				
+					"link":	"src/css/"		
+				}
+				
+			}
+
+		]
+
+	},
+
+
+	
+	{
+		"_comment": "package w/ single group",
+
+		"value":	"test/assets/js/framework1/package1/",
+		"label":	"single group package",
+		"data":	{
+			"path":		"test/assets/js/framework1/package1/",
+			"link":		"test/assets/js/framework1/package1/"
+		}
+
+	},
+	
+
+	{
+
+		"_comment": "package w/ multiple groups: framework2 [package1 + package2]",
+
+		"value": "test/assets/js/framework2/",
+		"label": "multiple groups package",
+		"data":	[
+			
+			{
+				"path":		"test/assets/js/framework2/package1/",
+				"closure":	"http://my-domain.com/closure/js/",
+				"link":		"test/assets/js/framework2/package1/"
+			},
+			
+			{
+				"path":		"test/assets/js/framework2/package2/",
+				"closure":	"http://other-domain.com/closure/js/",
+				"link":		"test/assets/js/framework2/package2/"
+			}
+		
+		]
+
+	},
+				
+
+	{
+
+		"_comment": "package w/ single group including precedence: framework1 + first",
+
+		"value": "package1 + first",
+		"label": "single group package with precedence [\"first\"]",
+		"data":	{			
+			"path":		"test/assets/js/framework1/package1/",				
+			"closure":	"http://my-domain.com/closure/js/",
+			"link":		"test/assets/js/framework1/package1/",
+			"top":		["Package1Class3.js"]				
+		}
+		
+	},
+
+
+	{
+
+		"_comment": "single group package with file filtering",
+
+		"value":	"test/assets/js/framework1/package1/",
+		"label":	"single group package with file filtering",
+		"data":	{
+			"path":		"test/assets/js/framework1/package1/",
+			"link":		"test/assets/js/framework1/package1/",
+			"filter":		["Package1Class2SubClass2.js"]
+		}
+
+	},
+
+
+
+	{
+
+		"_comment": "collection groups",
+
+		"label": "Collection Group", "values": [
+
+
+		{
+
+			"_comment": "single group package with file filtering",
+
+			"value":	"test/assets/js/es6/",
+			"label":	"es6 test",
+			"data":	{
+				"path":		"test/assets/js/es6/",
+				"link":		"test/assets/js/es6/"
+			}
+
+		}
+
+
+	]},
+
+
+
+
+	{
+
+		"_comment": "css package",
+
+		"label": 	"CSS package",
+		"type": 	"css",			
+		"data":	{			
+			"top":	["images.css"],
+			"join": 	"test/compiled/",
+			"path":	"test/assets/css/",				
+			"link":	"test/assets/css/"		
+		}
+		
+	},
+
+
+	{
+		"_comment": "package w/ multiple filtered groups",
+
+		"value": "test/assets/js/framework2/",
+		"label": "package w/ multiple filtered groups",
+		"data":	[
+
+			[
+	
+				{
+					"path":		"test/assets/js/framework2/package1/",
+					"closure":	"http://my-domain.com/closure/js/",
+					"link":		"test/assets/js/framework2/package1/"
+				},
+				
+				{
+					"path":		"test/assets/js/framework2/package2/",
+					"closure":	"http://other-domain.com/closure/js/",
+					"link":		"test/assets/js/framework2/package2/"
+				}
+
+			],
+
+
+			{
+				"_comment": "css package",
+
+				"group": 	"CSS package",
+				"type": 	"css",					
+				"items":	{			
+					"top":	["images.css"],
+					"join": 	"test/assets/js/framework1/",
+					"path":	"test/assets/css/",				
+					"link":	"test/assets/css/"		
+				}
+				
+			}
+		
+		]
+
+	}
+
+
+]

@@ -2,7 +2,7 @@
  * Filter for collections
  *
  */
-var ModuleCompilerFilterCollection = function ({data, handler, prefix, target}) {
+var ModuleCompilerFilterCollection = function ({data, prefix, target}) {
 
 	let core, form;
 

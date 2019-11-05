@@ -5,7 +5,7 @@
  * @param {Object} options.handler 			[description]
  * @return {undefined}
  */
-var ModuleCompilerFileManager = function ({handler, prefix, target}) {
+var ModuleCompilerFileManager = function ({prefix, target}) {
 
 
 	let core, groups, group_nav, inner;
@@ -22,31 +22,49 @@ var ModuleCompilerFileManager = function ({handler, prefix, target}) {
 		 */
 		get = function () {
 
-			let exclude = [], inactive;
+			let data = [], inactive;
 
 			groups.forEach( (group, index) => {
 
-				inactive = group.inactive();
+				//console.log('active1');
+				if( group.active() ) {
+				//console.log('active2');
 
-				if (inactive) {
+					//console.log(group.active());
+					//console.log('active (false)1');
+					inactive = group.active( false ); //group.inactive();
+					//console.log('active (false)2');
 
-					exclude[ index ] = [];
+					data[index] = {};
 
-					for(const data of inactive.values()) {
+					if (inactive) {
 
-						exclude[ index ].push( data.path || data );
+						data[ index ].exclude = [];
 
-					}
+						//exclude[ index ] = [];
+
+						for(const value of inactive.values()) {
+
+							data[ index ].exclude.push( value.path || value );
+							//exclude[ index ].push( data.path || data );
+
+						}
+
+					} /*else {
+
+						exclude[ index ] = false;
+
+					}*/
 
 				} else {
 
-					exclude[ index ] = false;
+					data[ index ] = false;
 
 				}
 
 			});
 
-			return exclude;
+			return data;//exclude;
 			
 		},
 
@@ -139,7 +157,7 @@ var ModuleCompilerFileManager = function ({handler, prefix, target}) {
 	( core = target.appendChild( document.createElement('div') ) ).classList.add(`${prefix}-files`);
 
 
-	group_nav	= new ModuleCompilerFileManagerGroupNav({handler: handler, target: core});
+	group_nav	= new ModuleCompilerFileManagerGroupNav({target: core});
 
 	
 	group_nav.core.addEventListener('SELECT', eventFileGroupSelectHandler);

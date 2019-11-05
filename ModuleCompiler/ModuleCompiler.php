@@ -286,8 +286,7 @@ foreach( $DATA as $n => $data) {
 				continue;
 
 
-			//if a filter exists , a file thay does not match it is excluded
-
+			//if a filter exists, any file that does not match is excluded
 			} elseif (isset( $filter_regexp ) && !preg_match( $filter_regexp, $file_path )) {
 
 				continue;

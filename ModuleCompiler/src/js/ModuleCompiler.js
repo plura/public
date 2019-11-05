@@ -17,6 +17,42 @@ var ModuleCompiler = function ({data, prefix, process = 'ModuleCompiler.php'}) {
 		PRFX = 'p-app-modulecompiler',
 
 
+		render = () => {
+
+			if(!core) {
+
+				( _this.core = core = document.body.appendChild( document.createElement('div') ) ).classList.add(PRFX);
+
+			}
+
+
+			ui_collections	= new ModuleCompilerFilterCollection({data: datahandler.filter(), prefix: PRFX, target: core});
+
+			ui_collections.core.addEventListener('COLLECTIONS', eventFilterHandler);
+
+
+
+			ui_preferences	= new ModuleCompilerPreferences({target: core, prefix: PRFX});
+
+			ui_preferences.core.addEventListener('PREFERENCES', eventFilterHandler);
+
+
+			ui_files		= new ModuleCompilerFileManager({prefix: PRFX, target: core});
+
+			['FILES', 'GROUPS'].forEach( eventType => ui_files.core.addEventListener(eventType, eventFilterHandler) );
+
+
+
+			ui_result		= new ModuleCompilerResultManager({prefix: PRFX, target: core});
+
+
+			ui_systemstatus	= new ModuleCompilerSystemStatus({app: _this, prefix: PRFX, target: core});			
+
+		},
+
+
+
+
 		eventDataCollectionsHandler = data => {
 
 			ui_files.refresh( data.tree );
@@ -72,33 +108,7 @@ var ModuleCompiler = function ({data, prefix, process = 'ModuleCompiler.php'}) {
 
 
 
-	datahandler	= new ModuleDataManager({data: data, prefix: prefix, process: process});
-
-
-	( _this.core = core = document.body.appendChild( document.createElement('div') ) ).classList.add(PRFX);
-	
-
-	ui_collections	= new ModuleCompilerFilterCollection({data: datahandler.filter(), handler: datahandler, prefix: PRFX, target: core});
-
-	ui_collections.core.addEventListener('COLLECTIONS', eventFilterHandler);
-
-
-
-	ui_preferences	= new ModuleCompilerPreferences({target: core, prefix: PRFX});
-
-	ui_preferences.core.addEventListener('PREFERENCES', eventFilterHandler);
-
-
-	ui_files		= new ModuleCompilerFileManager({handler: datahandler, prefix: PRFX, target: core});
-
-	['FILES', 'GROUPS'].forEach( eventType => ui_files.core.addEventListener(eventType, eventFilterHandler) );
-
-
-
-	ui_result		= new ModuleCompilerResultManager({prefix: PRFX, target: core});
-
-
-	ui_systemstatus	= new ModuleCompilerSystemStatus({app: _this, prefix: PRFX, target: core});
+	datahandler	= new ModuleDataManager({data: data, handler: render, prefix: prefix, process: process});
 
 	
 };
