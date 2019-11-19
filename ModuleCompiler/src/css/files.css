@@ -2,12 +2,14 @@
 .p-app-modulecompiler-files .files-group-nav												{ text-align: center;}
 .p-app-modulecompiler-files .files-group-nav .index .i										{ display: inline-block;}
 .p-app-modulecompiler-files .files-group-nav .index .i:not(.active)						{ cursor: pointer; }
-.p-app-modulecompiler-files .files-group-nav .index 										{ font-size: 0; } /* removes strange children inline-block margin */
+.p-app-modulecompiler-files .files-group-nav .index { 
+
+} 
 
 
 .p-app-modulecompiler-files .files-group-nav form {
 	display: inline-block;
-	margin-bottom: 15px;
+	/*margin-bottom: 15px;*/
 	position: relative;
 }
 
@@ -21,7 +23,15 @@
 
 /*dims*/
 .p-app-modulecompiler-files .files-group-nav .index	{
-	padding: 3px 0 7px 0;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	height: calc( var(--groupheaderheight) - 30px );
+
+	/* removes strange children inline-block margin */
+	font-size: 0;
+
+	/*padding: 3px 0 7px 0;*/
 }
 
 .p-app-modulecompiler-files .files-group-nav .index .i {
@@ -36,9 +46,9 @@
 
 
 /* dims */
-.p-app-modulecompiler-files .files-group-nav select {
+/*.p-app-modulecompiler-files .files-group-nav select {
 	padding-right: 20px;
-}
+}*/
 
 /* Files: Group */
 .p-app-modulecompiler-files .inner/*.has-scroll*/									{ overflow-y: auto; }

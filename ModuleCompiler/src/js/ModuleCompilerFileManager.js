@@ -5,7 +5,7 @@
  * @param {Object} options.handler 			[description]
  * @return {undefined}
  */
-var ModuleCompilerFileManager = function ({prefix, target}) {
+const ModuleCompilerFileManager = function ({prefix, target}) {
 
 
 	let core, groups, group_nav, inner;
@@ -26,14 +26,9 @@ var ModuleCompilerFileManager = function ({prefix, target}) {
 
 			groups.forEach( (group, index) => {
 
-				//console.log('active1');
 				if( group.active() ) {
-				//console.log('active2');
-
-					//console.log(group.active());
-					//console.log('active (false)1');
-					inactive = group.active( false ); //group.inactive();
-					//console.log('active (false)2');
+	
+					inactive = group.active( false );
 
 					data[index] = {};
 
@@ -41,20 +36,13 @@ var ModuleCompilerFileManager = function ({prefix, target}) {
 
 						data[ index ].exclude = [];
 
-						//exclude[ index ] = [];
-
 						for(const value of inactive.values()) {
 
 							data[ index ].exclude.push( value.path || value );
-							//exclude[ index ].push( data.path || data );
 
 						}
 
-					} /*else {
-
-						exclude[ index ] = false;
-
-					}*/
+					}
 
 				} else {
 
@@ -64,7 +52,7 @@ var ModuleCompilerFileManager = function ({prefix, target}) {
 
 			});
 
-			return data;//exclude;
+			return data;
 			
 		},
 

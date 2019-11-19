@@ -17,8 +17,10 @@ body {overflow: hidden;}*/
 
 :root {
 	--pad: 30px;
+	--border-radius: 10px;
+	--border-color: #ccc;
 	--headerheight: 80px;
-	--groupheaderheight: 80px;
+	--groupheaderheight: 60px;
 	--font: 'Roboto', sans-serif;
 	--fontsize: .875rem;
 }
@@ -55,7 +57,8 @@ body {
 .p-app-modulecompiler-files,
 .p-app-modulecompiler-result,
 .p-app-modulecompiler-systemstatus {
-	height: calc( 100vh - var(--headerheight) - 3 * var(--pad)  );
+	--files-result-systemstauts-height: calc( 100vh - var(--headerheight) - 3 * var(--pad)  );
+	height: var( --files-result-systemstauts-height );
 }
 
 .p-app-modulecompiler-files .files-group-nav {
@@ -69,6 +72,15 @@ body {
 .p-app-modulecompiler-systemstatus {
 	right: var( --pad );
 	top: calc( var( --headerheight ) + 2 * var( --pad ) );	
+}
+
+
+.p-app-modulecompiler-result-nav {
+	height: var( --groupheaderheight );
+}
+
+.p-app-modulecompiler-result-content {
+	height: calc( var( --files-result-systemstauts-height ) - var( --groupheaderheight ) );
 }
 
 
@@ -123,10 +135,10 @@ body {
 .p-app-modulecompiler-files .files-group-nav form:after									{ color: #666; }
 .p-app-modulecompiler-files .files-group-nav .index .i 									{ background-color: #666; }
 
-.p-app-modulecompiler-collections form,
-.p-app-modulecompiler-files .files-group,
-.p-app-modulecompiler-result textarea												{ border: 1px solid #CCC; }
-.p-app-modulecompiler-files .files-group.on .controls								{ border-bottom: 1px solid #CCC; }
+/*.p-app-modulecompiler-collections form,*/
+.p-app-modulecompiler-files .files-group/*,
+.p-app-modulecompiler-result textarea	*/											{ border: 1px solid var(--border-color); }
+.p-app-modulecompiler-files .files-group.on .controls								{ border-bottom: 1px solid var(--border-color); }
 
 
 

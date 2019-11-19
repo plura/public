@@ -1,4 +1,10 @@
-var ModuleCompilerSystemStatus = function({app, prefix, target}) {
+/**
+ * Indicates loading status
+ * @param {Object} options.app    [description]
+ * @param {string} options.prefix [description]
+ * @param {Object} options.target [description]
+ */
+const ModuleCompilerSystemStatus = function({app, prefix, target}) {
 
 	var core, status;
 

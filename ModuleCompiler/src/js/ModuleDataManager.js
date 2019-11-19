@@ -1,7 +1,7 @@
 /**
  *	. ModuleCompiler
  */
-var ModuleDataManager = function ({data, handler, prefix, process}) {
+const ModuleDataManager = function ({data, handler, prefix, process}) {
 
 	
 	let collections, collectionsGroups, filter;
@@ -69,7 +69,7 @@ var ModuleDataManager = function ({data, handler, prefix, process}) {
 
 			if( handler ) {
 
-				handler();
+				handler( _this );
 
 			}
 
@@ -227,17 +227,18 @@ var ModuleDataManager = function ({data, handler, prefix, process}) {
 	collectionsGroups	= new Map();
 
 
-	if( data ) {
-
-		init( data );
-
-	}	
-
-
 	_this.load			= load;
 	_this.filter		= () => filter;
 	_this.collection	= id => collections.get( id );
 	_this.returnTypes	= id => collectionsGroups.get( id ).returnTypes;
 	_this.type			= id => collectionsGroups.get( id ).type;
+
+
+	if( data ) {
+
+		init( data );
+
+	}
+
 
 };

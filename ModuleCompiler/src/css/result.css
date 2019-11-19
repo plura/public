@@ -1,10 +1,74 @@
 /* Result */
-.p-app-modulecompiler-result {
-	
+.p-app-modulecompiler-result-nav {
+	display: flex;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-left: 0;
+	position: relative;
+	list-style: none;
 }
 
-/*dims*/
-.p-app-modulecompiler-result textarea {
+.p-app-modulecompiler-result-nav-item {
+	border: 1px solid #ccc;
+	border-radius: 5px 5px 0 0;
+	height: 100%;
+	width: calc( 100% / 3 );
+}
+
+
+.p-app-modulecompiler-result-nav-item:only-child::after {
+	content: '';
+	border-bottom: 1px solid var(--border-color);
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: calc( 100% / 3 );
+	width: calc( 100% / 3 * 2 );
+}
+
+
+.p-app-modulecompiler-result-nav-item.active {
+	border-bottom-color: transparent;
+}
+
+.p-app-modulecompiler-result-nav-item a {
+	align-items: center;
+	display: flex;
+	font-size: .9rem;
+	font-weight: 700;
+	height: 100%;
+	justify-content: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	width: 100%;
+}
+
+.p-app-modulecompiler-result-content {
+	border: 1px solid var(--border-color);
+	border-top-color: transparent;
+	position: relative;
+}
+
+.p-app-modulecompiler-result-content-item {
+	opacity: 0;
+	padding: var(--pad) 0 0 var(--pad);
+	position: absolute;
+	top: auto;
+	transition:	visibility 0s linear .4s, opacity .4s linear;	
+	visibility: hidden;
+	z-index: auto;
+}
+
+.p-app-modulecompiler-result-content-item.on {
+	opacity: 1;
+	transition-delay: 0s;	
+	visibility: visible;
+}
+
+
+.p-app-modulecompiler-result-content-item,
+.p-app-modulecompiler-result-content-item textarea {
+	border: none;
 	height: 100%;
 	width: 100%;
 }

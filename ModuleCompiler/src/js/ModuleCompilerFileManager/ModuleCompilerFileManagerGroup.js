@@ -1,5 +1,4 @@
-
-var ModuleCompilerFileManagerGroup = function ({data, target}) {
+const ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 
 	var core, status, status_visibility,

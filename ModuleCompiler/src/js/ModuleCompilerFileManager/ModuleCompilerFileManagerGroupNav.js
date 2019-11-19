@@ -1,7 +1,7 @@
 /**
  * Filter for file groups
  */
-var ModuleCompilerFileManagerGroupNav = function({target}) {
+const ModuleCompilerFileManagerGroupNav = function({target}) {
 
 
 	let active, core, data, map, nav_index, nav_select;

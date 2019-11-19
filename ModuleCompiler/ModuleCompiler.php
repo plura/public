@@ -193,6 +193,47 @@ function pathTo_css_update( string $to, string $from, string $content ): string 
 
 
 
+
+function curl_return($params, $url, $certificate) {
+
+	$ch_data = array();
+
+	foreach( $params as $key => $value ) {
+
+		$ch_data[] = $key . "=" . $value;
+
+	}	
+
+    // init the request, set some info, send it and finally close it
+    $ch = curl_init( $url );
+
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, implode('&', $ch_data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/x-www-form-urlencoded'));    
+
+    //The usage of https requires a 'trusted' CA certificate - saved as 'certificate with chain (PEM). For more
+    //info check this link: http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/
+	//You can also not-so-safe 'workaround' [via https://stackoverflow.com/a/4372730].
+	//In that case, comment the following 3 lines of code and uncomment this one below.
+	//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);	
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+	curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/certificates/" . $certificate);    
+
+    $result = curl_exec($ch);
+
+    curl_close($ch);
+
+    return $result;
+
+}
+
+
+
+
+
+
 //INIT DATA PARSING
 
 //ATTN: ['data'] is not being recognized as string anymore but as an array!?
@@ -471,7 +512,7 @@ foreach( $DATA as $n => $data) {
  * if minify option is set, use Google's Closure RESTful or CSSMinifier APIs
  * to generate a minified version of the joined result
  */
-if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify']) {
+if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify'] ) {
 
 
 	$src = implode('', $result);
@@ -487,6 +528,10 @@ if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify']) {
 	    	'input' => urlencode( $src )
 	    );
 
+
+	    $result = curl_return($params, $ch_url, $ch_crt);
+
+
 	//Google Closure API params for js filetypes
 	} else {
 
@@ -494,25 +539,54 @@ if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify']) {
 		$ch_url	= 'https://closure-compiler.appspot.com/compile';
 		$ch_crt	= '-appspotcom.crt';	
 
+		/* NOTE SOME LANGUAGES WILL REQUIRE ECMASCRIPT_2018 (await/sync) */
 		$params = array( 
 			'compilation_level'		=> 'SIMPLE_OPTIMIZATIONS',
 			'output_format'			=> 'text',
-			'output_info'			=> 'compiled_code',
-			'language_out'			=> 'ECMASCRIPT_2015',
+			'language'				=> $_REQUEST['language'],
+			'language_out'			=> $_REQUEST['language_out'],
 			'js_code'				=> urlencode( $src ),
-			
-			/*'language'			=> 'ECMASCRIPT6_STRICT',
-			'rewrite_polyfills'		=> false,
-			'inject_libraries'		=> false
-			'rewrite_polyfills' 	=> 'false',
-			'--inject_libraries'	=> 'false'*/
-
 		);
 
 
+		$output_types	= ['errors', 'compiled_code', 'warnings', 'statistics'];
+
+		$results		= [];
+
+		foreach ($output_types as $type) {
+
+			$p = array_merge( $params, array('output_info' => $type) );
+
+			$result = curl_return($p, $ch_url, $ch_crt);
+
+			if( !empty( $result ) ) {
+
+				$results[ $type ] = $result;
+
+				if( $type === 'errors' ) {
+
+					break;
+
+				}
+
+			}
+
+		}
+
+
+		$result = $results;
+		//$result = curl_return($params, $ch_url, $ch_crt);
+
 	}
 
-	$ch_data = array();
+
+
+
+
+	//['errors', 'warnings', 'compiled_code', 'statistics']
+
+
+	/*$ch_data = array();
 
 	foreach( $params as $key => $value ) {
 
@@ -540,7 +614,7 @@ if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify']) {
 
     $result = curl_exec($ch);
 
-    curl_close($ch);
+    curl_close($ch);*/
 
 } else {
 

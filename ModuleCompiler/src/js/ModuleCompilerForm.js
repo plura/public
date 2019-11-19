@@ -1,18 +1,10 @@
-function ModuleCompilerForm({data, target}) {
+const ModuleCompilerForm = function({data, target}) {
 
 
 	let form, map;
 
 
-	const
-
-		ALIGN_LEFT 			= 'left',
-
-		ALIGN_LEFT_WRAP 	= 'left_wrap',
-
-		ALIGN_RIGHT 		= 'right',
-
-		ALIGN_RIGHT_WRAP 	= 'right_wrap',
+	const 
 
 		_this = this,
 
@@ -46,6 +38,8 @@ function ModuleCompilerForm({data, target}) {
 						element = document.createElement('input');
 
 					}
+
+					element.classList.add('p-modulecompiler-form-element');
 
 				}
 
@@ -105,7 +99,7 @@ function ModuleCompilerForm({data, target}) {
 				
 				} else {
 
-					el_name	= val( [data.label, data.name, data.value] );
+					el_name	= val( [data.label, data.name, data.value, data] );
 
 					( el = element.appendChild( document.createElement('option') ) ).value = val( [ data.value, el_name ] );
 
@@ -117,9 +111,6 @@ function ModuleCompilerForm({data, target}) {
 
 			} );
 
-
-
-
 			return element;
 
 		},
@@ -127,7 +118,7 @@ function ModuleCompilerForm({data, target}) {
 
 
 
-		renderLabel = (label, field, labelAlign = ALIGN_LEFT) => {
+		renderLabel = (label, field, labelAlign = ModuleCompilerFormLabelAlign.LEFT) => {
 
 			let align = label.align || labelAlign,
 
@@ -143,31 +134,33 @@ function ModuleCompilerForm({data, target}) {
 
 			switch (align) {
 
-			case ALIGN_LEFT:
+			case ModuleCompilerFormLabelAlign.LEFT:
 
 				field.parentNode.insertBefore(obj, field);
 
 				break;
 
-			case ALIGN_LEFT_WRAP:
+			case ModuleCompilerFormLabelAlign.LEFT_WRAP:
 
 				( field.parentNode.appendChild( obj ) ).appendChild( field );
 
 				break;        		
 
-			case ALIGN_RIGHT:
+			case ModuleCompilerFormLabelAlign.RIGHT:
 
 				field.parentNode.insertBefore(obj, field.nextSibling);
 
 				break;
 
-			case ALIGN_RIGHT_WRAP:
+			case ModuleCompilerFormLabelAlign.RIGHT_WRAP:
 		        
 		         ( field.parentNode.appendChild( obj ) ).prepend( field );
 
 				break;
 
 			}
+
+			obj.classList.add(`align-${align}`);
 
 			return obj;
 
@@ -263,4 +256,4 @@ function ModuleCompilerForm({data, target}) {
 	}
 
 
-}
+};

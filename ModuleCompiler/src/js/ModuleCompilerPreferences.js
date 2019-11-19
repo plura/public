@@ -1,7 +1,7 @@
 /**
  * Filter for output type - script, join or closure compiler *
  */
-var ModuleCompilerPreferences = function ({prefix, target}) {
+const ModuleCompilerPreferences = function ({prefix, target}) {
 
 	let core, form;
 
@@ -9,14 +9,20 @@ var ModuleCompilerPreferences = function ({prefix, target}) {
 
 		_this = this,
 	
+
+		LANGUAGE = ['ECMASCRIPT_2019', 'ECMASCRIPT_2018', 'ECMASCRIPT_2017', 'ECMASCRIPT_2016', 'ECMASCRIPT6', 'ECMASCRIPT5'],
+
+
 		get = () => {
 
 			let params = {'returnType': val('[name=returnType]:checked') };
 
-			if( params.returnType.match(/join/) ) {
+			if( params.returnType.match(/join/) && el('[name=minify]').checked ) {
 
 				params = { ...params,
-					'minify': el('[name=minify]').checked ? 1 : 0
+					'minify': 		1,
+					'language': 	val('[name=language]'),
+					'language_out':	val('[name=language_out]')
 				};
 
 			}
@@ -62,7 +68,22 @@ var ModuleCompilerPreferences = function ({prefix, target}) {
 
 
 			//JS type: es6 disabled if minify is unchecked
-			el('[name="join"] [name=es6]').disabled = !el('[name="join"] [name=minify]').checked;
+			['language', 'language_out'].forEach( name => {
+
+				let e = el(`[name="join"] [name=${name}]`);
+
+				e.disabled = !el('[name="join"] [name=minify]').checked;
+
+				//de-activate fields that do not belong to certain types (ie. CSS)
+				if( type ) {
+
+					e.classList[ type.match(/js/) ? 'remove' : 'add' ]('off');
+
+				}
+
+			});
+
+			/*el('[name="join"] [name=es6]').disabled = !el('[name="join"] [name=minify]').checked;
 
 
 			//de-activate fields that do not belong to certain types (ie. CSS)
@@ -70,7 +91,7 @@ var ModuleCompilerPreferences = function ({prefix, target}) {
 
 				el('[name="join"] [name=es6]').classList[ type.match(/js/) ? 'remove' : 'add' ]('off');
 				
-			}
+			}*/
 
 
 
@@ -132,8 +153,9 @@ var ModuleCompilerPreferences = function ({prefix, target}) {
 			},
 			{
 				type: 'set', name: 'join', tag: 'div', fields: [
-					{name: 'minify', type: 'checkbox', label: {name: 'Minify', align: 'right'}, change: eventChangeHandler},
-					{name: 'es6', type: 'checkbox', label: {name: 'ES6', align: 'right'}, checked: true, change: eventChangeHandler}
+					{name: 'minify', type: 'checkbox', label: {name: 'Minify', align: ModuleCompilerFormLabelAlign.RIGHT_WRAP}, change: eventChangeHandler},
+					{name: 'language', type: 'select', values: LANGUAGE, blank: false, label: {name: 'Language', align: ModuleCompilerFormLabelAlign.LEFT_WRAP}, change: eventChangeHandler},
+					{name: 'language_out', type: 'select', values: LANGUAGE, blank: false, label: {name: 'Language Out', align: ModuleCompilerFormLabelAlign.LEFT_WRAP}, change: eventChangeHandler}
 				]
 			}
 

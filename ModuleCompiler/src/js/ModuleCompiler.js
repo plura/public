@@ -4,7 +4,7 @@
  * @param {[type]} options.prefix  [description]
  * @param {String} options.process [description]
  */
-var ModuleCompiler = function ({data, prefix, process = 'ModuleCompiler.php'}) {
+const ModuleCompiler = function ({data, prefix, process = 'ModuleCompiler.php'}) {
 		
 	
 	let core, datahandler, id, ui_collections, ui_files, ui_preferences, ui_result, ui_systemstatus;
@@ -17,14 +17,19 @@ var ModuleCompiler = function ({data, prefix, process = 'ModuleCompiler.php'}) {
 		PRFX = 'p-app-modulecompiler',
 
 
-		render = () => {
+		/**
+		 * The ModuleDataManager binds itself to the handler function. This is necessary when data is an object,
+		 * and the handler is immediatelly called before the class is stored as 'datahandler' in ModuleCompiler. without this parameter
+		 * When data is served as string path, the error does not occur because the process occurs is asynchronous
+		 * @param  {Object} datahandler 	ModuleDataManager
+		 */
+		render = datahandler => {
 
 			if(!core) {
 
 				( _this.core = core = document.body.appendChild( document.createElement('div') ) ).classList.add(PRFX);
 
 			}
-
 
 			ui_collections	= new ModuleCompilerFilterCollection({data: datahandler.filter(), prefix: PRFX, target: core});
 
@@ -42,8 +47,9 @@ var ModuleCompiler = function ({data, prefix, process = 'ModuleCompiler.php'}) {
 			['FILES', 'GROUPS'].forEach( eventType => ui_files.core.addEventListener(eventType, eventFilterHandler) );
 
 
-
+			
 			ui_result		= new ModuleCompilerResultManager({prefix: PRFX, target: core});
+			
 
 
 			ui_systemstatus	= new ModuleCompilerSystemStatus({app: _this, prefix: PRFX, target: core});			

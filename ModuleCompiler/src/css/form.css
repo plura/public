@@ -1,5 +1,6 @@
 .p-app-modulecompiler form {
 	--formpadding: 10px;
+	--formbordercolor: #ccc;
 	--inputheight: 30px;
 }
 
@@ -8,7 +9,9 @@
 .p-app-modulecompiler form select		{ 
 	-webkit-appearance: none;
 	appearance: none;
-	border: none;
+	padding: 0 var(--inputheight) 0 calc( var(--inputheight) / 4 );
+	border: 1px solid var(--formbordercolor);
+	border-radius: var(--border-radius);
 }
 
 
@@ -25,6 +28,16 @@
 }
 
 
+.p-app-modulecompiler form label[align-type=right],
+.p-app-modulecompiler form label.align-left-wrap .p-modulecompiler-form-element {
+	margin-left: var(--formpadding);
+}
+
+.p-app-modulecompiler form label.align-right-wrap .p-modulecompiler-form-element {
+	margin-right: var(--formpadding);
+}
+
+
 .p-app-modulecompiler form select {
 	height: var( --inputheight );
 }
@@ -36,12 +49,11 @@
 	margin: 0;
 }
 
-.p-app-modulecompiler form label[align-type=right] {
-	padding-left: var( --formpadding );
-}
+
 
 .p-app-modulecompiler form input[type=radio] + label[align-type=right]:not(:last-of-type),
-.p-app-modulecompiler form input[type=checkbox] + label[align-type=right]:not(:last-of-type) {
+.p-app-modulecompiler form input[type=checkbox] + label[align-type=right]:not(:last-of-type),
+.p-app-modulecompiler form label[align-type*=wrap]:not(:last-of-type) {
 	margin-right: 30px;
 }
 

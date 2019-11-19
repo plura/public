@@ -1,7 +1,7 @@
 /**
  * creates files structure tree
  */
-var ModuleCompilerFileManagerTree = function ({data, target}) {
+const ModuleCompilerFileManagerTree = function ({data, target}) {
 
 
 	let core, map, map_inactive, map_active, map_leaf;
