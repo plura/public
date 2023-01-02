@@ -1,5 +1,33 @@
+
+/* Files: Group Nav / Group [common] */
+
+
+/* Controls */
+.p-app-modulecompiler-files :is(.files-group-nav, .files-group) .controls {
+	align-items: center;
+	display: flex;
+	height: var(--mc-form-element-height);
+	justify-content: space-between;
+	pointer-events: none;
+}
+
+.p-app-modulecompiler-files :is(.files-group-nav, .files-group) .controls .control {
+	pointer-events: initial;
+}
+
+
+
+
+
+
 /* Files: Group Nav */
-.p-app-modulecompiler-files .files-group-nav												{ text-align: center;}
+.p-app-modulecompiler-files .files-group-nav {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
 .p-app-modulecompiler-files .files-group-nav .index .i										{ display: inline-block;}
 .p-app-modulecompiler-files .files-group-nav .index .i:not(.active)						{ cursor: pointer; }
 .p-app-modulecompiler-files .files-group-nav .index { 
@@ -26,7 +54,7 @@
 	align-items: center;
 	display: flex;
 	justify-content: center;
-	height: calc( var(--groupheaderheight) - 30px );
+	height: calc( var(--mc-groupheaderheight) - var(--mc-form-element-height) );
 
 	/* removes strange children inline-block margin */
 	font-size: 0;
@@ -50,15 +78,22 @@
 	padding-right: 20px;
 }*/
 
+
+/* Files: Group Nav Controls */
+.p-app-modulecompiler-files .files-group-nav .controls {
+	position: absolute;
+	bottom: 0;
+	padding: 0 calc( var(--pad2) + 1px);
+	width: 100%;
+}
+
+
+
+
+
 /* Files: Group */
 .p-app-modulecompiler-files .inner/*.has-scroll*/									{ overflow-y: auto; }
 
-
-/* Controls */
-.p-app-modulecompiler-files .files-group .controls {
-	display: flex;
-	justify-content: space-between;
-}
 
 
 
@@ -69,23 +104,38 @@
 .p-app-modulecompiler-files .files-group .tree .node>.trigger						{ display: inline-block; }
 
 .p-app-modulecompiler-files .files-group .controls,
-.p-app-modulecompiler-files .files-group .tree .node									{ cursor: default; }
+.p-app-modulecompiler-files .files-group .tree .node {
+	cursor: default;
+}
 
 .p-app-modulecompiler-files .files-group .controls .controls-check:before,
-.p-app-modulecompiler-files .files-group .tree .node>.trigger:before					{ display: inline-block; }
+.p-app-modulecompiler-files .files-group .tree .node>.trigger:before {
+	display: inline-block;
+}
 
 /*dims*/
-.p-app-modulecompiler-files .inner.has-scroll										{ padding-right: 20px; }
+.p-app-modulecompiler-files .inner.has-scroll {
+	padding-right: calc( var(--pad2) * 2 );
+}
 
-.p-app-modulecompiler-files .files-group											{ padding: 0 10px; }
-.p-app-modulecompiler-files .files-group:not(:last-child)							{ margin-bottom: 20px; }
+.p-app-modulecompiler-files .files-group {
+	padding: 0 var(--pad2);
+}
+
+.p-app-modulecompiler-files .files-group:not(:last-child) {
+	margin-bottom: calc( var(--pad2) * 2 );
+}
 
 
-.p-app-modulecompiler-files .files-group .controls,
-.p-app-modulecompiler-files .files-group .tree										{ padding: 10px 0;  }
+/*.p-app-modulecompiler-files .files-group .controls,*/
+.p-app-modulecompiler-files .files-group .tree {
+	padding: var(--pad2) 0;
+}
 
 .p-app-modulecompiler-files .files-group .tree .branch								{ padding-left: 40px; }
-.p-app-modulecompiler-files .files-group .tree .node>.trigger						{ padding-top: 2px; padding-bottom: 2px; }
+.p-app-modulecompiler-files .files-group .tree .node > .trigger						{ padding-top: 2px; padding-bottom: 2px; }
 
 .p-app-modulecompiler-files .files-group .controls .controls-check:before,
-.p-app-modulecompiler-files .files-group .tree .node>.trigger:before				{ width: 20px; }
+.p-app-modulecompiler-files .files-group .tree .node > .trigger:before {
+	width: 20px;
+}

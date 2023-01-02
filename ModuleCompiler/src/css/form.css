@@ -1,7 +1,6 @@
 .p-app-modulecompiler form {
 	--formpadding: 10px;
 	--formbordercolor: #ccc;
-	--inputheight: 30px;
 }
 
 
@@ -9,7 +8,7 @@
 .p-app-modulecompiler form select		{ 
 	-webkit-appearance: none;
 	appearance: none;
-	padding: 0 var(--inputheight) 0 calc( var(--inputheight) / 4 );
+	padding: 0 var(--mc-form-element-height) 0 calc( var(--mc-form-element-height) / 4 );
 	border: 1px solid var(--formbordercolor);
 	border-radius: var(--border-radius);
 }
@@ -39,7 +38,7 @@
 
 
 .p-app-modulecompiler form select {
-	height: var( --inputheight );
+	height: var( --mc-form-element-height );
 }
 
 

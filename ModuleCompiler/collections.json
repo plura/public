@@ -27,7 +27,7 @@
 				"type": 	"css",					
 				"items":	{			
 					"top":	["styles.css"],
-					"join": 	"src/css/",
+					"join": "src/css/",
 					"path":	"src/css/",				
 					"link":	"src/css/"		
 				}
@@ -144,7 +144,7 @@
 		"type": 	"css",			
 		"data":	{			
 			"top":	["images.css"],
-			"join": 	"test/compiled/",
+			"join": "test/compiled/",
 			"path":	"test/assets/css/",				
 			"link":	"test/assets/css/"		
 		}

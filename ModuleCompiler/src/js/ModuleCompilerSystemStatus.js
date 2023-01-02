@@ -6,7 +6,7 @@
  */
 const ModuleCompilerSystemStatus = function({app, prefix, target}) {
 
-	var core, status;
+	let core, status;
 
 	const
 

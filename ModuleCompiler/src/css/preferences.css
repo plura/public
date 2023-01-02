@@ -4,7 +4,7 @@
 	--arrowsize: 10px;
 	--borderwidth: 1px;
 
-	height: var( --headerheight );
+	height: var( --mc-headerheight );
 
 }
 
@@ -17,12 +17,12 @@
 }
 
 .p-app-modulecompiler-preferences [type=set][name=main] {
-	height: var( --inputheight );
+	height: var( --mc-form-element-height );
 }
 
 .p-app-modulecompiler-preferences [type=set]:not([name=main]) {
 	margin-top: var( --arrowsize );
-	height: calc( var( --headerheight ) - var( --inputheight ) - var( --arrowsize ) / 2 );
+	height: calc( var( --mc-headerheight ) - var( --mc-form-element-height ) - var( --arrowsize ) / 2 );
 	opacity: .5;
 	/*visibility: hidden;*/
 	transition:	/*visibility 0s linear .4s,*/ opacity .4s linear;

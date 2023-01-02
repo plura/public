@@ -16,7 +16,7 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 			( ui_ctrls = core.appendChild( document.createElement('div') ) ).classList.add('controls');
 
-			( ui_ctrls_check = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['controls-check'] );
+			( ui_ctrls_check = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['control', 'controls-check'] );
 
 			ui_ctrls_check.addEventListener('click', eventControlsCheckHandler);
 
@@ -25,7 +25,7 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 			check( true, false );
 
 
-			( ui_ctrls_visibility = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['controls-visibility'] );
+			( ui_ctrls_visibility = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['control', 'controls-visibility'] );
 
 			ui_ctrls_visibility.addEventListener('click', eventControlsVisibilityHandler);
 
@@ -39,10 +39,11 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 		/**
 		 * Toggles tree status. If traverse is true it will activate or de-activate status, otherwise 
 		 * only changes trigger's toggle status style
-		 * @param  {Boolean}  on       	indicates toggle status
+		 * @param  {Boolean} on       	indicates toggle status
 		 * @param  {Boolean} traverse 	if true, activates-dectivates tree
+		 * @param  {Boolean} event 		if true, activates-dectivates tree
 		 */
-		check = (on, traverse = true ) => {
+		check = ( on, traverse = true, event = true ) => {
 
 			if (on) {
 
@@ -56,7 +57,7 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 			if( traverse ) {
 			
-				ui_tree.activate( on );
+				ui_tree.activate( on, event );
 
 			}
 
@@ -90,22 +91,14 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 * Tree active status trigger click event
 		 * @param  {Object} event 	event object
 		 */
-		eventControlsCheckHandler = function( event ) {
-
-			check( !status );
-
-		},
+		eventControlsCheckHandler = event => check( !status ),
 
 
 		/**
-		 * [eventControlsVisibilityHandler description]
+		 * Tree visibility status trigger click event
 		 * @param  {Object} event 	event object
 		 */
-		eventControlsVisibilityHandler = function( event ) {
-
-			visible( !status_visibility );
-
-		},
+		eventControlsVisibilityHandler = event => visible( !status_visibility ),
 
 
 		/**
@@ -113,11 +106,7 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 * therefore avoiding circular, infinite loop
 		 * @param  {Object} event 	event object
 		 */
-		eventTreeHandler = event => {
-
-			check( ui_tree.active(), false );
-
-		};
+		eventTreeHandler = event => check( ui_tree.active(), false );
 
 
 
@@ -129,12 +118,17 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 	ui_ctrls	= render_controls();
 
-	ui_tree		= new ModuleCompilerFileManagerTree({data: data.core, target: core});
+	ui_tree		= new ModuleCompilerFileManagerGroupTree({data: data.core, target: core});
 
-	ui_tree.core.addEventListener('CHANGE', eventTreeHandler );
+	ui_tree.core.addEventListener('GROUP_TREE_CHANGE', eventTreeHandler );
 
 	
-	_this.core		= core;
 	_this.active	= ui_tree.active;
+
+	_this.check		= check;
+
+	_this.core		= core;
+
+	_this.visible	= visible;
 
 };

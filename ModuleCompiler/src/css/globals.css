@@ -1,0 +1,23 @@
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+
+
+:root {
+	--pad: 30px;
+
+	--pad2: 10px;
+
+	--border-radius: 10px;
+	--border-color: #ccc;
+
+	--mc-headerheight: 80px;
+	--mc-groupheaderheight: 60px;
+
+	--mc-form-element-height: 30px;
+
+	--font: 'Roboto', sans-serif;
+	--fontsize: .875rem;
+}

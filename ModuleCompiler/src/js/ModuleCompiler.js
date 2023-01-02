@@ -44,7 +44,7 @@ const ModuleCompiler = function ({data, prefix, process = 'ModuleCompiler.php'})
 
 			ui_files		= new ModuleCompilerFileManager({prefix: PRFX, target: core});
 
-			['FILES', 'GROUPS'].forEach( eventType => ui_files.core.addEventListener(eventType, eventFilterHandler) );
+			['FILES', 'GROUPS_SELECT'].forEach( eventType => ui_files.core.addEventListener(eventType, eventFilterHandler) );
 
 
 			
@@ -89,7 +89,7 @@ const ModuleCompiler = function ({data, prefix, process = 'ModuleCompiler.php'})
 
 				break;
 
-			case 'GROUPS':
+			case 'GROUPS_SELECT':
 
 				id = event.detail.id;
 

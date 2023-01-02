@@ -16,11 +16,11 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 		_this = this,
 
 		/**
-		 * gets a multidimensional of one or more arrays of excluded files for
-		 * each package's group
+		 * gets a multidimensional array of one or more arrays of 
+		 * excluded files for each package's group
 		 * @return {Object[]}	an array of excluded files
 		 */
-		get = function () {
+		get = () => {
 
 			let data = [], inactive;
 
@@ -32,7 +32,7 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 
 					data[index] = {};
 
-					if (inactive) {
+					if ( inactive ) {
 
 						data[ index ].exclude = [];
 
@@ -57,7 +57,7 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 		},
 
 
-		clean = function () {
+		clean = () => {
 
 			groups = [];
 
@@ -85,7 +85,7 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 					target:	inner
 				});
 				
-				groups[index].core.addEventListener('CHANGE', eventTreeHandler);
+				groups[index].core.addEventListener('GROUP_TREE_CHANGE', eventTreeHandler);
 
 			});
 
@@ -122,16 +122,36 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 		},
 
 
-		eventFileGroupSelectHandler = function (event) {
+		eventFileGroupNavHandler = event => {
 
 			event.stopImmediatePropagation();
 
-			core.dispatchEvent( new CustomEvent('GROUPS', {detail: event.detail}) );
+			switch( event.type ) {
+
+			case 'GROUPS_CHECK':
+
+				//Traverse all groups WITHOUT triggering an event (last false param in foreach loop function).
+				//Before, only the first group data was handled/loaded
+				groups.forEach( group => group.check( event.detail, true, false ) );
+
+				//after handling groups checking, trigger FILES event for data handling/loading
+				core.dispatchEvent( new CustomEvent('FILES') );
+
+				break;
+
+			//checks/unchecks all groups visibility
+			case 'GROUPS_VISIBILITY':
+
+				groups.forEach( group => group.visible( event.detail ) );
+
+				break;
+
+			}
 
 		},
 
 
-		eventTreeHandler = function (event) {
+		eventTreeHandler = event => {
 
 			event.stopImmediatePropagation();
 
@@ -145,10 +165,10 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 	( core = target.appendChild( document.createElement('div') ) ).classList.add(`${prefix}-files`);
 
 
-	group_nav	= new ModuleCompilerFileManagerGroupNav({target: core});
+	group_nav	= new ModuleCompilerFileManagerGroupsNav({target: core});
 
 	
-	group_nav.core.addEventListener('SELECT', eventFileGroupSelectHandler);
+	['GROUPS_CHECK', 'GROUPS_VISIBILITY'].forEach( eventType => group_nav.core.addEventListener(eventType, eventFileGroupNavHandler) );
 
 
 	( inner = core.appendChild( document.createElement('div') ) ).classList.add('inner');

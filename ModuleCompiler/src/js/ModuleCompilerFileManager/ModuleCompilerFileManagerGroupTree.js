@@ -1,7 +1,7 @@
 /**
  * creates files structure tree
  */
-const ModuleCompilerFileManagerTree = function ({data, target}) {
+const ModuleCompilerFileManagerGroupTree = function ({data, target}) {
 
 
 	let core, map, map_inactive, map_active, map_leaf;
@@ -16,7 +16,7 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 		* @param {string} id - the id that identifies the node.
 		* @param {boolean} [status=true] - the boolean value that indicates node activation or de-activation.
 		*/		
-		activate = function(id, status = true ) {
+		activate = (id, status = true ) => {
 
 			if ( status && !map_active.has( id ) ) {
 				
@@ -32,7 +32,7 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 
 			}
 
-
+			//if node has parents, set its active status
 			if( map.get( id ).parents ) {
 
 				map.get( id ).parents.forEach( parentID => {
@@ -82,7 +82,7 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 		* @param {string} id - the id that identifies the node.
 		* @param {boolean} [status=true] - the boolean value that indicates node style activation or de-activation.
 		*/			
-		active_style = function (id, status) {
+		active_style = (id, status) => {
 
 			if (status) {
 
@@ -99,13 +99,18 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 
 	   /**
 		* Selects/unselects all nodes in the tree
-		* @param {boolean=} status - boolean value indicating selection/unselection
+		* @param {boolean=} status	boolean value indicating selection/unselection
+		* @param {boolean=} event 	if true, triggers an event. disabling events is useful for multiple groups trees activation/de-activation
 		*/	
-		activateAll = function ( status = true ) {
+		activateAll = ( status = true, event = true ) => {
 
 			data.forEach( (dataItem, index) => toggle(`i${ index }`, status ) );
 
-			core.dispatchEvent( new CustomEvent('CHANGE', {bubbles: true, detail: get_info()}) );
+			if( event ) {console.log('werewr');
+
+				core.dispatchEvent( new CustomEvent('GROUP_TREE_CHANGE', {bubbles: true, detail: get_info()}) );
+
+			}
 
 		},
 
@@ -114,7 +119,7 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 		* Get active (true || undefined) or inactive (false)
 		* @param {status=} boolean - boolean value indicating active/inactive return
 		*/		
-		get_active = function (status = true) {
+		get_active = (status = true) => {
 
 			if( (status && map_active.size) || (!status && map_inactive.size) ) {
 
@@ -127,7 +132,7 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 		},
 
 
-		get_info = function () {
+		get_info = () => {
 
 			return {
 				active:		get_active(), 
@@ -168,7 +173,7 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 		* @param {number} id - nodeID
 		* @param {boolean} [status] - optional boolean value to force activation/deactivation of leaf/branch
 		*/
-		toggle = function (id, status) {
+		toggle = (id, status) => {
 
 			let s = status !== undefined ? status : ( is_leaf( id ) ? !map_active.has( id ) : !map.get( id ).node.classList.contains('on') );
 
@@ -190,9 +195,9 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 		* @param {Object} data - node data to be parsed
 		* @param {number} [parentID] - parentID, used for recursive purposes
 		*/
-		render = function (data, parentID) {
+		render = (data, parentID) => {
 
-			var nodeID, pID = parentID ? parentID + '_' : 'i',
+			let nodeID, pID = parentID ? parentID + '_' : 'i',
 
 				ui_holder, ui_branch, ui_node, ui_trigger;
 
@@ -266,7 +271,7 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 		 * @param  {Object} data 	element data
 		 * @return {Object}      	DOM element
 		 */
-		trigger = function( data ) {
+		trigger = data => {
 
 			let label = typeof data === 'string' ? data : data.name || data.vanity,
 
@@ -291,39 +296,35 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 		 * @param  {string}  id  	nodeID
 		 * @return {Boolean}    	true if 'leaf', false if 'branch'
 		 */
-		is_leaf = function (id) {
-
-			return !map.get( id ).children;
-
-		},
+		is_leaf = id => !map.get( id ).children,
 
 
 	
-		eventTreeBranchClickHandler = function (event) {
+		eventTreeBranchClickHandler = event => {
 
 			let id = map.get( event.currentTarget.parentNode );
 
 			toggle( id );
 
-			core.dispatchEvent( new CustomEvent('CHANGE', {bubbles: true, detail: get_info()}) );
+			core.dispatchEvent( new CustomEvent('GROUP_TREE_CHANGE', {bubbles: true, detail: get_info()}) );
 
 		},
 
 
 
-		eventTreeLeafClickHandler = function (event) {
+		eventTreeLeafClickHandler = event => {
 
 			let id = map.get( event.currentTarget );
 
 			toggle( id );
 
-			core.dispatchEvent( new CustomEvent('CHANGE', {bubbles: true, detail: get_info()}) );
+			core.dispatchEvent( new CustomEvent('GROUP_TREE_CHANGE', {bubbles: true, detail: get_info()}) );
 
 		},
 
 
 
-		init = function () {
+		init = () => {
 
 			map						= new Map();
 
@@ -341,6 +342,7 @@ const ModuleCompilerFileManagerTree = function ({data, target}) {
 
 
 	_this.activate	= activateAll;
+
 	_this.active	= get_active;
 
 	init();

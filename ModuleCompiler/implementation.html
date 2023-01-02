@@ -3,27 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>ModuleCompiler</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<script src="ModuleCompiler.js"></script>
-<link rel="stylesheet" type="text/css" href="ModuleCompiler.css" />
+<script src="build/ModuleCompiler.js"></script>
+<link rel="stylesheet" type="text/css" href="build/ModuleCompiler.css" />
 <script src="collections.js"></script>
 <script>
 
-document.addEventListener('DOMContentLoaded', () => {
-	
-	new ModuleCompiler({
-		data:		TEST,
-		process:	'ModuleCompiler.php'/*,
-		prefix:		'../../'*/
-	}); 
-	
-});
+document.addEventListener('DOMContentLoaded', () => new ModuleCompiler({data: TEST}) );
     
 </script>
-
-
-
 </head>
 <body>
 </body>

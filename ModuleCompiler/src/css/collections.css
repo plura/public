@@ -22,6 +22,6 @@
 /*dims*/
 .p-app-modulecompiler-collections {
 
-	height: var( --headerheight );
+	height: var( --mc-headerheight );
 
 }

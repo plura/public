@@ -41,7 +41,7 @@ function get_tree_structure ( $source ): array {
 			for ($i = 0; $i < count( $path ); $i += 1) {
 
 				//create unique path sequence key
-				$key = implode( array_slice( $path, 0, $i + 1), '/' ) . '/';
+				$key = implode( '/', array_slice( $path, 0, $i + 1) ) . '/';
 
 				//if key does not exist in reference array create one
 				if ( !isset( $flat[$key] ) ) {
@@ -221,9 +221,9 @@ function curl_return($params, $url, $certificate) {
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 	curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/certificates/" . $certificate);    
 
-    $result = curl_exec($ch);
+    $result = curl_exec( $ch );
 
-    curl_close($ch);
+    curl_close( $ch );
 
     return $result;
 
@@ -512,7 +512,7 @@ foreach( $DATA as $n => $data) {
  * if minify option is set, use Google's Closure RESTful or CSSMinifier APIs
  * to generate a minified version of the joined result
  */
-if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify'] ) {
+if ( $_REQUEST['returnType'] === 'join' && isset( $_REQUEST['minify'] ) ) {
 
 
 	$src = implode('', $result);
@@ -521,8 +521,8 @@ if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify'] ) {
 	if ( $_REQUEST['type'] === 'css' ) {
 
 
-		$ch_url	= 'https://cssminifier.com/raw';
-		$ch_crt	= 'cssminifiercom.crt';
+		$ch_url	= 'https://www.toptal.com/developers/cssminifier/api/raw';
+		$ch_crt	= '-toptalcom.crt';
 
 	    $params		= array(
 	    	'input' => urlencode( $src )
@@ -618,7 +618,7 @@ if ($_REQUEST['returnType'] === 'join' && $_REQUEST['minify'] ) {
 
 } else {
 
-	$result = implode($group_sep, $result);
+	$result = !empty( $result ) ? implode($group_sep, $result) : "";
 
 }
 

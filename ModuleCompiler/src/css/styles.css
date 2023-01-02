@@ -11,19 +11,10 @@ body {overflow: hidden;}*/
 
 
 
-/*body															{ margin: 0; padding: 0; }*/
+/*body	{ margin: 0; padding: 0; }*/
 
-*																{ box-sizing: border-box;}
 
-:root {
-	--pad: 30px;
-	--border-radius: 10px;
-	--border-color: #ccc;
-	--headerheight: 80px;
-	--groupheaderheight: 60px;
-	--font: 'Roboto', sans-serif;
-	--fontsize: .875rem;
-}
+
 
 body {
 	font-family: var( --font );
@@ -57,30 +48,30 @@ body {
 .p-app-modulecompiler-files,
 .p-app-modulecompiler-result,
 .p-app-modulecompiler-systemstatus {
-	--files-result-systemstauts-height: calc( 100vh - var(--headerheight) - 3 * var(--pad)  );
+	--files-result-systemstauts-height: calc( 100vh - var(--mc-headerheight) - 3 * var(--pad)  );
 	height: var( --files-result-systemstauts-height );
 }
 
 .p-app-modulecompiler-files .files-group-nav {
-	height: var( --groupheaderheight );
+	height: var( --mc-groupheaderheight );
 }
 
-.p-app-modulecompiler-files>.inner {
-	height: calc( 100vh - var(--headerheight) - 3 * var(--pad) - var( --groupheaderheight ) );
+.p-app-modulecompiler-files > .inner {
+	height: calc( 100vh - var(--mc-headerheight) - 3 * var(--pad) - var( --mc-groupheaderheight ) );
 }
 
 .p-app-modulecompiler-systemstatus {
 	right: var( --pad );
-	top: calc( var( --headerheight ) + 2 * var( --pad ) );	
+	top: calc( var( --mc-headerheight ) + 2 * var( --pad ) );	
 }
 
 
 .p-app-modulecompiler-result-nav {
-	height: var( --groupheaderheight );
+	height: var( --mc-groupheaderheight );
 }
 
 .p-app-modulecompiler-result-content {
-	height: calc( var( --files-result-systemstauts-height ) - var( --groupheaderheight ) );
+	height: calc( var( --files-result-systemstauts-height ) - var( --mc-groupheaderheight ) );
 }
 
 
@@ -99,41 +90,61 @@ body {
 /* icons*/
 .p-app-modulecompiler-collections form:after,
 .p-app-modulecompiler-files .files-group-nav form:after,
-.p-app-modulecompiler-files .files-group .controls .controls-check:before,
-.p-app-modulecompiler-files .files-group .controls .controls-visibility:before,
-.p-app-modulecompiler-files .files-group .tree .node>.trigger:before {
+.p-app-modulecompiler-files :is(.files-group-nav, .files-group) .controls .controls-check:before,
+.p-app-modulecompiler-files :is(.files-group-nav, .files-group) .controls .controls-visibility:before,
+.p-app-modulecompiler-files .files-group .tree .node > .trigger:before {
 
-	font-family:'FontAwesome'; font-weight: normal;
+	font-family:'FontAwesome';
+	font-weight: normal;
 
 }
 
 /* uncheck */
-.p-app-modulecompiler-files .files-group .controls .controls-check:before,
-.p-app-modulecompiler-files .files-group .tree .node>.trigger:before					{ content: '\f096'; } 
+.p-app-modulecompiler-files :is(.files-group-nav, .files-group) .controls .controls-check:before,
+.p-app-modulecompiler-files .files-group .tree .node>.trigger:before {
+	content: '\f096';
+} 
 
 /* check */
-.p-app-modulecompiler-files .files-group .controls .controls-check.on:before,
-.p-app-modulecompiler-files .files-group .tree .node.on>.trigger:before				{ content: '\f046'; }
+.p-app-modulecompiler-files :is(.files-group-nav, .files-group) .controls .controls-check.on:before,
+.p-app-modulecompiler-files .files-group .tree .node.on>.trigger:before {
+	content: '\f046';
+}
 
 /* visible [eye open] */
-.p-app-modulecompiler-files .files-group .controls .controls-visibility.on:before	{ content: '\f06e'; }
+.p-app-modulecompiler-files :is(.files-group-nav, .files-group) .controls .controls-visibility.on:before {
+	content: '\f06e';
+}
 
 /* visible [eye closed] */
-.p-app-modulecompiler-files .files-group .controls .controls-visibility:before		{ content: '\f070'; }
+.p-app-modulecompiler-files :is(.files-group-nav, .files-group) .controls .controls-visibility:before {
+	content: '\f070';
+}
 
 /* arrow circle down */
-.p-app-modulecompiler-collections form:after											{ content: '\f0ab'; font-size: 1.5em; }
+.p-app-modulecompiler-collections form:after {
+	content: '\f0ab';
+	font-size: 1.5em;
+}
 
 /* caret down */
-.p-app-modulecompiler-files .files-group-nav form:after									{ content: '\f0d7'; font-size: 1em; }
+.p-app-modulecompiler-files .files-group-nav form:after {
+	content: '\f0d7';
+	font-size: 1em;
+}
 
 
 
 /* COLORS | BG | BORDER-RADIUS */
 
 .p-app-modulecompiler-collections form:after,		
-.p-app-modulecompiler-files .files-group-nav form:after									{ color: #666; }
-.p-app-modulecompiler-files .files-group-nav .index .i 									{ background-color: #666; }
+.p-app-modulecompiler-files .files-group-nav form:after {
+	color: #666;
+}
+
+.p-app-modulecompiler-files .files-group-nav .index .i {
+	background-color: #666;
+}
 
 /*.p-app-modulecompiler-collections form,*/
 .p-app-modulecompiler-files .files-group/*,
@@ -148,9 +159,18 @@ body {
 
 
 /* border radius*/
-.p-app-modulecompiler-collections form												{ border-radius: 10px; }
+.p-app-modulecompiler-collections form {
+	border-radius: 10px;
+}
 
-.p-app-modulecompiler-files .files-group												{ border-radius: 5px; }
-.p-app-modulecompiler-result textarea 												{ border-radius: 5px 0 0 0; }
+.p-app-modulecompiler-files .files-group {
+	border-radius: 5px;
+}
 
-.p-app-modulecompiler-files .files-group-nav .index .i 									{ border-radius: 100%; }
+.p-app-modulecompiler-result textarea {
+	border-radius: 5px 0 0 0;
+}
+
+.p-app-modulecompiler-files .files-group-nav .index .i {
+	border-radius: 100%;
+}

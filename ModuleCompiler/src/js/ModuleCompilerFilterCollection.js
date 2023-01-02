@@ -25,6 +25,7 @@ const ModuleCompilerFilterCollection = function ({data, prefix, target}) {
 
 	}] });
 
+
 	_this.core		= core;
 
 

@@ -85,14 +85,14 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 		 * @param  {Object|boolean} exclude     object containing excluded files
 		 * @return {undefined}             	
 		 */
-		load = function (groupID, handler, preferences, groupItemsData) {
+		load = (groupID, handler, preferences, groupItemsData) => {
 
 			let data = [], group = collectionsGroups.get( groupID ), request;
 
 
 			group.items.forEach( (item, index) => {
 
-				//if groupitemsData is definem, exclude any group item without data (active files)
+				//if groupitemsData is defined, exclude any group item without data (active files)
 				if( !groupItemsData || groupItemsData[ index ] ) {
 	
 					data.push({
@@ -131,17 +131,16 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 			collectionsData.forEach( (collection, index) => {
 
 
-				let id = `${collectionGroupID ? `${ collectionGroupID}_` : 'i'}${ index }`;
+				let id = `${collectionGroupID ? `${ collectionGroupID }_` : 'i'}${ index }`;
 
 
-				//collection group
+				//collection group (if object is an array or has a 'values' property)
 				if( collection.values || collection instanceof Array ) {
 
 
 					let values = parse( collection.values || collection, id );
 
 					filter_items.push({name: collection.label, values: values});
-
 
 
 				//collection
