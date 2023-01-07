@@ -3,9 +3,9 @@
 /**
  * Module Compiler 1.0
  *
- * Copyright (c) 2015 Plura
+ * Copyright (c) 2023 Plura
  *
- * Date: 2015-08-17 17:35:00 (Mon, 17 Aug 2015)
+ * Date: 2023-01-02 17:35:00 (Mon, 02 Jan 2023)
  * Revision: 6246
  *
  */

@@ -16,7 +16,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 		refresh = groups => {
 
 			//empty
-			while (core.firstChild) {
+			while ( core.firstChild ) {
 			
 				core.removeChild( core.firstChild );
 			
@@ -24,13 +24,15 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 
 			active	= null;
 
-			data	= groups;
+			data	= groups; console.log( data );
 
 			if( data.length > 1 ) {
 
-				render( data );
+				render_set_nav( data );
 
 			}
+
+			render_set_groups_controls();
 
 			select();
 
@@ -41,7 +43,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 		* render group select box navigation and index 'position' indicator
 		* @param {Array} data - the array containing group data
 		*/
-		render = data => {
+		render_set_nav = data => {
 
 			let values = [], element;
 
@@ -69,15 +71,13 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 			core.appendChild( ui_nav_index );
 
 
-			render_controls();
-
 		},
 
 
 
-		render_controls = () => {
+		render_set_groups_controls = () => {
 
-			( ui_ctrls = core.appendChild( document.createElement('div') ) ).classList.add('controls');
+			( ui_ctrls = document.createElement('div') ).classList.add('controls');
 
 			( ui_ctrls_check = ui_ctrls.appendChild( document.createElement('div') ) ).classList.add( ...['control', 'controls-check'] );
 
@@ -101,7 +101,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 
 	   /**
 		* selects group by its data index. By default selects the first element
-		* @param {number} [index=0] - the group index
+		* @param {number} [index=0] - the set index
 		*/
 		select = (index = 0) => {
 
@@ -120,9 +120,26 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 
 			}
 
+			//if collection set has more than one module/group add global check/visible controls.
+			//Otherwise remove them
+			if( data[index].items.length > 1 ) {
+
+				core.appendChild( ui_ctrls );
+
+			} else if( ui_ctrls.isConnected ) {
+
+				core.removeChild( ui_ctrls );
+
+			}
+
 		},
 
 
+		/**
+		 * refreshes collection sets' select and bullet navigation
+		 * @param  {number} index 	nav index
+		 * @return {[type]}       	[description]
+		 */
 		show = index => {
 
 			ui_nav_select.core.querySelector('select').value = index;

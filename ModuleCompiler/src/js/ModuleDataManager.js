@@ -4,7 +4,7 @@
 const ModuleDataManager = function ({data, handler, prefix, process}) {
 
 	
-	let collections, collectionsGroups, filter;
+	let alias, collections, collectionsGroups, filter;
 
 
 	const
@@ -18,7 +18,7 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 		 * @param  {...[type]} params 	[description]
 		 * @return {Object}           	Request object
 		 */
-		getRequest = function( path, ...params ) {
+		getRequest = ( path, ...params ) => {
 
 			let data = new FormData();
 
@@ -50,8 +50,19 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 
 
 
-		init = async function(data) {
+		init = async data => {
 
+			alias				= {
+
+				keys: new Map(),
+
+				groups: new Map()
+
+			};
+
+			collections			= new Map();
+
+			collectionsGroups	= new Map();
 
 			if( typeof data === 'object' ) {
 
@@ -63,7 +74,7 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 
 							.then( response => response.json() )
 
-							.then( response => parse(response) );
+							.then( response => parse( response ) );
 
 			}
 
@@ -127,7 +138,7 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 
 			let filter_items = [];
 
-			
+
 			collectionsData.forEach( (collection, index) => {
 
 
@@ -135,7 +146,8 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 
 
 				//collection group (if object is an array or has a 'values' property)
-				if( collection.values || collection instanceof Array ) {
+				//use recursive parse to retrieve its collections
+				if( collection.values || Array.isArray( collection ) ) {
 
 
 					let values = parse( collection.values || collection, id );
@@ -147,35 +159,52 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 				} else {
 
 
-					let groups = [], data = collection.data,
+					let groups = [], group, data = collection.data,
 
 						defaultFileType		= 'js',
 						defaultGroupName	= 'Group',
 						defaultReturnTypes	= ['join', 'link'];
 
-					//only for collections with "grouped" data
-					if (data instanceof Array && (data[0] instanceof Array || (data[0].group && data[0].items))) {
 
+					//only for collections with "grouped" data
+					//1 - if data is a Array AND
+					//2 - first data item is an array OR an object with either a 'group' or 'items' property
+					if ( Array.isArray( data ) && ( Array.isArray( data[0] ) || ( data[0].group && data[0].items ) ) ) {
 
 						data.forEach( (groupData, groupIndex) => {
-						
-							groups.push({
+
+							group = {
 								id: 	id + '_' + groupIndex,
 								type: 	groupData.type || collection.type || defaultFileType,
 								name: 	groupData.group || defaultGroupName + ' ' + groupIndex,
-								items: 	groupData instanceof Array ? groupData : ( groupData.items instanceof Array ? groupData.items : [groupData.items] )
-							});
+								items: 	Array.isArray( groupData ) ? groupData : ( Array.isArray( groupData.items ) ? groupData.items : [ groupData.items ] )
+							};
+						
+							groups.push( group );
+
+							check4alias( group );
+
+							//set_alias_group( groupData, group );
 
 						});
 
 					} else {
 
-						groups.push({
+						//console.log( collection );
+
+						group = {
 							id: 	id + '_' + 0,
 							type: 	collection.type || defaultFileType,
 							name: 	defaultGroupName + ' 0',
-							items: 	data instanceof Array ? data : [data]
-						});
+							items:  Array.isArray( data ) ? data : [ data ]
+						};
+
+						groups.push( group );
+
+						check4alias( group );
+
+
+						//set_alias_group( collection, group );
 
 					}
 
@@ -187,6 +216,12 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 
 						//check for available return types
 						group.returnTypes = [].concat( defaultReturnTypes );
+
+						/*group.items.forEach( item => {
+
+
+
+						});*/
 
 						for (let n = 0; n < group.items.length; n += 1) {
 
@@ -215,15 +250,63 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 			});
 
 
+			//after parsing/traversing is completed (undefined 'collectionGroupID' indicates root level traversing)
+			//check for alias and replace them with correct value
+			if( collectionGroupID === undefined ) {
+
+				alias.groups.forEach( ( groups, alias_key ) => {
+
+					if( alias.keys.has( alias_key ) ) {
+
+						groups.forEach( obj => {
+
+							obj.group.items[ obj.index ] = alias.keys.get( alias_key );
+
+						});
+
+					}
+
+				});				
+
+			}
+
 			return filter_items;
+
+		},
+
+
+
+		check4alias = group => {
+
+			//loop items
+			group.items.forEach( (item, index) => {
+
+				//if item is a string, save its info (parent group and item index) 
+				//for later replacement with corresponding alias
+				if( typeof item === 'string' ) {
+
+					let groups = alias.groups;
+
+					if( !groups.has( item ) ) {
+
+						groups.set( item, [] );
+
+					} 
+
+					groups.set( item, [ ...groups.get( item ), {group: group, index: index} ] );
+
+				//if item as an alias 'key', save its info to be used in replacements
+				} else if( item.alias ) {
+
+					alias.keys.set( item.alias, item );
+
+				}
+
+			});
 
 		};
 
 
-
-	collections			= new Map();
-
-	collectionsGroups	= new Map();
 
 
 	_this.load			= load;

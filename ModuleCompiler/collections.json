@@ -46,6 +46,7 @@
 		"value":	"test/assets/js/framework1/package1/",
 		"label":	"single group package",
 		"data":	{
+			"alias":	"package-single-group",
 			"path":		"test/assets/js/framework1/package1/",
 			"link":		"test/assets/js/framework1/package1/"
 		}
@@ -130,7 +131,6 @@
 
 		}
 
-
 	]},
 
 
@@ -192,7 +192,19 @@
 		
 		]
 
+	},
+
+
+	{
+		"label": "alias",
+		"data": ["package-single-group"]
+
 	}
+
+
+
+
+
 
 
 ]

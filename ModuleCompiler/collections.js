@@ -2,6 +2,7 @@ var TEST = [
 		
 		//package w/ single group	
 		{
+			alias: 'module-compiler',
 			value:	'src/js/',
 			label:	'Module Compiler',							//framework1/package1/',
 			data:	[
@@ -168,6 +169,20 @@ var TEST = [
 			
 			]
 	
+		},
+
+
+		//css package
+		{
+			label: 	'CSS package',
+			type: 	'css',			
+			data:	{			
+				top:	['images.css'],
+				join: 	'test/compiled/',
+				path:	'test/assets/css/',				
+				link:	'test/assets/css/'		
+			}
+			
 		}
 
 
