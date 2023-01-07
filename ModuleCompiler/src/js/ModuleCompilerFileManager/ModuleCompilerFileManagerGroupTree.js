@@ -28,7 +28,7 @@ const ModuleCompilerFileManagerGroupTree = function ({data, target}) {
 
 				map_inactive.set(id, map.get( id ).data );
 
-				map_active.delete(id);
+				map_active.delete( id );
 
 			}
 
@@ -106,7 +106,7 @@ const ModuleCompilerFileManagerGroupTree = function ({data, target}) {
 
 			data.forEach( (dataItem, index) => toggle(`i${ index }`, status ) );
 
-			if( event ) {console.log('werewr');
+			if( event ) {
 
 				core.dispatchEvent( new CustomEvent('GROUP_TREE_CHANGE', {bubbles: true, detail: get_info()}) );
 

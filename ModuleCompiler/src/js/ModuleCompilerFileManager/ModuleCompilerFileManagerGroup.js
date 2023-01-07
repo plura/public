@@ -30,7 +30,7 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 			ui_ctrls_visibility.addEventListener('click', eventControlsVisibilityHandler);
 
 
-			visible( true );
+			show( true );
 
 		},
 
@@ -45,7 +45,7 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 */
 		check = ( on, traverse = true, event = true ) => {
 
-			if (on) {
+			if ( on ) {
 
 				ui_ctrls_check.classList.add('on');
 
@@ -70,9 +70,9 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 * Visibility trigger click event
 		 * @param  {Boolean} on  	visibility status
 		 */
-		visible = on => {
+		show = on => {
 
-			if (on) {
+			if ( on ) {
 
 				[core, ui_ctrls_visibility].forEach( element => element.classList.add('on') );
 
@@ -83,6 +83,8 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 			}
 
 			status_visibility = on;
+
+			core.dispatchEvent( new CustomEvent('GROUP_VISIBILITY', {detail: { visibility: status_visibility } } ) );
 
 		},
 
@@ -98,7 +100,7 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 		 * Tree visibility status trigger click event
 		 * @param  {Object} event 	event object
 		 */
-		eventControlsVisibilityHandler = event => visible( !status_visibility ),
+		eventControlsVisibilityHandler = event => show( !status_visibility ),
 
 
 		/**
@@ -129,6 +131,8 @@ const ModuleCompilerFileManagerGroup = function ({data, target}) {
 
 	_this.core		= core;
 
-	_this.visible	= visible;
+	_this.show		= show;
+
+	_this.visible	= () => status_visibility;
 
 };

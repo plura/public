@@ -24,7 +24,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 
 			active	= null;
 
-			data	= groups; console.log( data );
+			data	= groups;
 
 			if( data.length > 1 ) {
 
@@ -37,6 +37,38 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 			select();
 
 		},
+
+
+
+		/**
+		 * refreshes collection sets' select and bullet navigation
+		 * @param  {number} index 	nav index
+		 * @return {[type]}       	[description]
+		 */
+		refresh_nav = index => {
+
+			ui_nav_select.core.querySelector('select').value = index;
+
+			[ ...ui_nav_index.children ].forEach( (element, n) => {
+
+				if( index === n ) {
+
+					element.classList.add('active');
+
+					element.removeEventListener('click', eventNavChangeHandler);
+
+				} else {
+
+					element.classList.remove('active');
+
+					element.addEventListener('click', eventNavChangeHandler);
+
+				}
+
+			});
+
+		},
+
 
 
 	   /**
@@ -93,7 +125,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 
 			ui_ctrls_visibility.addEventListener('click', eventControlsVisibilityHandler);
 
-			visible( true, false );
+			show( true, false );
 
 		},
 
@@ -109,7 +141,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 
 				if (data.length > 1) {
 
-					show( index );
+					refresh_nav( index );
 
 				}
 
@@ -135,35 +167,6 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 		},
 
 
-		/**
-		 * refreshes collection sets' select and bullet navigation
-		 * @param  {number} index 	nav index
-		 * @return {[type]}       	[description]
-		 */
-		show = index => {
-
-			ui_nav_select.core.querySelector('select').value = index;
-
-			[ ...ui_nav_index.children ].forEach( (element, n) => {
-
-				if( index === n ) {
-
-					element.classList.add('active');
-
-					element.removeEventListener('click', eventNavChangeHandler);
-
-				} else {
-
-					element.classList.remove('active');
-
-					element.addEventListener('click', eventNavChangeHandler);
-
-				}
-
-			});
-
-		},
-
 
 		/**
 		 * Toggles tree status. If event is true it will trigger an event, otherwise 
@@ -188,7 +191,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 
 			if( event ) {
 
-				core.dispatchEvent( new CustomEvent('GROUPS_CHECK', {detail: status}));
+				core.dispatchEvent( new CustomEvent('GROUPS_CHECK', { detail: { check: status } } ) );
 
 			}
 
@@ -201,7 +204,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 		 * @param  {Boolean} on  	visibility status
 		 * @param  {Boolean} event 	if true, triggers event
 		 */
-		visible = ( on, event = true ) => {
+		show = ( on, event = true ) => {
 
 			if ( on ) {
 
@@ -217,7 +220,7 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 
 			if( event ) {
 
-				core.dispatchEvent( new CustomEvent('GROUPS_VISIBILITY', {detail: status_visibility}));
+				core.dispatchEvent( new CustomEvent('GROUPS_VISIBILITY', { detail: { visibility: status_visibility } } ) );
 
 			}
 
@@ -243,14 +246,19 @@ const ModuleCompilerFileManagerGroupsNav = function({target}) {
 		 * Global trees visibility status trigger click event
 		 * @param  {Object} event 	event object
 		 */
-		eventControlsVisibilityHandler = event => visible( !status_visibility );
+		eventControlsVisibilityHandler = event => show( !status_visibility );
 
 
 
 	( core = target.appendChild( document.createElement('div') ) ).classList.add('files-group-nav');
 
 	_this.core		= core;
+	
+	_this.check		= check;
+
 	_this.refresh	= refresh;
+
+	_this.show		= show;
 
 
 };

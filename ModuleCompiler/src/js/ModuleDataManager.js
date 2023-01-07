@@ -184,13 +184,9 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 
 							check4alias( group );
 
-							//set_alias_group( groupData, group );
-
 						});
 
 					} else {
-
-						//console.log( collection );
 
 						group = {
 							id: 	id + '_' + 0,
@@ -202,9 +198,6 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 						groups.push( group );
 
 						check4alias( group );
-
-
-						//set_alias_group( collection, group );
 
 					}
 
@@ -250,7 +243,7 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 			});
 
 
-			//after parsing/traversing is completed (undefined 'collectionGroupID' indicates root level traversing)
+			//after parsing/traversing is completed (undefined 'collectionGroupID' indicates root level)
 			//check for alias and replace them with correct value
 			if( collectionGroupID === undefined ) {
 
@@ -263,6 +256,10 @@ const ModuleDataManager = function ({data, handler, prefix, process}) {
 							obj.group.items[ obj.index ] = alias.keys.get( alias_key );
 
 						});
+
+					} else {
+
+						console.log(`ModuleCompiler: alias '${alias_key}' not found.`);
 
 					}
 

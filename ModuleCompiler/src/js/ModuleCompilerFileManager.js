@@ -85,28 +85,17 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 					target:	inner
 				});
 				
-				groups[index].core.addEventListener('GROUP_TREE_CHANGE', eventTreeHandler);
+
+				['GROUP_TREE_CHANGE', 'GROUP_VISIBILITY'].forEach(
+
+					eventType => groups[index].core.addEventListener(eventType, eventGroupHandler)
+
+				);
 
 			});
 
 		},
 
-
-		/*resize = function ( height ) {
-
-			var innerh = ( height - parseInt( $( core ).css('padding'), 10) * 2 ) -  $( group.core ).height();
-
-			$( core ).outerHeight( height );
-
-			$( inner ).outerHeight('').removeClass('has-scroll');
-
-			if ( innerh < $( inner ).outerHeight() ) {
-
-				$( inner ).outerHeight( innerh ).addClass('has-scroll');
-
-			}
-
-		},*/
 
 
 	   /**
@@ -132,7 +121,7 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 
 				//Traverse all groups WITHOUT triggering an event (last false param in foreach loop function).
 				//Before, only the first group data was handled/loaded
-				groups.forEach( group => group.check( event.detail, true, false ) );
+				groups.forEach( group => group.check( event.detail.check, true, false ) );
 
 				//after handling groups checking, trigger FILES event for data handling/loading
 				core.dispatchEvent( new CustomEvent('FILES') );
@@ -142,7 +131,7 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 			//checks/unchecks all groups visibility
 			case 'GROUPS_VISIBILITY':
 
-				groups.forEach( group => group.visible( event.detail ) );
+				groups.forEach( group => group.show( event.detail.visibility ) );
 
 				break;
 
@@ -151,11 +140,54 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 		},
 
 
-		eventTreeHandler = event => {
+		//Triggers 'FILES' event, indicating changes in the files' tree structure occurred. 
+		//ModuleCompiler will catch this event and refresh data accordingly
+		//It also updates group nav global check trigger (ie. if no module is active)
+		eventGroupHandler = event => {
 
 			event.stopImmediatePropagation();
 
-			core.dispatchEvent( new CustomEvent('FILES') );
+			switch( event.type ) {
+
+			case 'GROUP_TREE_CHANGE':
+
+				let inactive = [];
+
+				groups.forEach( group => {
+
+					if( !group.active() ) {
+
+						inactive.push( group );
+
+					}
+
+				} );
+
+				group_nav.check( inactive.length !== groups.length, false );
+
+				core.dispatchEvent( new CustomEvent('FILES') );
+
+				break;
+
+			case 'GROUP_VISIBILITY':
+
+				let invisible = [];
+
+				groups.forEach( group => {
+
+					if( !group.visible() ) {
+
+						invisible.push( group );
+
+					}
+
+				} );
+
+				group_nav.show( invisible.length !== groups.length, false );
+
+				break;
+
+			}
 
 		};
 
@@ -175,8 +207,11 @@ const ModuleCompilerFileManager = function ({prefix, target}) {
 
 
 	_this.core		= core;
+
 	_this.get		= get;
+
 	_this.refresh	= refresh;
+
 	_this.start		= start;
 
 
